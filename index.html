@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mô Ha Mách Bu Ba Ka | Software Engineer & AI Researcher</title>
+  <meta name="description" content="Portfolio of Mô Ha Mách Bu Ba Ka - Software Engineer, Distributed Systems Architect, ICPC PTITHCM Champion, and International Conference Author." />
+  <meta name="author" content="Mô Ha Mách Bu Ba Ka (KaNguyen3005)" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            brand: {
+              bg: '#080C14',
+              surface: '#0E1626',
+              card: '#141E33',
+              cardHover: '#1B2742',
+              border: 'rgba(255, 255, 255, 0.08)',
+              indigo: '#6366F1',
+              blue: '#2563EB',
+              cyan: '#06B6D4',
+              emerald: '#10B981',
+              amber: '#F59E0B'
+            }
+          },
+          animation: {
+            'gradient-x': 'gradient-x 15s ease infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite'
+          },
+          keyframes: {
+            'gradient-x': {
+              '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+              '50%': { 'background-size': '200% 200%', 'background-position': 'right center' }
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #080C14; }
+    ::-webkit-scrollbar-thumb { background: #1F2E4D; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3B82F6; }
+
+    .glass {
+      background: rgba(14, 22, 38, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-card {
+      background: rgba(20, 30, 51, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      background: rgba(27, 39, 66, 0.85);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(99, 102, 241, 0.15);
+    }
+    .glow-effect {
+      position: relative;
+    }
+    .glow-effect::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(90deg, #6366F1, #06B6D4, #10B981);
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .glow-effect:hover::before {
+      opacity: 0.5;
+    }
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+  </style>
+</head>
+
+<body class="bg-brand-bg text-slate-100 font-sans antialiased selection:bg-brand-blue selection:text-white relative overflow-x-hidden bg-grid-pattern">
+
+  <!-- Ambient Glow Background Orbs -->
+  <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-blue/15 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse-slow"></div>
+  <div class="fixed bottom-1/3 right-1/4 w-[28rem] h-[28rem] bg-brand-indigo/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+  <div class="fixed top-1/2 left-2/3 w-80 h-80 bg-brand-emerald/10 rounded-full blur-3xl pointer-events-none -z-10 animate-float"></div>
+
+  <!-- Sticky Navbar -->
+  <header class="fixed top-0 inset-x-0 z-50 transition-all duration-300 glass" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-indigo flex items-center justify-center font-mono font-bold text-lg text-white shadow-lg shadow-brand-blue/25 group-hover:scale-105 transition-transform">
+          MB
+        </div>
+        <div>
+          <span class="font-bold tracking-tight text-white group-hover:text-brand-cyan transition-colors text-base sm:text-lg block">Mô Ha Mách Bu Ba Ka</span>
+          <span class="text-xs font-mono text-slate-400 block -mt-1">Software Engineer · PTIT</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-brand-cyan transition-colors">Về Tôi</a>
+        <a href="#honors" class="hover:text-brand-cyan transition-colors">Thành Tựu</a>
+        <a href="#projects" class="hover:text-brand-cyan transition-colors">Dự Án</a>
+        <a href="#research" class="hover:text-brand-cyan transition-colors">Nghiên Cứu</a>
+        <a href="#skills" class="hover:text-brand-cyan transition-colors">Kỹ Năng</a>
+        <a href="#contact" class="hover:text-brand-cyan transition-colors">Liên Hệ</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-blue to-brand-indigo hover:from-blue-600 hover:to-indigo-600 text-white font-semibold text-sm shadow-md shadow-brand-blue/20 hover:shadow-brand-blue/40 transition-all hover:scale-[1.02]">
+          Kết Nối Ngay
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-400 hover:text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 glass border-t border-white/5">
+      <a href="#about" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5">Về Tôi</a>
+      <a href="#honors" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5">Thành Tựu</a>
+      <a href="#projects" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5">Dự Án</a>
+      <a href="#research" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5">Nghiên Cứu</a>
+      <a href="#skills" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5">Kỹ Năng</a>
+      <a href="#contact" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5">Liên Hệ</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="about" class="pt-36 pb-20 md:pt-44 md:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <!-- Hero Left: Content -->
+      <div class="lg:w-7/12 text-center lg:text-left">
+        <!-- Status Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-emerald/10 border border-brand-emerald/20 text-brand-emerald text-xs font-semibold mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-emerald animate-ping"></span>
+          <span>Sẵn sàng cho cơ hội Software Engineer & AI Research</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight mb-4">
+          Xin chào, tôi là <br class="hidden sm:inline">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-300">
+            Mô Ha Mách Bu Ba Ka
+          </span>
+        </h1>
+
+        <!-- Typewriter Subtitle -->
+        <div class="h-10 text-xl sm:text-2xl font-mono text-slate-300 mb-6 flex items-center justify-center lg:justify-start gap-2">
+          <span>&gt;</span>
+          <span id="typewriter" class="text-brand-cyan border-r-2 border-brand-cyan pr-1"></span>
+        </div>
+
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mb-8">
+          Sinh viên Công nghệ Thông tin tại <b>Học viện Công nghệ Bưu chính Viễn thông (PTITHCM)</b>. 
+          Kết hợp kỷ luật tư duy thuật toán <b>ICPC</b> với năng lực thiết kế <b>Hệ thống phân tán Microservices</b> 
+          và nghiên cứu các mô hình <b>AI Agent tự trị</b> giải quyết bài toán thực tế.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+          <a href="#projects" class="px-6 py-3.5 rounded-xl bg-brand-blue hover:bg-blue-600 text-white font-semibold text-sm shadow-lg shadow-brand-blue/30 hover:shadow-brand-blue/50 transition-all hover:scale-105 flex items-center gap-2">
+            <span>Khám Phá Dự Án</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </a>
+          <a href="https://icpc.global/ICPCID/KX82OXXF5CSE" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl glass hover:bg-white/10 text-slate-200 font-semibold text-sm border border-white/10 transition-all hover:scale-105 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-brand-amber"></span>
+            <span>Hồ Sơ ICPCID Toàn Cầu</span>
+          </a>
+        </div>
+
+        <!-- Social Badges Row -->
+        <div class="mt-10 flex items-center justify-center lg:justify-start gap-5 text-slate-400">
+          <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/bu-ba-ka-mo-ha-mach-002713309" target="_blank" rel="noopener noreferrer" class="hover:text-[#0A66C2] transition-colors flex items-center gap-2 text-sm font-medium">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://codeforces.com/profile/morex3" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors flex items-center gap-2 text-sm font-medium">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M4.5 7.5A1.5 1.5 0 0 1 6 9v10.5A1.5 1.5 0 0 1 4.5 21h-3A1.5 1.5 0 0 1 0 19.5V9a1.5 1.5 0 0 1 1.5-1.5h3zm9-4.5A1.5 1.5 0 0 1 15 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 19.5V4.5A1.5 1.5 0 0 1 10.5 3h3zm9 7.5A1.5 1.5 0 0 1 24 12v7.5a1.5 1.5 0 0 1-1.5 1.5h-3a1.5 1.5 0 0 1-1.5-1.5V12a1.5 1.5 0 0 1 1.5-1.5h3z"/></svg>
+            <span>Codeforces</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Right: Interactive Visual Card -->
+      <div class="lg:w-5/12 w-full max-w-md">
+        <div class="glass-card rounded-3xl p-6 relative group overflow-hidden border border-white/10">
+          <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-indigo/30 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+          
+          <!-- Terminal Header -->
+          <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            </div>
+            <span class="text-xs font-mono text-slate-400">developer_profile.json</span>
+          </div>
+
+          <!-- Code Snippet -->
+          <pre class="text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto"><code>{
+  <span class="text-indigo-400">"engineer"</span>: <span class="text-emerald-400">"Mô Ha Mách Bu Ba Ka"</span>,
+  <span class="text-indigo-400">"institution"</span>: <span class="text-emerald-400">"PTITHCM"</span>,
+  <span class="text-indigo-400">"scholarship"</span>: <span class="text-amber-400">"100% Straight-A (2023-Present)"</span>,
+  <span class="text-indigo-400">"icpc_standing"</span>: [
+    <span class="text-amber-400">"Champion 2024 (1st Prize)"</span>,
+    <span class="text-slate-400">"Vice Champion 2025 (2nd Prize)"</span>,
+    <span class="text-cyan-400">"Vietnam National Finalist 2025"</span>
+  ],
+  <span class="text-indigo-400">"research_publication"</span>: {
+    <span class="text-indigo-300">"venue"</span>: <span class="text-emerald-400">"I-SMAC 2026"</span>,
+    <span class="text-indigo-300">"core"</span>: <span class="text-emerald-400">"PhoBERT + Class Imbalance"</span>
+  },
+  <span class="text-indigo-400">"active_flagship"</span>: <span class="text-cyan-400">"Due Bro (Household OS & AI)"</span>
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Stats Section -->
+  <section class="py-12 border-y border-white/5 bg-brand-surface/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="p-4">
+          <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 font-mono mb-1">
+            100%
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 font-medium">Học Bổng Xuất Sắc Các Kỳ</p>
+        </div>
+        <div class="p-4">
+          <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300 font-mono mb-1">
+            1st / ICPC
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 font-medium">Quán Quân ICPC PTITHCM 2024</p>
+        </div>
+        <div class="p-4">
+          <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-400 font-mono mb-1">
+            I-SMAC '26
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 font-medium">Tác Giả Bài Báo Quốc Tế</p>
+        </div>
+        <div class="p-4">
+          <div class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-300 font-mono mb-1">
+            Specialist
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 font-medium">Thứ Hạng Codeforces (morex3)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honors & Awards Section -->
+  <section id="honors" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-xs uppercase tracking-widest font-mono text-brand-cyan mb-2">Honors & Competitions</h2>
+      <h3 class="text-3xl sm:text-4xl font-bold text-white">Bảng Vàng Thành Tích</h3>
+      <p class="text-slate-400 mt-3 text-sm sm:text-base">Chứng minh năng lực giải quyết vấn đề dưới áp lực thời gian thực và kỷ luật học thuật vững chãi.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Honor 1 -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-2xl">🥇</span>
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 font-semibold">ICPC 2024</span>
+        </div>
+        <h4 class="text-lg font-bold text-white mb-2">Quán Quân ICPC PTITHCM 2024</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Đoạt Giải Nhất kỳ thi Lập trình sinh viên quốc tế cấp cơ sở tại PTITHCM, dẫn đầu bảng xếp hạng thuật toán toàn diện.
+        </p>
+      </div>
+
+      <!-- Honor 2 -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-slate-400">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-2xl">🥈</span>
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-400/10 text-slate-300 font-semibold">ICPC 2025</span>
+        </div>
+        <h4 class="text-lg font-bold text-white mb-2">Á Quân ICPC PTITHCM 2025</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Giải Nhì kỳ thi Lập trình sinh viên ICPC năm 2025, duy trì phong độ thuật toán xuất sắc trong nhiều mùa giải liên tiếp.
+        </p>
+      </div>
+
+      <!-- Honor 3 -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-red-500">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-2xl">🇻🇳</span>
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-red-500/10 text-red-400 font-semibold">National Arena</span>
+        </div>
+        <h4 class="text-lg font-bold text-white mb-2">ICPC Vietnam National 2025</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Đại diện PTITHCM thi đấu tại Vòng Chung kết Kỳ thi Lập trình sinh viên Quốc gia Việt Nam năm 2025.
+        </p>
+      </div>
+
+      <!-- Honor 4 -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-emerald-500">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-2xl">🎓</span>
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 font-semibold">2023 - Nay</span>
+        </div>
+        <h4 class="text-lg font-bold text-white mb-2">Học Bổng Xuất Sắc 100%</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Đạt học bổng khuyến khích học tập loại Xuất sắc toàn bộ tất cả các học kỳ liên tiếp từ 2023 đến nay tại PTITHCM.
+        </p>
+      </div>
+
+      <!-- Honor 5 -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-cyan-500">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-2xl">⚡</span>
+          <span class="text-xs font-mono px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 font-semibold">Codeforces</span>
+        </div>
+        <h4 class="text-lg font-bold text-white mb-2">Codeforces Specialist</h4>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Thứ hạng Specialist trên đấu trường lập trình thuật toán toàn cầu Codeforces với handle <b>morex3</b>.
+        </p>
+      </div>
+
+      <!-- Honor 6: ICPCID Official Verification -->
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-400 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-2xl">🌐</span>
+            <span class="text-xs font-mono px-2.5 py-1 rounded bg-amber-400/10 text-amber-300 font-semibold">Global ID</span>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2">Hồ Sơ Tuyển Thủ ICPC Toàn Cầu</h4>
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">
+            Mã định danh tuyển thủ quốc tế chính thức được xác thực: <b>KX82OXXF5CSE</b>.
+          </p>
+        </div>
+        <a href="https://icpc.global/ICPCID/KX82OXXF5CSE" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-amber-400 hover:text-amber-300 flex items-center gap-1.5">
+          <span>Xác thực trên icpc.global</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section with Interactive Filtering -->
+  <section id="projects" class="py-20 bg-brand-surface/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-xs uppercase tracking-widest font-mono text-brand-cyan mb-2">Selected Works</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-white">Dự Án Kỹ Thuật Tiêu Biểu</h3>
+        <p class="text-slate-400 mt-3 text-sm sm:text-base">Các sản phẩm thực chiến được xây dựng với kiến trúc chuẩn mực và công nghệ tiên tiến.</p>
+
+        <!-- Project Filter Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-8" id="projectFilters">
+          <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-brand-blue text-white shadow-md shadow-brand-blue/30">Tất Cả</button>
+          <button data-filter="mobile-ai" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white hover:bg-white/5">Mobile & AI</button>
+          <button data-filter="microservices" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white hover:bg-white/5">Microservices & Hệ Thống</button>
+          <button data-filter="algorithms" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white hover:bg-white/5">Thuật Toán & ICPC</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+
+        <!-- Project 1: Due Bro (FLAGSHIP) -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group" data-category="mobile-ai">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-indigo/15 text-indigo-300 border border-brand-indigo/30">
+                🏠 Flagship Mobile & AI BaaS
+              </span>
+              <span class="text-xs font-mono text-slate-400">2026</span>
+            </div>
+            <h4 class="text-xl font-bold text-white group-hover:text-brand-cyan transition-colors mb-3">
+              Due Bro — Household OS & Roommate Matching
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Hệ điều hành quản lý sinh hoạt phòng trọ kết hợp tìm bạn ở ghép tương thích lối sống; tích hợp <b>AI Matching Engine</b>, <b>AI Mascot Bro (Gemini)</b> nhắc việc tự nhiên và điểm tín nhiệm <b>Bayesian Trust Score</b>.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">React Native</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Expo</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Supabase</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Gemini AI</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">TypeScript</span>
+            </div>
+          </div>
+          <div class="px-7 py-4 border-t border-white/5 bg-black/20 flex items-center justify-between">
+            <a href="https://github.com/KaNguyen3005/DueBro_Kada_Program" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-cyan hover:text-white flex items-center gap-1.5 transition-colors">
+              <span>Xem Mã Nguồn GitHub</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: LMS Microservices -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group" data-category="microservices">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/15 text-blue-300 border border-blue-500/30">
+                ⚓ Flagship Microservices
+              </span>
+              <span class="text-xs font-mono text-slate-400">Distributed</span>
+            </div>
+            <h4 class="text-xl font-bold text-white group-hover:text-brand-cyan transition-colors mb-3">
+              Learning Management System (LMS)
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Hệ thống đào tạo trực tuyến quy mô lớn thiết kế theo chuẩn <b>Microservices</b>, phân chia domain độc lập, tối ưu hóa thông lượng và khả năng mở rộng chịu tải cao.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Spring Boot</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Microservices</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Docker</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Redis</span>
+            </div>
+          </div>
+          <div class="px-7 py-4 border-t border-white/5 bg-black/20 flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400">High Scalability System</span>
+          </div>
+        </div>
+
+        <!-- Project 3: Identity Service -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group" data-category="microservices">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                🔐 Security & Auth Gateway
+              </span>
+              <span class="text-xs font-mono text-slate-400">Java</span>
+            </div>
+            <h4 class="text-xl font-bold text-white group-hover:text-brand-cyan transition-colors mb-3">
+              Identity Service (Centralized Auth)
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Dịch vụ kiểm soát danh tính và quyền hạn trung tâm xây dựng bằng Spring Boot, Spring Security và JWT, bảo vệ bảo mật cho toàn bộ hệ thống phân tán.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Spring Security</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">OAuth2 / JWT</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">MySQL</span>
+            </div>
+          </div>
+          <div class="px-7 py-4 border-t border-white/5 bg-black/20 flex items-center justify-between">
+            <a href="https://github.com/KaNguyen3005/identity_service_springboot_2025" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-cyan hover:text-white flex items-center gap-1.5 transition-colors">
+              <span>Xem Repository</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 4: KaTiLa Bookstore -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group" data-category="microservices">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                📚 Fullstack Commerce
+              </span>
+              <span class="text-xs font-mono text-slate-400">Web</span>
+            </div>
+            <h4 class="text-xl font-bold text-white group-hover:text-brand-cyan transition-colors mb-3">
+              KaTiLa Bookstore System
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Hệ sinh thái thương mại điện tử mua bán sách tích hợp trí tuệ nhân tạo gợi ý sản phẩm, phát triển toàn diện Fullstack với Spring Boot và React.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Spring Boot</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">React</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">AI Recommendation</span>
+            </div>
+          </div>
+          <div class="px-7 py-4 border-t border-white/5 bg-black/20 flex items-center justify-between">
+            <a href="https://github.com/KaNguyen3005/Bookstore-System" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-cyan hover:text-white flex items-center gap-1.5 transition-colors">
+              <span>Xem Repository</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 5: ICPC & DSA Repo -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group" data-category="algorithms">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                📐 ICPC & CP Vault
+              </span>
+              <span class="text-xs font-mono text-slate-400">C++</span>
+            </div>
+            <h4 class="text-xl font-bold text-white group-hover:text-brand-cyan transition-colors mb-3">
+              Algorithms & Data Structures Vault
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Kho bí kíp cấu trúc dữ liệu và giải thuật nâng cao (Graph, DP, Segment Tree, Math) phục vụ luyện tập thi đấu ICPC và giải bài trên Codeforces.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">C++20</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Graph</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Segment Tree</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">ICPC</span>
+            </div>
+          </div>
+          <div class="px-7 py-4 border-t border-white/5 bg-black/20 flex items-center justify-between">
+            <a href="https://github.com/BuBaKaNg/Algorithm-And-Datastructure" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-cyan hover:text-white flex items-center gap-1.5 transition-colors">
+              <span>Xem Repository</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 6: Heuristic Maze Solver -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group" data-category="mobile-ai">
+          <div class="p-7">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/15 text-teal-300 border border-teal-500/30">
+                🧩 Classical AI
+              </span>
+              <span class="text-xs font-mono text-slate-400">Python</span>
+            </div>
+            <h4 class="text-xl font-bold text-white group-hover:text-brand-cyan transition-colors mb-3">
+              Heuristic Maze Solver AI
+            </h4>
+            <p class="text-slate-300 text-sm leading-relaxed mb-6">
+              Giải quyết mê cung phức tạp bằng các thuật toán tìm kiếm đồ thị kinh điển (BFS, DFS, A* Search) tối ưu chi phí duyệt đường.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-6">
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Python</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">A* Algorithm</span>
+              <span class="text-xs px-2.5 py-1 rounded bg-white/5 text-slate-300 font-mono">Graph Search</span>
+            </div>
+          </div>
+          <div class="px-7 py-4 border-t border-white/5 bg-black/20 flex items-center justify-between">
+            <a href="https://github.com/KaNguyen3005/maze_solver_beginning_AI" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-cyan hover:text-white flex items-center gap-1.5 transition-colors">
+              <span>Xem Repository</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Research & Deep Tech Section -->
+  <section id="research" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-xs uppercase tracking-widest font-mono text-brand-indigo mb-2">Scientific Contributions</h2>
+      <h3 class="text-3xl sm:text-4xl font-bold text-white">Nghiên Cứu Khoa Học & AI Engineering</h3>
+      <p class="text-slate-400 mt-3 text-sm sm:text-base">Tiếp cận các công nghệ AI thế hệ mới với phương pháp luận nghiên cứu nghiêm túc.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Research 1: Publication -->
+      <div class="glass-card rounded-3xl p-8 relative overflow-hidden border-t-2 border-t-brand-blue">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            📄 International Conference Paper
+          </span>
+          <span class="text-xs font-mono text-slate-400">I-SMAC 2026</span>
+        </div>
+        <h4 class="text-xl font-bold text-white mb-3">
+          Vietnamese Students’ Feedback Sentiment Analysis Using PhoBERT Combined with Extreme Class Imbalance Mitigation Strategies
+        </h4>
+        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+          Công bố tại <b>The 10th International Conference on IoT in Social, Mobile, Analytics and Cloud (I-SMAC 2026)</b>. Đóng góp chiến lược xử lý triệt để bài toán mất cân bằng dữ liệu cực đoan khi phân tích cảm xúc phản hồi của sinh viên bằng mô hình ngôn ngữ <b>PhoBERT</b>.
+        </p>
+        <div class="flex items-center gap-3">
+          <a href="https://i-smac.org/2026/" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-brand-blue hover:text-blue-300 flex items-center gap-1">
+            <span>Thông tin Hội nghị I-SMAC</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Research 2: AI Agents -->
+      <div class="glass-card rounded-3xl p-8 relative overflow-hidden border-t-2 border-t-brand-indigo">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            🤖 Applied AI Research
+          </span>
+          <span class="text-xs font-mono text-slate-400">Autonomous Systems</span>
+        </div>
+        <h4 class="text-xl font-bold text-white mb-3">
+          Effective AI Agent Architectures & Autonomous Workflows
+        </h4>
+        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+          Nghiên cứu và hiện thực hóa các Agentic Design Patterns: <b>Dynamic Planning</b>, <b>Memory</b>, <b>Self-Reflection</b> và <b>Tool-use</b>. Ứng dụng điều phối hệ thống nhiều Agent cộng tác song song vào sản phẩm thực chiến (như Mascot Bro trong nền tảng <b>Due Bro</b>).
+        </p>
+        <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-400">
+          <span>#AgenticDesign</span>
+          <span>#MultiAgentOrchestration</span>
+          <span>#GeminiAPI</span>
+          <span>#FunctionCalling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Arsenal (Skills) -->
+  <section id="skills" class="py-20 bg-brand-surface/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs uppercase tracking-widest font-mono text-brand-cyan mb-2">Technical Matrix</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-white">Kho Vũ Khí Công Nghệ</h3>
+        <p class="text-slate-400 mt-3 text-sm sm:text-base">Các công cụ và nền tảng được tôi làm chủ và ứng dụng trong phát triển hệ thống.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Group 1: Languages -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <span class="text-brand-cyan">💻</span> Ngôn Ngữ Lập Trình
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Java</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">C++</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Python</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">TypeScript</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">JavaScript</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">SQL</span>
+          </div>
+        </div>
+
+        <!-- Group 2: Backend -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <span class="text-brand-indigo">⚙️</span> Backend & Hệ Thống
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Microservices</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Spring Boot</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Spring Security</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Hibernate / JPA</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Node.js</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">RESTful API</span>
+          </div>
+        </div>
+
+        <!-- Group 3: Mobile & Frontend -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <span class="text-brand-blue">📱</span> Mobile & Frontend
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">React Native</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Expo</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">React.js</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Next.js</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Tailwind CSS</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Redux</span>
+          </div>
+        </div>
+
+        <!-- Group 4: Database & DevOps -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <span class="text-brand-emerald">🗄️</span> Cơ Sở Dữ Liệu & DevOps
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">PostgreSQL</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Supabase</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">MySQL</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">MongoDB</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Redis</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Docker</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Git / GitHub</span>
+          </div>
+        </div>
+
+        <!-- Group 5: AI & Data Science -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <span class="text-brand-amber">🤖</span> AI & Machine Learning
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">AI Agents</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Google Gemini API</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">PhoBERT</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">PyTorch</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">TensorFlow</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Hugging Face</span>
+          </div>
+        </div>
+
+        <!-- Group 6: Algorithms -->
+        <div class="glass-card rounded-2xl p-6">
+          <h4 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+            <span class="text-cyan-400">⚡</span> Thuật Toán & Thi Đấu
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Graph Theory</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Dynamic Programming</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Segment Tree / Fenwick</span>
+            <span class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-200 text-xs font-mono">Number Theory</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Connect Section -->
+  <section id="contact" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="glass-card rounded-3xl p-8 sm:p-14 relative overflow-hidden border border-white/10 text-center max-w-4xl mx-auto">
+      <div class="absolute -bottom-16 -left-16 w-60 h-60 bg-brand-blue/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -top-16 -right-16 w-60 h-60 bg-brand-indigo/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <span class="text-xs uppercase tracking-widest font-mono text-brand-cyan mb-2 block">Get in Touch</span>
+      <h3 class="text-3xl sm:text-5xl font-extrabold text-white mb-6">Cùng Nhau Tạo Nên Giá Trị</h3>
+      <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+        Tôi luôn hào hứng kết nối với các đồng nghiệp, nhà tuyển dụng và những kỹ sư có cùng đam mê về kiến trúc hệ thống và AI.
+      </p>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+        <a href="mailto:kaakaa3005@gmail.com" class="px-7 py-4 rounded-2xl bg-gradient-to-r from-brand-blue to-brand-indigo hover:from-blue-600 hover:to-indigo-600 text-white font-semibold text-sm shadow-xl shadow-brand-blue/25 hover:shadow-brand-blue/40 transition-all hover:scale-105 flex items-center gap-2.5">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <span>Gửi Email Trực Tiếp</span>
+        </a>
+        <a href="https://www.linkedin.com/in/bu-ba-ka-mo-ha-mach-002713309" target="_blank" rel="noopener noreferrer" class="px-7 py-4 rounded-2xl glass hover:bg-white/10 text-slate-100 font-semibold text-sm border border-white/10 transition-all hover:scale-105 flex items-center gap-2.5">
+          <svg class="w-5 h-5 fill-[#0A66C2]" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <span>Kết Nối LinkedIn</span>
+        </a>
+      </div>
+
+      <!-- Quick Contact Badges Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono text-slate-300 max-w-2xl mx-auto pt-8 border-t border-white/10">
+        <a href="https://github.com/KaNguyen3005" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all">
+          GitHub: @KaNguyen3005
+        </a>
+        <a href="https://codeforces.com/profile/morex3" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all">
+          Codeforces: @morex3
+        </a>
+        <a href="https://icpc.global/ICPCID/KX82OXXF5CSE" target="_blank" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all text-amber-400">
+          ICPCID: KX82OXXF5CSE
+        </a>
+        <div class="p-3 rounded-xl bg-white/5">
+          TP. Hồ Chí Minh, VN
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-white/5 text-center text-xs text-slate-500 font-mono">
+    <div class="max-w-7xl mx-auto px-4 space-y-3">
+      <p class="italic text-slate-400">"Kỷ luật trong tư duy, xuất sắc trong giải thuật, vững chãi trong kiến trúc."</p>
+      <p>© 2026 Mô Ha Mách Bu Ba Ka (KaNguyen3005). All Rights Reserved.</p>
+      <p class="text-[11px] text-slate-600">Hosted with GitHub Pages · Built for high performance and clean aesthetics</p>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Scripts -->
+  <script>
+    // 1. Navbar glass effect on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-xl', 'bg-brand-surface/90');
+      } else {
+        navbar.classList.remove('shadow-xl', 'bg-brand-surface/90');
+      }
+    });
+
+    // 2. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // 3. Typewriter Effect
+    const roles = [
+      'Software Engineer',
+      'Distributed Systems Architect',
+      'ICPC PTITHCM Champion',
+      'AI Agents & Deep Learning Researcher'
+    ];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriterEl = document.getElementById('typewriter');
+
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typewriterEl.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterEl.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 40 : 80;
+      if (!isDeleting && charIndex === currentRole.length) {
+        speed = 2000; // Pause at end
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        speed = 400; // Pause before new word
+      }
+
+      setTimeout(typeEffect, speed);
+    }
+    typeEffect();
+
+    // 4. Project Filter Tabs
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Active button styles
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-brand-blue', 'text-white', 'shadow-md', 'shadow-brand-blue/30');
+          b.classList.add('text-slate-400');
+        });
+        btn.classList.add('active', 'bg-brand-blue', 'text-white', 'shadow-md', 'shadow-brand-blue/30');
+        btn.classList.remove('text-slate-400');
+
+        const filter = btn.getAttribute('data-filter');
+
+        projectCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'flex';
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
