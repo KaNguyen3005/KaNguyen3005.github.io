@@ -117,19 +117,26 @@
   <!-- Sticky Navbar -->
   <header class="fixed top-0 inset-x-0 z-50 transition-all duration-300 glass" id="navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-indigo flex items-center justify-center font-mono font-bold text-lg text-white shadow-lg shadow-brand-blue/25 group-hover:scale-105 transition-transform">
-          MB
-        </div>
+      
+      <!-- Brand Logo & User Avatar -->
+      <a href="#" class="flex items-center gap-3.5 group mr-4 sm:mr-8 flex-shrink-0">
+        <img 
+          src="https://avatars.githubusercontent.com/u/142709831?v=4" 
+          alt="Mô Ha Mách Bu Ba Ka Avatar" 
+          class="w-10 h-10 rounded-xl object-cover border border-white/20 shadow-lg shadow-brand-blue/30 group-hover:scale-105 group-hover:border-brand-cyan transition-all"
+        />
         <div>
-          <span class="font-bold tracking-tight text-white group-hover:text-brand-cyan transition-colors text-base sm:text-lg block">Mô Ha Mách Bu Ba Ka</span>
-          <span class="text-xs font-mono text-slate-400 block -mt-1">Software Engineer · PTIT</span>
+          <span class="font-bold tracking-tight text-white group-hover:text-brand-cyan transition-colors text-base sm:text-lg block whitespace-nowrap">
+            Mô Ha Mách Bu Ba Ka
+          </span>
+          <span class="text-xs font-mono text-slate-400 block -mt-1 whitespace-nowrap">
+            Software Engineer · PTIT
+          </span>
         </div>
       </a>
 
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+      <!-- Desktop Navigation Links (with ample spacing) -->
+      <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium text-slate-300">
         <a href="#about" class="hover:text-brand-cyan transition-colors">Về Tôi</a>
         <a href="#honors" class="hover:text-brand-cyan transition-colors">Thành Tựu</a>
         <a href="#projects" class="hover:text-brand-cyan transition-colors">Dự Án</a>
@@ -139,7 +146,7 @@
       </nav>
 
       <!-- Action Button -->
-      <div class="hidden sm:flex items-center gap-3">
+      <div class="hidden sm:flex items-center gap-3 flex-shrink-0">
         <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all">
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
@@ -224,37 +231,30 @@
         </div>
       </div>
 
-      <!-- Hero Right: Interactive Visual Card -->
+      <!-- Hero Right: Authentic Contest Photo Card (PTIT Lab Arena) -->
       <div class="lg:w-5/12 w-full max-w-md">
-        <div class="glass-card rounded-3xl p-6 relative group overflow-hidden border border-white/10">
-          <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-indigo/30 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
-          
-          <!-- Terminal Header -->
-          <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
-              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
-              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-brand-blue via-brand-indigo to-brand-cyan rounded-3xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500"></div>
+          <div class="relative glass-card rounded-3xl overflow-hidden p-2.5 border border-white/10 shadow-2xl">
+            <div class="relative overflow-hidden rounded-2xl">
+              <img 
+                src="./assets/icpc_contest_2026.png" 
+                alt="Mô Ha Mách Bu Ba Ka thi đấu Chung kết ICPC PTIT & Olympic AI Contest 09/2026" 
+                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" 
+              />
+              <div class="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-xs font-semibold text-amber-300 flex items-center gap-2 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                <span>Chung kết ICPC & Olympic AI PTIT (09/2026)</span>
+              </div>
             </div>
-            <span class="text-xs font-mono text-slate-400">developer_profile.json</span>
+            <div class="p-3.5 flex items-center justify-between text-xs font-mono text-slate-300">
+              <span class="flex items-center gap-1.5">
+                <span>📍</span>
+                <span>PTITHCM Arena</span>
+              </span>
+              <span class="text-brand-cyan font-semibold">@morex3 in action</span>
+            </div>
           </div>
-
-          <!-- Code Snippet -->
-          <pre class="text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto"><code>{
-  <span class="text-indigo-400">"engineer"</span>: <span class="text-emerald-400">"Mô Ha Mách Bu Ba Ka"</span>,
-  <span class="text-indigo-400">"institution"</span>: <span class="text-emerald-400">"PTITHCM"</span>,
-  <span class="text-indigo-400">"scholarship"</span>: <span class="text-amber-400">"100% Straight-A (2023-Present)"</span>,
-  <span class="text-indigo-400">"icpc_standing"</span>: [
-    <span class="text-amber-400">"Champion 2024 (1st Prize)"</span>,
-    <span class="text-slate-400">"Vice Champion 2025 (2nd Prize)"</span>,
-    <span class="text-cyan-400">"Vietnam National Finalist 2025"</span>
-  ],
-  <span class="text-indigo-400">"research_publication"</span>: {
-    <span class="text-indigo-300">"venue"</span>: <span class="text-emerald-400">"I-SMAC 2026"</span>,
-    <span class="text-indigo-300">"core"</span>: <span class="text-emerald-400">"PhoBERT + Class Imbalance"</span>
-  },
-  <span class="text-indigo-400">"active_flagship"</span>: <span class="text-cyan-400">"Due Bro (Household OS & AI)"</span>
-}</code></pre>
         </div>
       </div>
     </div>
@@ -301,6 +301,26 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Honor 0: Double Finals 09/2026 (NEW) -->
+      <div class="glass-card rounded-2xl p-6 sm:p-7 border-l-4 border-l-rose-500 col-span-1 md:col-span-2 lg:col-span-3 bg-gradient-to-r from-rose-500/10 via-brand-surface/40 to-brand-indigo/10 border border-white/10 shadow-lg">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">🔥</span>
+            <div>
+              <h4 class="text-xl font-bold text-white">Chung Kết ICPC PTITHCM & Olympic AI Contest PTIT</h4>
+              <span class="text-xs font-mono text-brand-cyan">Thời gian: Tháng 09/2026 · Địa điểm: Phòng máy thi đấu PTITHCM</span>
+            </div>
+          </div>
+          <span class="text-xs font-mono px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-semibold whitespace-nowrap">
+            Double Arena · 09/2026
+          </span>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Góp mặt tranh tài tại 2 đấu trường công nghệ quan trọng trong tháng 09/2026: <b>Vòng Chung kết Lập trình sinh viên quốc tế ICPC PTITHCM 2026</b> và <b>Olympic AI Contest PTITHCM 2026</b> — thử thách năng lực tư duy giải thuật tối ưu dưới áp lực thời gian thực và phát triển mô hình Trí tuệ Nhân tạo thực nghiệm.
+        </p>
+      </div>
+
       <!-- Honor 1 -->
       <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500">
         <div class="flex items-center justify-between mb-4">
