@@ -187,27 +187,34 @@
         <!-- Right Column: Featured Arena Master HD Photo Bento Card (5 cols) -->
         <div class="lg:col-span-5">
           <div class="glass-card rounded-2xl p-3 border border-white/10 overflow-hidden relative group">
-            <!-- Top Live Arena Status Overlay -->
+            <!-- Top Live Arena Status Overlay & Tab Switcher -->
             <div class="flex items-center justify-between pb-3 px-1 text-xs font-mono">
-              <div class="inline-flex items-center gap-1.5 text-rose-400">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                </span>
-                <span class="font-semibold">Chung kết ICPC PTITHCM & Olympic AI 2026</span>
+              <div class="flex items-center gap-1 p-0.5 rounded-lg bg-black/40 border border-white/10">
+                <button id="hero-tab-arena" class="hero-tab-btn px-2.5 py-1 rounded-md text-[11px] font-medium transition-all bg-brand-blue/30 text-cyan-300 border border-brand-cyan/40" data-hero-view="arena" type="button">
+                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-rose-400 mr-1 animate-pulse"></span>Đấu Trường ICPC
+                </button>
+                <button id="hero-tab-campus" class="hero-tab-btn px-2.5 py-1 rounded-md text-[11px] font-medium transition-all text-slate-400 hover:text-white" data-hero-view="campus" type="button">
+                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mr-1"></span>Đời Sống PTIT
+                </button>
               </div>
-              <span class="text-slate-400">Live Arena</span>
+              <span id="hero-status-pill" class="text-[11px] text-rose-400 font-mono">Live Arena</span>
             </div>
 
             <!-- Master HD Contest Arena Picture Container with Zero CLS -->
-            <div class="relative overflow-hidden rounded-xl border border-white/10 aspect-video aspect-[16/9] w-full bg-slate-900/60 cursor-pointer" data-lightbox-src="assets/icpc_contest_2026.png" data-lightbox-title="Chung kết ICPC PTITHCM & Olympic AI 2026" data-lightbox-desc="Khoảnh khắc thi đấu thuật toán trực tiếp tại phòng lab máy tính PTITHCM của Mô Ha Mách Bu Ba Ka cùng đồng đội.">
-              <picture class="block w-full h-full">
+            <div id="hero-image-wrap" class="relative overflow-hidden rounded-xl border border-white/10 aspect-video aspect-[16/9] w-full bg-slate-900/60 cursor-pointer" data-lightbox-src="assets/icpc_contest_2026.png" data-lightbox-title="Chung kết ICPC PTITHCM & Olympic AI 2026" data-lightbox-desc="Khoảnh khắc thi đấu thuật toán trực tiếp tại phòng lab máy tính PTITHCM của Mô Ha Mách Bu Ba Ka cùng đồng đội.">
+              <!-- Arena View (Default) -->
+              <picture id="hero-pic-arena" class="block w-full h-full transition-opacity duration-300">
                 <source srcset="assets/icpc_contest_2026.webp" type="image/webp">
                 <img src="assets/icpc_contest_2026.png" alt="Mô Ha Mách Bu Ba Ka thi đấu tại Chung kết ICPC PTITHCM" width="1024" height="682" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" fetchpriority="high" />
               </picture>
+              <!-- Campus View (Photo 4) -->
+              <picture id="hero-pic-campus" class="hidden w-full h-full transition-opacity duration-300">
+                <source srcset="assets/ptit_campus_life.webp" type="image/webp">
+                <img src="assets/ptit_campus_life.png" alt="Khoảnh khắc hoàng hôn khuôn viên PTITHCM cùng bạn bè" width="469" height="505" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              </picture>
               <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Click xem ảnh gốc (1024x682 HD)</span>
+                <span id="hero-zoom-text">Click xem ảnh gốc (1024x682 HD)</span>
               </div>
             </div>
 
@@ -216,11 +223,11 @@
               <!-- Luffy Mascot & Ethos Quote -->
               <div class="flex items-center gap-2.5">
                 <img src="assets/luffy-mascot.svg" alt="Luffy Straw Hat Mascot" width="32" height="32" class="w-8 h-8 rounded-full border border-amber-400/40 shadow-sm" />
-                <span class="text-xs text-slate-300 italic font-sans">
+                <span id="hero-ethos-quote" class="text-xs text-slate-300 italic font-sans">
                   Tinh thần Luffy: Vươn ra biển lớn 🏴‍☠️
                 </span>
               </div>
-              <span class="text-[11px] font-mono text-brand-cyan bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+              <span id="hero-ethos-tag" class="text-[11px] font-mono text-brand-cyan bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
                 @morex3
               </span>
             </div>

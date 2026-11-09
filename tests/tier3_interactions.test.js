@@ -194,4 +194,31 @@ describe('Tier 3: Cross-Feature Combinations Suite', () => {
     }
   });
 
+  test('3.15: [Hero Tab Switcher]: Hero Dual-Tab controls toggle Arena and Campus Life views', ({ assert }) => {
+    const { document } = loadDOM(INDEX_HTML);
+    const tabArena = document.querySelector('#hero-tab-arena');
+    const tabCampus = document.querySelector('#hero-tab-campus');
+    const picArena = document.querySelector('#hero-pic-arena');
+    const picCampus = document.querySelector('#hero-pic-campus');
+    const imageWrap = document.querySelector('#hero-image-wrap');
+
+    assert.ok(tabArena, 'Hero Arena tab must exist');
+    assert.ok(tabCampus, 'Hero Campus tab must exist');
+    assert.ok(picArena, 'Hero Arena picture must exist');
+    assert.ok(picCampus, 'Hero Campus picture must exist');
+    assert.ok(imageWrap, 'Hero image wrapper must exist');
+
+    // Click campus tab
+    tabCampus.click();
+    assert.ok(!picCampus.classList.contains('hidden'), 'Campus view must become visible');
+    assert.ok(picArena.classList.contains('hidden'), 'Arena view must be hidden');
+    assert.equal(imageWrap.getAttribute('data-lightbox-src'), 'assets/ptit_campus_life.png', 'Lightbox source must point to campus photo');
+
+    // Click arena tab
+    tabArena.click();
+    assert.ok(!picArena.classList.contains('hidden'), 'Arena view must become visible again');
+    assert.ok(picCampus.classList.contains('hidden'), 'Campus view must be hidden again');
+    assert.equal(imageWrap.getAttribute('data-lightbox-src'), 'assets/icpc_contest_2026.png', 'Lightbox source must point to contest arena photo');
+  });
+
 });

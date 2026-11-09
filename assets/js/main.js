@@ -533,6 +533,81 @@
   }
 
   // ==========================================================================
+  // 7.5 HERO DUAL-TAB SHOWCASE (Arena vs Campus Life)
+  // ==========================================================================
+  function initHeroSwitcher() {
+    const tabArena = document.getElementById('hero-tab-arena');
+    const tabCampus = document.getElementById('hero-tab-campus');
+    const picArena = document.getElementById('hero-pic-arena');
+    const picCampus = document.getElementById('hero-pic-campus');
+    const imageWrap = document.getElementById('hero-image-wrap');
+    const statusPill = document.getElementById('hero-status-pill');
+    const zoomText = document.getElementById('hero-zoom-text');
+    const ethosQuote = document.getElementById('hero-ethos-quote');
+    const ethosTag = document.getElementById('hero-ethos-tag');
+
+    if (!tabArena || !tabCampus || !picArena || !picCampus || !imageWrap) return;
+
+    function setView(view) {
+      if (view === 'arena') {
+        tabArena.classList.add('bg-brand-blue/30', 'text-cyan-300', 'border-brand-cyan/40');
+        tabArena.classList.remove('text-slate-400');
+        tabCampus.classList.remove('bg-brand-blue/30', 'text-cyan-300', 'border-brand-cyan/40');
+        tabCampus.classList.add('text-slate-400');
+
+        picArena.classList.remove('hidden');
+        picArena.classList.add('block');
+        picCampus.classList.add('hidden');
+        picCampus.classList.remove('block');
+
+        imageWrap.setAttribute('data-lightbox-src', 'assets/icpc_contest_2026.png');
+        imageWrap.setAttribute('data-lightbox-title', 'Chung kết ICPC PTITHCM & Olympic AI 2026');
+        imageWrap.setAttribute('data-lightbox-desc', 'Khoảnh khắc thi đấu thuật toán trực tiếp tại phòng lab máy tính PTITHCM của Mô Ha Mách Bu Ba Ka cùng đồng đội.');
+
+        if (statusPill) {
+          statusPill.textContent = 'Live Arena';
+          statusPill.className = 'text-[11px] text-rose-400 font-mono';
+        }
+        if (zoomText) zoomText.textContent = 'Click xem ảnh gốc (1024x682 HD)';
+        if (ethosQuote) ethosQuote.textContent = 'Tinh thần Luffy: Vươn ra biển lớn 🏴‍☠️';
+        if (ethosTag) ethosTag.textContent = '@morex3';
+      } else {
+        tabCampus.classList.add('bg-brand-blue/30', 'text-cyan-300', 'border-brand-cyan/40');
+        tabCampus.classList.remove('text-slate-400');
+        tabArena.classList.remove('bg-brand-blue/30', 'text-cyan-300', 'border-brand-cyan/40');
+        tabArena.classList.add('text-slate-400');
+
+        picCampus.classList.remove('hidden');
+        picCampus.classList.add('block');
+        picArena.classList.add('hidden');
+        picArena.classList.remove('block');
+
+        imageWrap.setAttribute('data-lightbox-src', 'assets/ptit_campus_life.png');
+        imageWrap.setAttribute('data-lightbox-title', 'Khuôn Viên PTITHCM & Tình Bạn Học Đường');
+        imageWrap.setAttribute('data-lightbox-desc', 'Khoảnh khắc thư giãn dưới hoàng hôn rực rỡ tại khuôn viên PTITHCM cùng bạn bè — nơi nuôi dưỡng đam mê kỹ thuật và tinh thần đồng đội Luffy.');
+
+        if (statusPill) {
+          statusPill.textContent = 'Campus Life';
+          statusPill.className = 'text-[11px] text-amber-400 font-mono';
+        }
+        if (zoomText) zoomText.textContent = 'Click xem ảnh hoàng hôn PTIT';
+        if (ethosQuote) ethosQuote.textContent = 'Đồng đội là sức mạnh lớn nhất! 🤝';
+        if (ethosTag) ethosTag.textContent = 'PTIT Campus';
+      }
+    }
+
+    tabArena.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setView('arena');
+    });
+
+    tabCampus.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setView('campus');
+    });
+  }
+
+  // ==========================================================================
   // 8. LIFECYCLE INITIALIZATION
   // ==========================================================================
   function init() {
@@ -543,6 +618,7 @@
     initScrollReveal();
     initMobileMenu();
     initSmoothAnchors();
+    initHeroSwitcher();
   }
 
   // Expose Portfolio API for testing & manual invocation
