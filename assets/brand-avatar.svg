@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="KaNguyen3005 Engineering Monogram">
+  <defs>
+    <linearGradient id="kaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1626"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="kaRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+  <rect width="80" height="80" rx="40" fill="url(#kaBg)"/>
+  <circle cx="40" cy="40" r="37" fill="none" stroke="url(#kaRing)" stroke-width="3"/>
+  <path d="M25 28L15 40L25 52" fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M55 28L65 40L55 52" fill="none" stroke="#818CF8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 25L36 55" fill="none" stroke="#F8FAFC" stroke-width="4" stroke-linecap="round"/>
+</svg>

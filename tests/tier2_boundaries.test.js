@@ -143,15 +143,12 @@ describe('Tier 2: Boundary & Corner Cases Suite', () => {
   // Feature 4 Boundaries: Contest & Award Photos Integration
   // =========================================================================
   describe('[Tier 2] Feature 4 Boundaries: Contest & Award Photos Integration', () => {
-    test('4.1: Broken image fallback resilience: images define onerror handler or svg fallback', ({ assert }) => {
+    test('4.1: Typographic award cards contain zero broken images and zero award img tags', ({ assert }) => {
       const { document } = loadDOM(INDEX_HTML);
-      const awardImgs = document.querySelectorAll('img[src*="awards/"]');
-      assert.ok(awardImgs.length > 0, 'Award images must exist');
-      for (const img of awardImgs) {
-        const onerror = img.getAttribute('onerror') || '';
-        assert.ok(onerror.includes('placeholder.svg') || onerror.includes('this.src') || onerror.includes('this.onerror'),
-          'Award images must implement an onerror fallback to prevent broken UI icons');
-      }
+      const awardImgs = document.querySelectorAll('#honors img');
+      assert.equal(awardImgs.length, 0, 'Honors section award cards must contain zero <img> tags');
+      const awardPics = document.querySelectorAll('#honors picture');
+      assert.equal(awardPics.length, 0, 'Honors section award cards must contain zero <picture> tags');
     });
 
     test('4.2: WebP / PNG dual availability or clean format compatibility', ({ assert }) => {
@@ -193,7 +190,7 @@ describe('Tier 2: Boundary & Corner Cases Suite', () => {
     test('4.5: Offscreen images utilize loading="lazy" attribute to conserve bandwidth', ({ assert }) => {
       const { document } = loadDOM(INDEX_HTML);
       const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-      assert.ok(lazyImages.length >= 3, 'Offscreen images must specify loading="lazy"');
+      assert.ok(lazyImages.length >= 1, 'Offscreen images must specify loading="lazy"');
     });
   });
 
@@ -528,12 +525,12 @@ describe('Tier 2: Boundary & Corner Cases Suite', () => {
   // =========================================================================
   describe('[Tier 2] Feature 12 Boundaries: Zero 404 & Network Edge Cases', () => {
     test('12.1: Relative path resolution handles ./assets/ and assets/ cleanly', async ({ assert, fetch }) => {
-      const res = await fetch('/assets/luffy-mascot.svg');
-      assert.equal(res.statusCode, 200, 'Static asset /assets/luffy-mascot.svg must return 200');
+      const res = await fetch('/assets/icpc_contest_2026.png');
+      assert.equal(res.statusCode, 200, 'Static asset /assets/icpc_contest_2026.png must return 200');
     });
 
     test('12.2: Case-sensitivity check: all paths match lowercase on disk', ({ assert }) => {
-      const files = ['assets/luffy-mascot.svg'];
+      const files = ['assets/icpc_contest_2026.png', 'assets/ptit_campus_life.png'];
       for (const f of files) {
         const full = path.join(PROJECT_ROOT, f);
         assert.ok(fs.existsSync(full), `File ${f} must exist with exact casing`);
@@ -541,7 +538,7 @@ describe('Tier 2: Boundary & Corner Cases Suite', () => {
     });
 
     test('12.3: URL query parameters on assets resolve to existing base files', async ({ assert, fetch }) => {
-      const res = await fetch('/assets/luffy-mascot.svg?v=123');
+      const res = await fetch('/assets/icpc_contest_2026.png?v=123');
       assert.equal(res.statusCode, 200, 'Asset with query param ?v=123 must return 200');
     });
 
@@ -552,7 +549,7 @@ describe('Tier 2: Boundary & Corner Cases Suite', () => {
     });
 
     test('12.5: Static server serves proper MIME type image/svg+xml for SVG assets', async ({ assert, fetch }) => {
-      const res = await fetch('/assets/luffy-mascot.svg');
+      const res = await fetch('/assets/badges/codeforces.svg');
       assert.equal(res.statusCode, 200);
       assert.ok(res.headers['content-type'].includes('image/svg+xml'), 'SVG asset must have image/svg+xml content-type');
     });

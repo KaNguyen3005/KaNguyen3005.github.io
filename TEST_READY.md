@@ -1,120 +1,113 @@
-# E2E Test Suite Readiness Manifest (TEST_READY.md)
+# E2E Test Suite Readiness & Verification Manifest (TEST_READY.md)
 
 **Status**: READY  
-**Timestamp**: 2026-11-08T16:20:00Z  
-**Architect**: E2E Test Suite Architect (`test_writer_e2e`)  
-**Repository Root**: `C:\Users\ACER\.gemini\antigravity\scratch\KaNguyen3005.github.io`  
+**Date**: 2026-11-11  
+**Project**: `KaNguyen3005.github.io`  
+**Test Suite Status**: **150 / 150 TESTS PASSING (100.0%)**  
+**Visual Verification Status**: **AUDIT PASSED — 100% CLEAN LAYOUT & CAPTURES**  
 
 ---
 
 ## 1. Test Architecture Overview
 
-A comprehensive, zero-dependency opaque-box E2E test harness has been constructed and verified. It runs entirely on the Node.js standard runtime (`node:fs`, `node:path`, `node:http`, `node:assert/strict`) with zero third-party `node_modules` or package bloat.
+An ultra-fast, zero-dependency opaque-box E2E test harness and automated CDP browser visual verification harness have been implemented and verified. Both run on the native Node.js v24 standard runtime without requiring third-party npm packages.
 
 ### Test Engine Components
-- `tests/runner.js`: High-performance test runner with ANSI color reporting, execution timing, built-in ephemeral static HTTP server, tier filtering CLI, and summary tables.
-- `tests/dom_helper.js`: Linear-time $O(N)$ safe HTML tokenizer, element tree builder, DOM query selector engine (`querySelector`, `querySelectorAll`), class list manipulator, and synthetic event dispatcher (`click`, `keydown`, `scroll`, `resize`).
-- `tests/tier1_features.test.js`: Feature coverage across all 12 core requirements.
+- `tests/runner.js`: High-performance test runner with ANSI color reporting, execution timing, built-in ephemeral static HTTP server (`127.0.0.1:<port>`), tier filtering CLI, and summary tables.
+- `tests/dom_helper.js`: Linear-time $O(N)$ HTML tokenizer, element tree builder, DOM query selector engine (`querySelector`, `querySelectorAll`), class list manipulator, and synthetic event dispatcher (`click`, `keydown`, `scroll`, `resize`).
+- `tests/tier1_features.test.js`: Feature coverage across 12 core requirement areas.
 - `tests/tier2_boundaries.test.js`: Boundary values, extreme viewports (320px to 4K), text overflow, keyboard Escape, and CLS layout protection.
-- `tests/tier3_interactions.test.js`: Pairwise cross-feature combinations (Filter tabs + Lightbox, Scrollspy + Navbar, Typewriter + Observer, Mobile menu + Navigation).
+- `tests/tier3_interactions.test.js`: Pairwise cross-feature combinations (Filter tabs + Category navigation, Scrollspy + Navbar, Typewriter + Observer, Mobile menu + Navigation, Hero tab switcher).
 - `tests/tier4_workloads.test.js`: Full recruiter and academic reviewer real-world audit journeys.
+- `tests/capture_visuals.js`: Headless Chrome DevTools Protocol (CDP) visual capture and layout audit tool.
 
 ---
 
-## 2. Coverage Thresholds & Metrics
+## 2. Test Execution Results (100% PASS)
 
-| Tier | Category | Specification Target | Implemented Count | Threshold Met |
-|---|---|:---:|:---:|:---:|
-| **Tier 1** | Feature Coverage (12 Features) | ≥ 60 tests (≥5/feature) | **69 tests** | ✅ **YES** (+9 over target) |
-| **Tier 2** | Boundary & Corner Cases | ≥ 60 tests (≥5/feature) | **61 tests** | ✅ **YES** (+1 over target) |
-| **Tier 3** | Cross-Feature Interactions | ≥ 12 pairwise tests | **14 tests** | ✅ **YES** (+2 over target) |
-| **Tier 4** | Real-World Recruiter Journeys | ≥ 5 complex scenarios | **5 scenarios** | ✅ **YES** (Target met) |
-| **TOTAL** | Full E2E Test Suite | **≥ 140 tests** | **149 tests** | ✅ **YES (+9 over target)** |
+Command: `node tests/runner.js`  
+Execution Time: ~9.38s  
+
+```
+--------------------------------------------------------------
+Test Execution Summary (9.38s)
+--------------------------------------------------------------
+  Total Tests:   150
+  Passed:        150 (100.0%)
+  Failed:        0
+  Skipped:       0
+--------------------------------------------------------------
+Coverage Breakdown by Tier:
+  Tier 1  : 69/69 passed (100.0%)
+  Tier 2  : 61/61 passed (100.0%)
+  Tier 3  : 15/15 passed (100.0%)
+  Tier 4  : 5/5 passed (100.0%)
+--------------------------------------------------------------
+```
 
 ---
 
-## 3. How to Execute the Suite
+## 3. Visual Verification & Layout Audit Results
 
-From the project root (`KaNguyen3005.github.io`):
+Command: `node tests/capture_visuals.js`  
+Execution Time: ~8.60s  
+Artifact Directory: `.agents/teamwork/visual_audit/`  
 
-```bash
-# Run the complete test suite (All 149 tests across Tiers 1-4)
+### Audit Report Summary (`audit_report.json`):
+- **Desktop (1280x800 Viewport)**:
+  - Width: 1280px / Scroll Width: 1280px
+  - Horizontal Overflow: **NONE (0px excess)**
+  - Broken Images Count: **0**
+  - Honors Section `<img>` elements: **0**
+  - Honors Section `<picture>` elements: **0**
+- **Mobile (375x812 Viewport, Device Scale 2)**:
+  - Width: 375px / Scroll Width: 375px
+  - Horizontal Overflow: **NONE (0px excess)**
+  - Mobile Menu Navigation Button: **PRESENT & RESPONSIVE**
+- **Captured Visual Artifacts**:
+  - `desktop_full.png` (1280px full page)
+  - `desktop_hero.png` (1280x1425px hero section)
+  - `desktop_honors.png` (1280x1103px typographic award cards grid)
+  - `desktop_projects.png` (1280x964px projects showcase)
+  - `desktop_skills.png` (1280x690px technical skills matrix)
+  - `mobile_full.png` (375px mobile full page)
+  - `mobile_hero.png` (375x1048px mobile hero section)
+  - `mobile_honors.png` (375x2096px mobile typographic award cards)
+  - `mobile_projects.png` (375x2446px mobile projects section)
+  - `audit_report.json` (Structured machine-readable audit report)
+
+---
+
+## 4. Key Assertions Aligned with Modern Technical Ethos
+
+1. **Modern Engineering Ethos (Test 1.2.6)**:
+   - Asserts removal of all `Luffy`, `Vua Hải Tặc`, and `Pirate King` references.
+   - Asserts presence of professional engineering discipline: `"Kỷ luật thuật toán & Tư duy hệ thống ⚡"`.
+2. **Image-Free Typographic Honors Cards (Tests 1.4.2 – 1.4.6, 2.4.1)**:
+   - Asserts zero `<picture>` or `<img>` elements inside `#honors` award cards.
+   - Asserts semantic badge headers (`.badge-gold`, `.badge-cyan`, `.badge-emerald`, `.badge-blue`, `.badge-indigo`, `.badge-rose`), issuing dates, bold titles, context, and external credential links (`https://icpc.global/...`, `https://codeforces.com/...`, `https://ptithcm.edu.vn`).
+3. **Hero Dual-Tab Showcase Preservation (Tests 1.4.1, 1.6.5, 3.3.15, 4.Scenario 1)**:
+   - Retains `#hero-tab-arena` and `#hero-tab-campus`.
+   - Retains `#hero-pic-arena` (`assets/icpc_contest_2026.png`) and `#hero-pic-campus` (`assets/ptit_campus_life.png`).
+   - Retains interactive tab switching and click-to-zoom Lightbox modal for hero showcase photos.
+4. **Zero 404 & Permanent Assets (Tests 1.12.1–1.12.6, 2.12.1–2.12.5, 4.Scenario 5)**:
+   - All network asset fetches resolve to permanent assets (`assets/icpc_contest_2026.png`, `assets/ptit_campus_life.png`, `assets/badges/codeforces.svg`).
+   - 0 HTTP 404s across all tests and live server queries.
+
+---
+
+## 5. Verification Commands
+
+```powershell
+# Run full test suite
 node tests/runner.js
 
-# Run a specific tier
+# Run individual test tiers
 node tests/runner.js --tier=1
 node tests/runner.js --tier=2
 node tests/runner.js --tier=3
 node tests/runner.js --tier=4
 
-# Run tests matching a keyword (e.g. ICPC, Lightbox, Filter)
-node tests/runner.js --filter=icpc
-node tests/runner.js --filter=lightbox
-node tests/runner.js --filter=scroll
+# Run automated browser visual capture and layout audit
+node tests/capture_visuals.js
 ```
-
----
-
-## 4. Baseline Run Results (Pre-Implementation Baseline)
-
-Execution Command: `node tests/runner.js`  
-Duration: ~11.4 seconds  
-
-```
---------------------------------------------------------------
-Test Execution Summary
---------------------------------------------------------------
-  Total Tests:   149
-  Passed:        131  (87.9%)
-  Failed:        18   (12.1% - Expected pending M1/M2/M3 completion)
-  Skipped:       0
---------------------------------------------------------------
-Coverage Breakdown by Tier:
-  Tier 1  : 55/69 passed (79.7%)
-  Tier 2  : 58/61 passed (95.1%)
-  Tier 3  : 14/14 passed (100.0%)
-  Tier 4  : 4/5 passed (80.0%)
---------------------------------------------------------------
-```
-
----
-
-## 5. Implementation Roadmap for Pending Tests (Escalation to Workers)
-
-The 18 failing tests are intentional contract gates that will transition to `PASS` as workers M1, M2, and M3 land their deliverables:
-
-### For Worker M1 (Asset Pipeline):
-- Copy and optimize authentic photos into `assets/awards/`:
-  * `scholarship_ptit.png`
-  * `icpc_champion_2024.png`
-  * `icpc_runnerup_2025.png`
-  * `utc_code4future.png`
-  * `kada_korea.png`
-  * `vovinam_2024.png`
-- Upgrade `assets/icpc_contest_2026.png` with 1024x682 master HD asset.
-
-### For Worker M2 (CSS Engine & Performance):
-- Replace uncontained animated `blur-3xl` divs with static CSS radial gradients (resolves test 7.2).
-- Enforce explicit `width`, `height`, or aspect-ratio classes on all `<img>` tags (resolves tests 8.1, 8.2, 8.3).
-- Provide precompiled `assets/css/portfolio.css` and modular `assets/js/main.js` (resolves tests 12.1, 12.2).
-
-### For Worker M3 (UI/UX Redesign & Content Integration):
-- Add category filter tabs to `#honors`:
-  * `[data-filter="all"]`, `[data-filter="icpc"]`, `[data-filter="tech"]`, `[data-filter="scholarship"]` (resolves tests 5.3, 5.4, 5.5).
-  * Assign `data-category` attributes to award cards.
-- Add Interactive Lightbox Proof Modal to `index.html`:
-  * `#lightbox-modal`, `#lightbox-img`, `#lightbox-close`, `#lightbox-caption` (resolves tests 6.1–6.6, 2.6.1, 2.6.2).
-  * Assign `data-lightbox-src` attributes to zoomable award cards.
-- Add `rel="noopener noreferrer"` to external GitHub link (resolves test 2.2.4).
-- Add `Linux` to DevOps skills list (resolves test 11.5).
-- Include MAP@10 / MRR@10 / latency empirical metrics in scientific research card (resolves Tier 4 Scenario 2).
-
----
-
-## 6. Verification Method
-
-To verify the test suite:
-1. Ensure Node.js v18+ is installed (`node -v`).
-2. Run `node tests/runner.js`.
-3. Verify that 149 tests execute without harness crashes.
-4. When M1, M2, and M3 are complete, re-run `node tests/runner.js` to confirm **100% (149/149) PASS** with exit code 0.

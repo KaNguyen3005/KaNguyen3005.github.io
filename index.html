@@ -8,10 +8,9 @@
   <meta name="author" content="Mô Ha Mách Bu Ba Ka (KaNguyen3005)" />
 
   <!-- Browser Tab Favicons -->
-  <link rel="icon" type="image/png" sizes="32x32" href="https://avatars.githubusercontent.com/u/142709831?v=4" />
-  <link rel="icon" type="image/png" sizes="16x16" href="https://avatars.githubusercontent.com/u/142709831?v=4" />
-  <link rel="apple-touch-icon" sizes="180x180" href="https://avatars.githubusercontent.com/u/142709831?v=4" />
-  <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/142709831?v=4" />
+  <link rel="icon" type="image/svg+xml" href="assets/brand-avatar.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/brand-avatar.svg" />
+  <link rel="shortcut icon" type="image/svg+xml" href="assets/brand-avatar.svg" />
 
   <!-- Google Fonts Preconnect & Optimized Font Loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +38,7 @@
       <!-- Brand Identity -->
       <a href="#about" class="flex items-center gap-3 group focus:outline-none" aria-label="Mô Ha Mách Bu Ba Ka - Trang chủ">
         <div class="relative">
-          <img src="https://avatars.githubusercontent.com/u/142709831?v=4" alt="Mô Ha Mách Bu Ba Ka avatar" width="40" height="40" class="w-10 h-10 rounded-full border border-brand-cyan/40 object-cover shadow-md group-hover:border-brand-cyan transition-colors" />
+          <img src="assets/brand-avatar.svg" alt="Mô Ha Mách Bu Ba Ka avatar" width="40" height="40" class="w-10 h-10 rounded-full border border-brand-cyan/40 object-cover shadow-md group-hover:border-brand-cyan transition-colors" />
           <span class="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-brand-surface"></span>
@@ -141,7 +140,7 @@
           </div>
 
           <!-- Typewriter Cycling Subtitle (IntersectionObserver Throttled) -->
-          <div class="h-10 sm:h-12 flex items-center font-mono text-lg sm:text-xl text-brand-cyan">
+          <div class="min-h-[3.25rem] sm:min-h-[3rem] py-1 flex items-center font-mono text-base sm:text-xl text-brand-cyan">
             <span class="text-slate-500 mr-2">$</span>
             <span id="typewriter" class="inline-block border-r-2 border-brand-cyan pr-1">Software Engineering Intern @ Rikkeisoft</span>
           </div>
@@ -188,16 +187,16 @@
         <div class="lg:col-span-5">
           <div class="glass-card rounded-2xl p-3 border border-white/10 overflow-hidden relative group">
             <!-- Top Live Arena Status Overlay & Tab Switcher -->
-            <div class="flex items-center justify-between pb-3 px-1 text-xs font-mono">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 px-1 text-xs font-mono">
               <div class="flex items-center gap-1 p-0.5 rounded-lg bg-black/40 border border-white/10">
-                <button id="hero-tab-arena" class="hero-tab-btn px-2.5 py-1 rounded-md text-[11px] font-medium transition-all bg-brand-blue/30 text-cyan-300 border border-brand-cyan/40" data-hero-view="arena" type="button">
+                <button id="hero-tab-arena" class="hero-tab-btn whitespace-nowrap px-2.5 py-1 rounded-md text-[11px] font-medium transition-all bg-brand-blue/30 text-cyan-300 border border-brand-cyan/40" data-hero-view="arena" type="button">
                   <span class="inline-block w-1.5 h-1.5 rounded-full bg-rose-400 mr-1 animate-pulse"></span>Đấu Trường ICPC
                 </button>
-                <button id="hero-tab-campus" class="hero-tab-btn px-2.5 py-1 rounded-md text-[11px] font-medium transition-all text-slate-400 hover:text-white" data-hero-view="campus" type="button">
+                <button id="hero-tab-campus" class="hero-tab-btn whitespace-nowrap px-2.5 py-1 rounded-md text-[11px] font-medium transition-all text-slate-400 hover:text-white" data-hero-view="campus" type="button">
                   <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-400 mr-1"></span>Đời Sống PTIT
                 </button>
               </div>
-              <span id="hero-status-pill" class="text-[11px] text-rose-400 font-mono">Live Arena</span>
+              <span id="hero-status-pill" class="text-[11px] text-rose-400 font-mono whitespace-nowrap">Live Arena</span>
             </div>
 
             <!-- Master HD Contest Arena Picture Container with Zero CLS -->
@@ -220,11 +219,15 @@
 
             <!-- Bottom Integrated Ethos Card Chrome -->
             <div class="mt-3 pt-3 border-t border-white/5 flex items-center justify-between">
-              <!-- Luffy Mascot & Ethos Quote -->
+              <!-- Engineering Ethos Quote -->
               <div class="flex items-center gap-2.5">
-                <img src="assets/luffy-mascot.svg" alt="Luffy Straw Hat Mascot" width="32" height="32" class="w-8 h-8 rounded-full border border-amber-400/40 shadow-sm" />
+                <span class="w-8 h-8 rounded-full border border-cyan-400/40 bg-cyan-500/10 flex items-center justify-center text-cyan-400 shadow-sm flex-shrink-0">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                </span>
                 <span id="hero-ethos-quote" class="text-xs text-slate-300 italic font-sans">
-                  Tinh thần Luffy: Vươn ra biển lớn 🏴‍☠️
+                  Kỷ luật thuật toán & Tư duy hệ thống ⚡
                 </span>
               </div>
               <span id="hero-ethos-tag" class="text-[11px] font-mono text-brand-cyan bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
@@ -247,11 +250,11 @@
 
         <!-- Cell 1: ICPC Champion (Gold Accent) -->
         <a href="#honors" class="bento-card group border-amber-400/20 hover:border-amber-400/40 focus:outline-none">
-          <div class="flex items-center justify-between mb-3">
-            <span class="badge-gold inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="badge-gold inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
               🏆 Quán Quân ICPC
             </span>
-            <span class="text-xs font-mono text-slate-500">2024 - 2025</span>
+            <span class="text-xs font-mono text-slate-500 whitespace-nowrap shrink-0">2024 - 2025</span>
           </div>
           <div class="space-y-1">
             <div class="text-3xl font-extrabold text-white tracking-tight group-hover:text-amber-400 transition-colors">
@@ -265,11 +268,11 @@
 
         <!-- Cell 2: Codeforces Specialist (Cyan Accent) -->
         <a href="https://codeforces.com/profile/morex3" target="_blank" rel="noopener noreferrer" class="bento-card group border-cyan-500/20 hover:border-cyan-500/40 focus:outline-none">
-          <div class="flex items-center justify-between mb-3">
-            <span class="badge-cyan inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium">
-              ⚡ Codeforces Specialist
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="badge-cyan inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
+              ⚡ Codeforces
             </span>
-            <span class="text-xs font-mono text-slate-500">@morex3</span>
+            <span class="text-xs font-mono text-slate-500 whitespace-nowrap shrink-0">@morex3</span>
           </div>
           <div class="space-y-1">
             <div class="text-3xl font-extrabold text-white tracking-tight group-hover:text-cyan-400 transition-colors">
@@ -283,11 +286,11 @@
 
         <!-- Cell 3: Supreme Academic Scholarship (Emerald Accent) -->
         <a href="#honors" class="bento-card group border-emerald-500/20 hover:border-emerald-500/40 focus:outline-none">
-          <div class="flex items-center justify-between mb-3">
-            <span class="badge-emerald inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium">
-              🎓 Học Bổng Xuất Sắc
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="badge-emerald inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
+              🎓 Học Bổng 100%
             </span>
-            <span class="text-xs font-mono text-slate-500">PTITHCM</span>
+            <span class="text-xs font-mono text-slate-500 whitespace-nowrap shrink-0">PTITHCM</span>
           </div>
           <div class="space-y-1">
             <div class="text-3xl font-extrabold text-white tracking-tight group-hover:text-emerald-400 transition-colors">
@@ -301,11 +304,11 @@
 
         <!-- Cell 4: International Conference Author (Indigo Accent) -->
         <a href="#research" class="bento-card group border-indigo-500/20 hover:border-indigo-500/40 focus:outline-none">
-          <div class="flex items-center justify-between mb-3">
-            <span class="badge-indigo inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium">
-              📄 Conference Author
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="badge-indigo inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
+              📄 I-SMAC Author
             </span>
-            <span class="text-xs font-mono text-slate-500">I-SMAC '26</span>
+            <span class="text-xs font-mono text-slate-500 whitespace-nowrap shrink-0">I-SMAC '26</span>
           </div>
           <div class="space-y-1">
             <div class="text-3xl font-extrabold text-white tracking-tight group-hover:text-indigo-400 transition-colors">
@@ -337,7 +340,7 @@
             Minh Chứng Thực Tế & Vinh Danh Học Thuật
           </h2>
           <p class="text-sm text-slate-400 mt-2 max-w-2xl font-light">
-            Mọi danh hiệu đều được chứng thực bằng hình ảnh trao giải thực tế, chứng chỉ gốc và mã định danh quốc tế.
+            Mọi danh hiệu đều được chứng thực bằng chứng chỉ chính thức, kết quả thi đấu thực tế và mã định danh quốc tế.
           </p>
         </div>
 
@@ -362,250 +365,234 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
         <!-- Award Card 1: ICPC Champion 2024 -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="icpc" data-award-id="icpc-2024-champion">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/icpc_champion_2024.png" data-lightbox-title="Quán Quân ICPC PTITHCM 2024" data-lightbox-desc="Lễ trao giải Quán quân cuộc thi Lập trình sinh viên ICPC tại Học viện Công nghệ Bưu chính Viễn thông." data-lightbox-verify="https://icpc.global/ICPCID/KX82OXXF5CSE">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/icpc_champion_2024.webp" type="image/webp">
-                <img src="assets/awards/icpc_champion_2024.png" alt="Quán Quân ICPC PTITHCM 2024" width="470" height="308" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-gold inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
-                🥇 Quán Quân ICPC 2024
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-amber-400/40 transition-all duration-300" data-category="icpc" data-award-id="icpc-2024-champion">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-gold inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
+                🏆 Quán Quân ICPC
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors">
+              <span class="text-xs font-mono text-slate-400 whitespace-nowrap shrink-0">2024</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
                 Quán Quân ICPC PTITHCM 2024
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
-                Giải Nhất chung cuộc kỳ thi lập trình thuật toán sinh viên cấp học viện với thành tích giải trọn bộ bài thi.
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
+                Giải Nhất chung cuộc kỳ thi lập trình thuật toán sinh viên cấp học viện với thành tích xuất sắc giải trọn bộ bài thi.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>Học viện PTITHCM</span>
-            <span class="text-amber-400">Hạng 1</span>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Đơn vị trao giải</span>
+              <span class="text-slate-300 font-medium">Học viện PTITHCM</span>
+            </div>
+            <a href="https://icpc.global/ICPCID/KX82OXXF5CSE" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Xác thực ICPC</span> &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Award Card 2: ICPC Runner-up 2025 -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="icpc" data-award-id="icpc-2025-runnerup">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/icpc_runnerup_2025.png" data-lightbox-title="Á Quân ICPC PTITHCM 2025" data-lightbox-desc="Giấy khen chính thức đội thi Sánh Vai Cùng Năm Châu đạt giải Nhì ICPC PTITHCM năm 2025." data-lightbox-verify="https://icpc.global/ICPCID/KX82OXXF5CSE">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/icpc_runnerup_2025.webp" type="image/webp">
-                <img src="assets/awards/icpc_runnerup_2025.png" alt="Á Quân ICPC PTITHCM 2025" width="471" height="760" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-cyan inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
-                🥈 Á Quân ICPC 2025
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-cyan-400/40 transition-all duration-300" data-category="icpc" data-award-id="icpc-2025-runnerup">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-cyan inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
+                🥈 Á Quân ICPC
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <span class="text-xs font-mono text-slate-400 whitespace-nowrap shrink-0">2025</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
                 Á Quân ICPC PTITHCM 2025
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
                 Đội thi "Sánh Vai Cùng Năm Châu" xuất sắc giành giải Nhì tại vòng chung kết ICPC học viện năm 2025.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>Sánh Vai Cùng Năm Châu</span>
-            <span class="text-cyan-400">Giải Nhì</span>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Đội thi</span>
+              <span class="text-slate-300 font-medium">Sánh Vai Cùng Năm Châu</span>
+            </div>
+            <a href="https://icpc.global/ICPCID/KX82OXXF5CSE" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Xác thực ICPC</span> &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Award Card 3: 100% Supreme Scholarship PTIT -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="scholarship" data-award-id="scholarship-ptit">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/scholarship_ptit.png" data-lightbox-title="Học Bổng Khuyến Khích Học Tập Xuất Sắc 100%" data-lightbox-desc="Nhận giấy khen học bổng xuất sắc toàn phần 100% học phí tại Học viện Công nghệ Bưu chính Viễn thông." data-lightbox-verify="https://ptithcm.edu.vn">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/scholarship_ptit.webp" type="image/webp">
-                <img src="assets/awards/scholarship_ptit.png" alt="Học Bổng Khuyến Khích Học Tập Xuất Sắc 100% PTITHCM" width="686" height="365" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-emerald inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
-                🎓 100% Học Bổng Xuất Sắc
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-emerald-400/40 transition-all duration-300" data-category="scholarship" data-award-id="scholarship-ptit">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-emerald inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
+                🎓 Học Bổng 100%
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">
+              <span class="text-xs font-mono text-slate-400 whitespace-nowrap shrink-0">2023–2025</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors leading-snug">
                 Học Bổng Xuất Sắc PTITHCM
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
                 Đạt học bổng toàn phần 100% học phí liên tiếp các học kỳ nhờ thành tích học tập và rèn luyện xuất sắc.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>Học viện PTITHCM</span>
-            <span class="text-emerald-400">100% Toàn Phần</span>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Đơn vị cấp</span>
+              <span class="text-slate-300 font-medium">Học viện PTITHCM</span>
+            </div>
+            <a href="https://ptithcm.edu.vn" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Cổng PTIT</span> &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Award Card 4: UTC Code4Future Contest -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="tech" data-award-id="utc-code4future">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/utc_code4future.png" data-lightbox-title="Giải Nhì Cuộc Thi Lập Trình UTC Code4Future 2024" data-lightbox-desc="Chứng nhận đạt Giải Nhì cuộc thi lập trình UTC Code4Future do Đại học Giao thông Vận tải & FPT Software đồng tổ chức." data-lightbox-verify="https://github.com/KaNguyen3005">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/utc_code4future.webp" type="image/webp">
-                <img src="assets/awards/utc_code4future.png" alt="Giải Nhì UTC Code4Future Contest 2024" width="469" height="320" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-blue inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-blue-400/40 transition-all duration-300" data-category="tech" data-award-id="utc-code4future">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-blue inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
                 🥈 Á Quân UTC C4F
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-blue-400 transition-colors">
+              <span class="text-xs font-mono text-slate-400 whitespace-nowrap shrink-0">2024</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors leading-snug">
                 Giải Nhì UTC Code4Future 2024
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
                 Giải nhì cuộc thi lập trình thuật toán và công nghệ mở rộng kết nối sinh viên liên trường công nghệ lớn.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>UTC & FPT Software</span>
-            <span class="text-blue-400">Giải Nhì</span>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Ban tổ chức</span>
+              <span class="text-slate-300 font-medium">UTC & FPT Software</span>
+            </div>
+            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Chi tiết</span> &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Award Card 5: KADA Korea Program (Due Bro) -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="tech" data-award-id="kada-korea">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/kada_korea.png" data-lightbox-title="Giải Ba KADA Program Korea (Dự án Due Bro)" data-lightbox-desc="Chứng nhận đạt Giải Ba chương trình KADA Hàn Quốc với sản phẩm nền tảng quản lý gia đình và ghép bạn cùng phòng thông minh." data-lightbox-verify="https://github.com/KaNguyen3005/DueBro">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/kada_korea.webp" type="image/webp">
-                <img src="assets/awards/kada_korea.png" alt="Giải Ba KADA Program of Korea" width="465" height="398" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-indigo inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
-                🥉 Giải Ba KADA Korea
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-indigo-400/40 transition-all duration-300" data-category="tech" data-award-id="kada-korea">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-indigo inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
+                🥉 KADA Korea
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-indigo-400 transition-colors">
+              <span class="text-xs font-mono text-slate-400 whitespace-nowrap shrink-0">2024</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors leading-snug">
                 KADA Program Korea (Due Bro)
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
                 Giải Ba chương trình ươm mầm khởi nghiệp công nghệ Hàn Quốc với giải pháp AI Matching Due Bro.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>KADA Program Korea</span>
-            <span class="text-indigo-400">Giải Ba</span>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Chương trình</span>
+              <span class="text-slate-300 font-medium">KADA Program Korea</span>
+            </div>
+            <a href="https://github.com/KaNguyen3005/DueBro" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Mã nguồn</span> &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Award Card 6: ICPC Vietnam National Finalist -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="icpc" data-award-id="icpc-national-2025">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/icpc_national_2025.png" data-lightbox-title="Chung Khảo ICPC Vietnam National 2025" data-lightbox-desc="Chứng nhận vòng chung kết quốc gia ICPC Việt Nam quy tụ các tài năng thuật toán hàng đầu cả nước." data-lightbox-verify="https://icpc.global/ICPCID/KX82OXXF5CSE">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/icpc_national_2025.webp" type="image/webp">
-                <img src="assets/awards/icpc_national_2025.png" alt="Chung Khảo ICPC Vietnam National 2025" width="469" height="318" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-gold inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-amber-400/40 transition-all duration-300" data-category="icpc" data-award-id="icpc-national-2025">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-gold inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
                 🇻🇳 National Finalist
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors">
+              <span class="text-xs font-mono text-slate-400 whitespace-nowrap shrink-0">2025</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition-colors leading-snug">
                 ICPC Vietnam National 2025
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
                 Đại diện PTITHCM tranh tài tại Vòng Chung kết Quốc gia Kỳ thi Lập trình Sinh viên Quốc tế ICPC.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>Hội Tin học Việt Nam</span>
-            <span class="text-amber-400">National Finalist</span>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Đơn vị tổ chức</span>
+              <span class="text-slate-300 font-medium">Hội Tin học Việt Nam</span>
+            </div>
+            <a href="https://icpc.global/ICPCID/KX82OXXF5CSE" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Xác thực ICPC</span> &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Award Card 7: Vovinam Martial Arts Award 2024 -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="scholarship" data-award-id="vovinam-2024">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/vovinam_2024.png" data-lightbox-title="Vovinam Việt Võ Đạo 2024" data-lightbox-desc="Vận động viên Mô Ha Mách Bu Ba Ka nhận huy chương và giấy khen tại giải thể thao Vovinam PTITHCM 2024." data-lightbox-verify="https://ptithcm.edu.vn">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/vovinam_2024.webp" type="image/webp">
-                <img src="assets/awards/vovinam_2024.png" alt="Huy Chương Vovinam Việt Võ Đạo 2024" width="465" height="452" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-rose inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-rose-400/40 transition-all duration-300" data-category="scholarship" data-award-id="vovinam-2024">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-rose inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
                 🥋 Vovinam Võ Đạo
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-rose-400 transition-colors">
+              <span class="text-xs font-mono text-slate-400 whitespace-nowrap shrink-0">2024</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-rose-400 transition-colors leading-snug">
                 Giải Vovinam Việt Võ Đạo 2024
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
                 Huy chương và giấy khen thi đấu võ thuật cổ truyền, thể hiện tinh thần bền bỉ và kỷ luật sắt son.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>CLB Vovinam PTIT</span>
-            <span class="text-rose-400">Huy Chương</span>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Đơn vị trao giải</span>
+              <span class="text-slate-300 font-medium">CLB Vovinam PTIT</span>
+            </div>
+            <a href="https://ptithcm.edu.vn" target="_blank" rel="noopener noreferrer" class="text-rose-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Võ Đạo PTIT</span> &rarr;
+            </a>
           </div>
         </div>
 
         <!-- Award Card 8: Codeforces Specialist Verification -->
-        <div class="award-card glass-card group flex flex-col justify-between overflow-hidden" data-category="icpc" data-award-id="codeforces-specialist">
-          <div>
-            <div class="relative overflow-hidden aspect-video aspect-[16/9] w-full bg-slate-900/50 cursor-pointer" data-lightbox-src="assets/awards/codeforces_specialist.png" data-lightbox-title="Codeforces Specialist Rating 1400+" data-lightbox-desc="Chứng nhận tài khoản Codeforces rank Specialist handle morex3 với rating 1400+." data-lightbox-verify="https://codeforces.com/profile/morex3">
-              <picture class="block w-full h-full">
-                <source srcset="assets/awards/codeforces_specialist.webp" type="image/webp">
-                <img src="assets/awards/codeforces_specialist.png" alt="Codeforces Specialist Verification Card" width="600" height="340" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" onerror="this.onerror=null;this.src='assets/awards/placeholder.svg';" />
-              </picture>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span>Xem ảnh phóng to</span>
-              </div>
-            </div>
-            <div class="p-5 space-y-2">
-              <span class="badge-cyan inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
+        <div class="award-card glass-card group flex flex-col justify-between p-6 rounded-2xl border border-white/10 hover:border-cyan-400/40 transition-all duration-300" data-category="icpc" data-award-id="codeforces-specialist">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="badge-cyan inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium whitespace-nowrap">
                 ⚡ Specialist 1400+
               </span>
-              <h3 class="text-base font-bold text-white group-hover:text-cyan-400 transition-colors">
+              <span class="text-xs font-mono text-cyan-400 whitespace-nowrap shrink-0">Active</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors leading-snug">
                 Codeforces Specialist (@morex3)
               </h3>
-              <p class="text-xs text-slate-400 leading-relaxed font-sans">
+              <p class="text-xs text-slate-400 mt-2 leading-relaxed font-sans">
                 Xác thực năng lực giải quyết thuật toán thời gian thực trên đấu trường toàn cầu Codeforces.
               </p>
             </div>
           </div>
-          <div class="px-5 pb-5 pt-1 text-[11px] font-mono text-slate-500 border-t border-white/5 flex items-center justify-between">
-            <span>Codeforces.com</span>
-            <a href="https://codeforces.com/profile/morex3" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">Xem Profile &rarr;</a>
+          <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
+            <div class="flex flex-col">
+              <span class="text-slate-500 text-[10px] uppercase tracking-wider">Nền tảng</span>
+              <span class="text-slate-300 font-medium">Codeforces.com</span>
+            </div>
+            <a href="https://codeforces.com/profile/morex3" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+              <span>Xem Profile</span> &rarr;
+            </a>
           </div>
         </div>
 
@@ -667,7 +654,7 @@
                 Due Bro — Household OS & AI Matching
               </h3>
               <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                Nền tảng quản lý gia đình và kết nối bạn cùng phòng thông minh. Tích hợp AI Matching Engine phân tích thói quen sống, Mascot Bro nhắc việc thông minh qua Google Gemini API, và hệ thống Bayesian Trust Score đảm bảo minh bạch tài chính phòng trọ.
+                Nền tảng quản lý gia đình và kết nối bạn cùng phòng thông minh. Tích hợp AI Matching Engine phân tích thói quen sống, Trợ lý AI Copilot thông minh tích hợp Google Gemini API, và hệ thống Bayesian Trust Score đảm bảo minh bạch tài chính phòng trọ.
               </p>
             </div>
             <!-- Tech Stack Pills -->
@@ -958,7 +945,7 @@
             <div class="space-y-2 text-xs text-slate-300">
               <div class="flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                <span>Ứng dụng trực tiếp vào AI Mascot Bro trong nền tảng Due Bro</span>
+                <span>Ứng dụng trực tiếp vào AI Copilot / Assistant trong nền tảng Due Bro</span>
               </div>
               <div class="flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
@@ -1176,8 +1163,10 @@
       <!-- Footer Ethos & Copyright -->
       <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400 font-mono">
         <div class="flex items-center gap-2">
-          <img src="assets/luffy-mascot.svg" alt="Luffy Straw Hat Mascot" width="24" height="24" class="w-6 h-6 rounded-full" />
-          <span>Nếu không dám chấp nhận rủi ro, bạn chẳng thể nào tạo nên tương lai.</span>
+          <svg class="w-4 h-4 text-brand-cyan flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span>"Architecting resilient distributed systems & intelligent AI solutions."</span>
         </div>
         <div class="text-center md:text-right">
           <span>&copy; 2026 Mô Ha Mách Bu Ba Ka (KaNguyen3005). All rights reserved.</span>

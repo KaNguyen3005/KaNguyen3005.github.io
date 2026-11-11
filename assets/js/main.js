@@ -569,7 +569,7 @@
           statusPill.className = 'text-[11px] text-rose-400 font-mono';
         }
         if (zoomText) zoomText.textContent = 'Click xem ảnh gốc (1024x682 HD)';
-        if (ethosQuote) ethosQuote.textContent = 'Tinh thần Luffy: Vươn ra biển lớn 🏴‍☠️';
+        if (ethosQuote) ethosQuote.textContent = 'Kỷ luật thuật toán & Tư duy hệ thống ⚡';
         if (ethosTag) ethosTag.textContent = '@morex3';
       } else {
         tabCampus.classList.add('bg-brand-blue/30', 'text-cyan-300', 'border-brand-cyan/40');
@@ -584,14 +584,14 @@
 
         imageWrap.setAttribute('data-lightbox-src', 'assets/ptit_campus_life.png');
         imageWrap.setAttribute('data-lightbox-title', 'Khuôn Viên PTITHCM & Tình Bạn Học Đường');
-        imageWrap.setAttribute('data-lightbox-desc', 'Khoảnh khắc thư giãn dưới hoàng hôn rực rỡ tại khuôn viên PTITHCM cùng bạn bè — nơi nuôi dưỡng đam mê kỹ thuật và tinh thần đồng đội Luffy.');
+        imageWrap.setAttribute('data-lightbox-desc', 'Khoảnh khắc thư giãn dưới hoàng hôn rực rỡ tại khuôn viên PTITHCM cùng bạn bè — nơi nuôi dưỡng đam mê kỹ thuật và khát vọng kiến tạo công nghệ.');
 
         if (statusPill) {
           statusPill.textContent = 'Campus Life';
           statusPill.className = 'text-[11px] text-amber-400 font-mono';
         }
         if (zoomText) zoomText.textContent = 'Click xem ảnh hoàng hôn PTIT';
-        if (ethosQuote) ethosQuote.textContent = 'Đồng đội là sức mạnh lớn nhất! 🤝';
+        if (ethosQuote) ethosQuote.textContent = 'PTIT Campus Life & Collaborative Engineering 🎓';
         if (ethosTag) ethosTag.textContent = 'PTIT Campus';
       }
     }

@@ -41,20 +41,12 @@ describe('Tier 4: Real-World Recruiter & Reviewer Journeys', () => {
       assert.ok(icpcFilter.classList.contains('active'), 'ICPC filter must become active');
     }
 
-    // Step 5: Recruiter inspects Champion award card and clicks to open Lightbox
-    const championCard = document.querySelector('[data-category*="icpc"]') || 
-                         document.querySelector('img[src*="icpc_champion_2024"]')?.parentElement;
-    const modal = document.querySelector('#lightbox-modal');
-    if (championCard && modal) {
-      modal.classList.remove('hidden');
-      assert.ok(!modal.classList.contains('hidden'), 'Modal must open to display proof');
-
-      // Close modal
-      const closeBtn = document.querySelector('#lightbox-close') || modal;
-      closeBtn.click();
-      modal.classList.add('hidden');
-      assert.ok(modal.classList.contains('hidden'), 'Modal must close cleanly');
-    }
+    // Step 5: Recruiter inspects Champion award card and verifies credential metadata
+    const championCard = document.querySelector('[data-category*="icpc"]');
+    assert.ok(championCard, 'Champion card must exist in honors');
+    const credLink = championCard.querySelector('a[href*="icpc"]') || championCard.querySelector('a');
+    assert.ok(credLink, 'Official external credential verification link must be present');
+    assert.equal(championCard.querySelectorAll('img, picture').length, 0, 'Award card must be image-free typographic card');
 
     // Step 6: Verify referenced image exists via HTTP
     const res = await fetch('/assets/icpc_contest_2026.png');
@@ -185,7 +177,7 @@ describe('Tier 4: Real-World Recruiter & Reviewer Journeys', () => {
     const criticalAssets = [
       '/index.html',
       '/assets/icpc_contest_2026.png',
-      '/assets/luffy-mascot.svg'
+      '/assets/ptit_campus_life.png'
     ];
 
     for (const assetPath of criticalAssets) {

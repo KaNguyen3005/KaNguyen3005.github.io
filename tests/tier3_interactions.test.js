@@ -15,29 +15,25 @@ const INDEX_HTML = path.join(PROJECT_ROOT, 'index.html');
 
 describe('Tier 3: Cross-Feature Combinations Suite', () => {
 
-  test('3.1: [Filter Tabs + Lightbox]: Filter by "ICPC" -> clicking card opens Lightbox -> closing leaves filter active', ({ assert }) => {
+  test('3.1: [Filter Tabs + Category Navigation]: Filter by "ICPC" -> filters cards to ICPC -> card verification link intact', ({ assert }) => {
     const { document } = loadDOM(INDEX_HTML);
     const icpcFilter = document.querySelector('[data-filter="icpc"]');
     const modal = document.querySelector('#lightbox-modal');
-    const closeBtn = document.querySelector('#lightbox-close');
 
-    if (icpcFilter && modal && closeBtn) {
+    if (icpcFilter && modal) {
       // 1. Activate ICPC filter
       icpcFilter.click();
       assert.ok(icpcFilter.classList.contains('active'), 'ICPC filter button must have .active class');
 
-      // 2. Click an ICPC card
-      const icpcCard = document.querySelector('[data-category*="icpc"] [data-lightbox-src]') || 
-                       document.querySelector('[data-category*="icpc"]');
-      if (icpcCard) {
-        icpcCard.click();
-        assert.ok(!modal.classList.contains('hidden'), 'Modal must open when award card is clicked');
+      // 2. Inspect ICPC card in filtered view
+      const icpcCard = document.querySelector('[data-category*="icpc"]');
+      assert.ok(icpcCard, 'ICPC card must exist in filtered view');
+      const verifyLink = icpcCard.querySelector('a[href*="icpc.global"]') || icpcCard.querySelector('a');
+      assert.ok(verifyLink, 'ICPC card must contain official external verification link');
 
-        // 3. Close modal
-        closeBtn.click();
-        assert.ok(modal.classList.contains('hidden'), 'Modal must close when close button is clicked');
-        assert.ok(icpcFilter.classList.contains('active'), 'ICPC filter button must remain active after modal close');
-      }
+      // 3. Ensure modal remains closed during filtering
+      assert.ok(modal.classList.contains('hidden'), 'Modal should remain hidden during filter operations');
+      assert.ok(icpcFilter.classList.contains('active'), 'ICPC filter button must remain active');
     }
   });
 

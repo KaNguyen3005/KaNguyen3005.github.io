@@ -104,9 +104,10 @@ describe('Tier 1: Feature Coverage Suite', () => {
       }
     });
 
-    test('2.6: Hero section includes inspirational mascot or Luffy quote pill', ({ assert }) => {
+    test('2.6: Hero section includes professional engineering ethos and zero Luffy references', ({ assert }) => {
       const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/Luffy|Vua Hải Tặc|Pirate King|mascot/i.test(rawHTML), 'Hero must feature Luffy quote or mascot element');
+      assert.ok(/Kỷ luật thuật toán|Tư duy hệ thống|Software Engineer|Competitive Programmer/i.test(rawHTML), 'Hero must feature professional engineering ethos');
+      assert.ok(!/Luffy|Vua Hải Tặc|Pirate King/i.test(rawHTML), 'Hero must completely remove Luffy/pirate references');
     });
   });
 
@@ -158,34 +159,53 @@ describe('Tier 1: Feature Coverage Suite', () => {
       assert.ok(/assets\/icpc_contest_2026\.png/i.test(rawHTML), 'Must reference assets/icpc_contest_2026.png');
     });
 
-    test('4.2: PTIT Academic Scholarship award photo reference exists', ({ assert }) => {
-      const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/scholarship_ptit\.(png|webp)/i.test(rawHTML), 'Must reference scholarship_ptit.png or webp');
+    test('4.2: PTIT Academic Scholarship typographic award card exists with zero image tags', ({ assert }) => {
+      const { document, rawHTML } = loadDOM(INDEX_HTML);
+      assert.ok(/Học Bổng Xuất Sắc|Học viện PTITHCM|PTITHCM/i.test(rawHTML), 'Must feature PTIT Academic Scholarship credential');
+      const card = document.querySelector('[data-award-id="scholarship-ptit"]') || 
+                   document.querySelector('[data-category*="scholarship"]');
+      assert.ok(card, 'PTIT Scholarship card must exist');
+      assert.equal(card.querySelectorAll('img, picture').length, 0, 'Award card must be image-free');
     });
 
-    test('4.3: ICPC 2024 Champion award photo reference exists', ({ assert }) => {
-      const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/icpc_champion_2024\.(png|webp)/i.test(rawHTML), 'Must reference icpc_champion_2024.png or webp');
+    test('4.3: ICPC 2024 Champion typographic award card exists with zero image tags', ({ assert }) => {
+      const { document, rawHTML } = loadDOM(INDEX_HTML);
+      assert.ok(/Quán Quân ICPC|ICPC PTITHCM 2024/i.test(rawHTML), 'Must feature ICPC 2024 Champion credential');
+      const card = document.querySelector('[data-award-id="icpc-2024-champion"]') ||
+                   document.querySelector('[data-category*="icpc"]');
+      assert.ok(card, 'ICPC 2024 Champion card must exist');
+      assert.equal(card.querySelectorAll('img, picture').length, 0, 'Award card must be image-free');
     });
 
-    test('4.4: ICPC 2025 Runner-up award photo reference exists', ({ assert }) => {
-      const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/icpc_runnerup_2025\.(png|webp)/i.test(rawHTML), 'Must reference icpc_runnerup_2025.png or webp');
+    test('4.4: ICPC 2025 Runner-up typographic award card exists with zero image tags', ({ assert }) => {
+      const { document, rawHTML } = loadDOM(INDEX_HTML);
+      assert.ok(/Á Quân ICPC|ICPC PTITHCM 2025/i.test(rawHTML), 'Must feature ICPC 2025 Runner-up credential');
+      const card = document.querySelector('[data-award-id="icpc-2025-runnerup"]');
+      assert.ok(card, 'ICPC 2025 Runner-up card must exist');
+      assert.equal(card.querySelectorAll('img, picture').length, 0, 'Award card must be image-free');
     });
 
-    test('4.5: UTC Code4Future award photo reference exists', ({ assert }) => {
-      const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/utc_code4future\.(png|webp)/i.test(rawHTML), 'Must reference utc_code4future.png or webp');
+    test('4.5: UTC Code4Future typographic award card exists with zero image tags', ({ assert }) => {
+      const { document, rawHTML } = loadDOM(INDEX_HTML);
+      assert.ok(/UTC Code4Future/i.test(rawHTML), 'Must feature UTC Code4Future award credential');
+      const card = document.querySelector('[data-award-id="utc-code4future"]');
+      assert.ok(card, 'UTC Code4Future card must exist');
+      assert.equal(card.querySelectorAll('img, picture').length, 0, 'Award card must be image-free');
     });
 
-    test('4.6: KADA Korea or Vovinam martial arts award photo reference exists', ({ assert }) => {
-      const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/kada_korea\.(png|webp)|vovinam_2024\.(png|webp)/i.test(rawHTML), 'Must reference KADA or Vovinam award photo');
+    test('4.6: KADA Korea or Vovinam martial arts typographic award card exists with zero image tags', ({ assert }) => {
+      const { document, rawHTML } = loadDOM(INDEX_HTML);
+      assert.ok(/KADA|Vovinam/i.test(rawHTML), 'Must feature KADA or Vovinam award credential');
+      const card = document.querySelector('[data-award-id="kada-korea"]') ||
+                   document.querySelector('[data-award-id="vovinam-2024"]');
+      assert.ok(card, 'KADA Korea or Vovinam card must exist');
+      assert.equal(card.querySelectorAll('img, picture').length, 0, 'Award card must be image-free');
     });
 
     test('4.7: Vector badge assets exist or are referenced for profiles', ({ assert }) => {
       const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/codeforces|icpc_global|luffy-mascot/i.test(rawHTML), 'Vector badges or mascots must be present');
+      assert.ok(/codeforces|icpc|github/i.test(rawHTML), 'Vector badges or profiles must be present');
+      assert.ok(!/luffy-mascot/i.test(rawHTML), 'Luffy mascot asset reference must be removed');
     });
   });
 
@@ -258,10 +278,15 @@ describe('Tier 1: Feature Coverage Suite', () => {
       assert.ok(caption, '#lightbox-caption element must exist');
     });
 
-    test('6.5: Award cards or photos specify data-lightbox-src for click-to-zoom', ({ assert }) => {
+    test('6.5: Hero showcase photos specify data-lightbox-src for click-to-zoom modal', ({ assert }) => {
       const { document } = loadDOM(INDEX_HTML);
       const zoomable = document.querySelectorAll('[data-lightbox-src]');
-      assert.ok(zoomable.length >= 4, 'Must have at least 4 zoomable elements with data-lightbox-src');
+      assert.ok(zoomable.length >= 1, 'Must have at least 1 hero showcase element with data-lightbox-src');
+      for (const z of zoomable) {
+        const src = z.getAttribute('data-lightbox-src');
+        assert.ok(src.includes('icpc_contest') || src.includes('ptit_campus') || src.startsWith('http'),
+          'Lightbox targets must be valid permanent showcase assets');
+      }
     });
 
     test('6.6: Lightbox modal is hidden by default', ({ assert }) => {
@@ -329,9 +354,15 @@ describe('Tier 1: Feature Coverage Suite', () => {
       assert.equal(missingDimensions, 0, `All images must define dimensions or aspect ratios (found ${missingDimensions} unconstrained)`);
     });
 
-    test('8.2: Award cards implement .aspect-card or aspect ratio containers', ({ assert }) => {
-      const { rawHTML } = loadDOM(INDEX_HTML);
-      assert.ok(/aspect-card|aspect-video|aspect-\[/i.test(rawHTML), 'Award cards must provide explicit aspect ratio wrappers');
+    test('8.2: Award cards implement clean card containers (.glass-card or rounded border cards)', ({ assert }) => {
+      const { document } = loadDOM(INDEX_HTML);
+      const cards = document.querySelectorAll('#honors .award-card, #honors .glass-card');
+      assert.ok(cards.length >= 4, 'Must have at least 4 structured award cards in #honors');
+      for (const card of cards) {
+        const cls = card.getAttribute('class') || '';
+        assert.ok(cls.includes('glass-card') || cls.includes('rounded') || cls.includes('p-'), 
+          'Award cards must implement polished card styling');
+      }
     });
 
     test('8.3: Hero arena master image defines explicit dimensions or aspect ratio', ({ assert }) => {
@@ -344,7 +375,7 @@ describe('Tier 1: Feature Coverage Suite', () => {
 
     test('8.4: Avatar image defines explicit dimension attributes (e.g. 40x40)', ({ assert }) => {
       const { document } = loadDOM(INDEX_HTML);
-      const avatar = document.querySelector('img[src*="avatars.githubusercontent.com"]') || document.querySelector('img[alt*="avatar" i]');
+      const avatar = document.querySelector('img[src*="brand-avatar.svg"]') || document.querySelector('img[src*="avatars.githubusercontent.com"]') || document.querySelector('#navbar img');
       assert.ok(avatar, 'Avatar image must exist');
       const hasDim = (avatar.hasAttribute('width') && avatar.hasAttribute('height')) || /w-10\s+h-10|w-8\s+h-8/i.test(avatar.getAttribute('class') || '');
       assert.ok(hasDim, 'Avatar image must define explicit size to prevent layout shifts');

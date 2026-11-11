@@ -1,49 +1,101 @@
-# E2E Test Infra: KaNguyen3005 Portfolio
+# Test Infrastructure & Verification Architecture: KaNguyen3005 Portfolio
 
-## Test Philosophy
-- Opaque-box, requirement-driven. No dependency on implementation design.
-- Methodology: Category-Partition + Boundary Value Analysis (BVA) + Pairwise Combinatorial Testing + Real-World Workload Testing.
-- Target: Verify interface correctness, asset availability (zero 404s), scrolling smoothness, CLS prevention, and interactive elements.
+## 1. Test Philosophy & Engineering Principles
+- **Opaque-Box & Behavior-Driven**: Evaluates user-facing outcomes, accessibility, and visual/DOM states without hardcoded bypasses or mock facades.
+- **Methodology**: Category-Partition + Boundary Value Analysis (BVA) + Pairwise Combinatorial Testing + Real-World Workload Scenarios + Automated Visual CDP Auditing.
+- **Modern Technical Ethos**: Asserts complete removal of all Monkey D. Luffy/anime mascot graphics and quotes, strictly verifying high-density software engineering branding, systems architecture, and algorithmic discipline.
+- **Image-Free Typographic Honors**: Asserts all 8 cards in `#honors` are built with semantic badge headers (`.badge-gold`, `.badge-cyan`, `.badge-emerald`, etc.), titles, credential metadata, and external verification links with zero `<img>` or `<picture>` elements.
+- **Permanent Asset Preservation**: Asserts high-definition hero contest arena (`assets/icpc_contest_2026.png`) and campus life (`assets/ptit_campus_life.png`) dual-tab showcase with click-to-zoom Lightbox.
 
-## Feature Inventory
-| # | Feature | Source (Requirement) | Tier 1 | Tier 2 | Tier 3 |
-|---|---------|----------------------|:------:|:------:|:------:|
-| 1 | Navigation & Brand Identity | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
-| 2 | Hero Section & CTAs | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
-| 3 | Bento Stats Matrix | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
-| 4 | Contest & Award Photos Integration | ORIGINAL_REQUEST §4 | 5 | 5 | ✓ |
-| 5 | Honors Category Filter Tabs | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
-| 6 | Interactive Lightbox Proof Modal | ORIGINAL_REQUEST §2, 4 | 5 | 5 | ✓ |
+---
+
+## 2. Feature Inventory & Coverage Matrix
+
+| # | Feature Domain | Specification Source | Tier 1 (Features) | Tier 2 (Boundaries) | Tier 3 (Interactions) |
+|---|----------------|----------------------|:-----------------:|:-------------------:|:---------------------:|
+| 1 | Navigation & Brand Identity | ORIGINAL_REQUEST §2, R1 | 6 | 5 | ✓ |
+| 2 | Hero Section & Modern Ethos CTAs | ORIGINAL_REQUEST §2, R1 | 6 | 5 | ✓ |
+| 3 | Bento Stats Matrix | ORIGINAL_REQUEST §2 | 6 | 5 | ✓ |
+| 4 | Typographic Honors & Contest Assets | ORIGINAL_REQUEST §4, R2 | 7 | 5 | ✓ |
+| 5 | Honors Category Filter Tabs | ORIGINAL_REQUEST §2 | 6 | 5 | ✓ |
+| 6 | Interactive Lightbox Showcase Modal | ORIGINAL_REQUEST §2, R2 | 6 | 6 | ✓ |
 | 7 | Scrolling Smoothness & 60fps Animation | ORIGINAL_REQUEST §3 | 5 | 5 | ✓ |
 | 8 | Zero Cumulative Layout Shift (CLS) | ORIGINAL_REQUEST §3 | 5 | 5 | ✓ |
-| 9 | Projects & Systems Showcase | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
+| 9 | Systems & Distributed Projects Showcase | ORIGINAL_REQUEST §2 | 6 | 5 | ✓ |
 | 10 | Scientific Research (I-SMAC '26) | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
-| 11 | Technical Arsenal / Skills | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
-| 12 | Zero 404 Network Errors | ORIGINAL_REQUEST §2, 4 | 5 | 5 | ✓ |
+| 11 | Technical Arsenal & Skill Badges | ORIGINAL_REQUEST §2 | 5 | 5 | ✓ |
+| 12 | Zero 404 & Network Edge Cases | ORIGINAL_REQUEST §2, 4 | 6 | 5 | ✓ |
 
-## Test Architecture
-- Test Runner: Node.js standard runtime script (`tests/runner.js`) requiring no bulky dependencies.
-- Assertion Engine: Lightweight DOM/HTML static & runtime assertions via regex/JSDOM parsing and headless HTTP/browser checks.
-- Test Suite Layout:
-  * `tests/tier1_features.test.js`: Feature coverage (≥5 per feature, 60+ tests).
-  * `tests/tier2_boundaries.test.js`: Boundary, edge cases, responsive dimensions, and error recovery.
-  * `tests/tier3_interactions.test.js`: Cross-feature combinations (filter + lightbox, scroll + navbar, etc.).
-  * `tests/tier4_workloads.test.js`: Real-world end-to-end recruiter audit journeys and candidate evaluation workflows.
-- Execution Command: `node tests/runner.js`
-- Pass/Fail Semantics: Exit code 0 on all tests passing, exit code 1 on any failure.
+---
 
-## Real-World Application Scenarios (Tier 4)
-| # | Scenario | Features Exercised | Complexity |
-|---|----------|--------------------|------------|
-| 1 | Recruiter ICPC Credential Verification Journey | F1, F2, F4, F5, F6, F12 | High |
-| 2 | Academic Paper & Research Evaluation | F9, F10 | Medium |
-| 3 | Fast Mobile User Browsing & Filter Switching | F1, F5, F7, F8, F12 | High |
-| 4 | High-Stress Rapid Scroll & Modal Toggle | F6, F7, F8 | High |
-| 5 | Full Portfolio Asset & Link Audit | F4, F9, F11, F12 | Medium |
+## 3. Test Harness Architecture
 
-## Coverage Thresholds
-- Tier 1: ≥5 per feature (≥60 tests across 12 features)
-- Tier 2: ≥5 per feature (where boundaries exist, ≥60 tests)
-- Tier 3: Pairwise coverage of major feature interactions (≥12 tests)
-- Tier 4: ≥5 realistic application scenarios
-- Total Target: ≥140 test cases
+```
+                    ┌────────────────────────────────────────┐
+                    │      node tests/runner.js              │
+                    └───────────────────┬────────────────────┘
+                                        │
+           ┌────────────────────────────┼────────────────────────────┐
+           ▼                            ▼                            ▼
+  ┌──────────────────┐         ┌──────────────────┐         ┌──────────────────┐
+  │ Ephemeral HTTP   │         │ DOM Helper ($O(N)$│        │ Tier 1-4 Test    │
+  │ Server (Port 0)  │         │ Tokenizer & Tree)│         │ Suites (150 tests│
+  └──────────────────┘         └──────────────────┘         └──────────────────┘
+```
+
+- **Zero External Dependencies**: Operates entirely on Node.js v24 standard runtime (`node:http`, `node:fs`, `node:path`, `node:assert/strict`).
+- **Linear-Time HTML Parser & DOM Helper** (`tests/dom_helper.js`): $O(N)$ safe tokenizer, document query engine (`querySelector`, `querySelectorAll`), class list manipulation, and synthetic event dispatching (`click`, `keydown`, `scroll`, `resize`).
+- **Built-in Ephemeral HTTP Server**: Random port binding (`127.0.0.1:<port>`), accurate MIME serving, query parameter resolution, case-sensitivity testing, and static asset streaming.
+
+---
+
+## 4. Automated Visual Verification Harness (`tests/capture_visuals.js`)
+
+```
+   Node.js v24 Script                     Headless Google Chrome
+ ┌─────────────────────┐   WebSocket CDP ┌───────────────────────────┐
+ │ capture_visuals.js  │ ─────────────── │ Chrome v157 (--headless=new)│
+ └──────────┬──────────┘                 └─────────────┬─────────────┘
+            │                                          │
+            ▼                                          ▼
+   .agents/teamwork/visual_audit/              Viewport Emulation & Layout Audit:
+   - desktop_full.png                          - Desktop: 1280x800
+   - desktop_hero.png                          - Mobile: 375x812 (Scale 2)
+   - desktop_honors.png                        - Horizontal Overflow Audit: 0px
+   - desktop_projects.png                      - Honors Broken Images: 0
+   - desktop_skills.png                        - Honors <img> tags: 0
+   - mobile_full.png
+   - mobile_hero.png
+   - mobile_honors.png
+   - mobile_projects.png
+   - audit_report.json
+```
+
+### Protocol & Capabilities:
+- Connects directly to Google Chrome via Chrome DevTools Protocol (CDP) using native `globalThis.WebSocket`.
+- Zero npm dependencies (Puppeteer/Playwright not needed).
+- Emulates responsive viewports, executes full-page (`captureBeyondViewport: true`) and section screenshots (`clip` rects with automated `scrollIntoView` for `content-visibility: auto` stability).
+- Performs automated layout integrity checks: computes DOM element bounding boxes against `clientWidth` to flag clipping, horizontal scrollbars, and broken images.
+
+---
+
+## 5. Execution Commands
+
+```bash
+# Run all 150 automated tests across Tiers 1-4
+node tests/runner.js
+
+# Run individual tiers
+node tests/runner.js --tier=1
+node tests/runner.js --tier=2
+node tests/runner.js --tier=3
+node tests/runner.js --tier=4
+
+# Filter tests by keyword
+node tests/runner.js --filter=icpc
+node tests/runner.js --filter=lightbox
+node tests/runner.js --filter=honors
+
+# Run automated browser visual verification & layout audit
+node tests/capture_visuals.js
+```
