@@ -549,4 +549,37 @@ describe('Tier 1: Feature Coverage Suite', () => {
     });
   });
 
+  // Feature 13: Theme Switcher & Progressive Disclosure Catalog
+  describe('Feature 13: Theme Switcher & Progressive Disclosure Catalog', () => {
+    test('13.1: Theme toggle button #theme-toggle exists in navbar with ARIA metadata', ({ assert }) => {
+      const { document } = loadDOM(INDEX_HTML);
+      const toggleBtn = document.getElementById('theme-toggle');
+      assert.ok(toggleBtn, '#theme-toggle button must exist');
+      assert.ok(toggleBtn.getAttribute('aria-label'), '#theme-toggle must have aria-label');
+      assert.ok(document.getElementById('navbar').contains(toggleBtn), '#theme-toggle must reside inside #navbar');
+    });
+
+    test('13.2: Progressive disclosure modal #detail-modal exists and is hidden by default', ({ assert }) => {
+      const { document } = loadDOM(INDEX_HTML);
+      const detailModal = document.getElementById('detail-modal');
+      assert.ok(detailModal, '#detail-modal container must exist');
+      assert.ok(detailModal.classList.contains('hidden'), '#detail-modal must be hidden by default');
+      assert.equal(detailModal.getAttribute('aria-hidden'), 'true', '#detail-modal aria-hidden must be true initially');
+    });
+
+    test('13.3: Structured #portfolio-details catalog covers all progressive-disclosure cards cleanly', ({ assert }) => {
+      const { document } = loadDOM(INDEX_HTML);
+      const scriptEl = document.getElementById('portfolio-details');
+      assert.ok(scriptEl, '#portfolio-details JSON catalog must exist');
+      const catalog = JSON.parse(scriptEl.textContent);
+      const triggerCards = document.querySelectorAll('[data-detail-id]');
+      assert.equal(triggerCards.length, 22, 'Expected 22 summary cards (8 honors + 6 projects + 2 research + 6 skills)');
+      for (const card of triggerCards) {
+        const id = card.getAttribute('data-detail-id');
+        assert.ok(catalog[id], `Catalog must contain structured detail entry for "${id}"`);
+        assert.ok(catalog[id].title && catalog[id].description, `Catalog entry "${id}" must define title and description`);
+      }
+    });
+  });
+
 });

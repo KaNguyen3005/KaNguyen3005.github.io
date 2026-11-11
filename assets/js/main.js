@@ -18,6 +18,8 @@
     isScrollTicking: false,
     activeSection: 'about',
     lightboxOpen: false,
+    detailModalOpen: false,
+    theme: 'dark',
     typewriterPaused: false,
     lastScrollY: 0
   };
@@ -610,10 +612,351 @@
   // ==========================================================================
   // 8. LIFECYCLE INITIALIZATION
   // ==========================================================================
+  /* ==========================================================================
+     8. DARK / LIGHT THEME SWITCHER (Zero FOUC + Persistent Preference)
+     ========================================================================== */
+  function getThemeRoot() {
+    return document.documentElement || document.querySelector('html');
+  }
+
+  function getSavedThemePreference() {
+    try {
+      if (typeof window.localStorage !== 'undefined' && window.localStorage) {
+        var saved = window.localStorage.getItem('portfolio-theme');
+        if (saved === 'light' || saved === 'dark') return saved;
+      }
+    } catch (err) {
+      // Ignore storage restrictions in sandboxed environments
+    }
+    var root = getThemeRoot();
+    if (root && root.getAttribute) {
+      var attrTheme = root.getAttribute('data-theme');
+      if (attrTheme === 'light' || attrTheme === 'dark') return attrTheme;
+    }
+    return 'dark';
+  }
+
+  function applyTheme(theme, persist) {
+    var normalized = theme === 'light' ? 'light' : 'dark';
+    var root = getThemeRoot();
+    if (root && root.setAttribute) {
+      root.setAttribute('data-theme', normalized);
+    }
+    state.theme = normalized;
+
+    var toggleBtn = document.getElementById('theme-toggle');
+    if (toggleBtn) {
+      var label = normalized === 'light'
+        ? 'Chuyển sang giao diện tối'
+        : 'Chuyển sang giao diện sáng';
+      toggleBtn.setAttribute('aria-pressed', normalized === 'light' ? 'true' : 'false');
+      toggleBtn.setAttribute('aria-label', label);
+      toggleBtn.setAttribute('title', label);
+    }
+
+    if (persist) {
+      try {
+        if (typeof window.localStorage !== 'undefined' && window.localStorage) {
+          window.localStorage.setItem('portfolio-theme', normalized);
+        }
+      } catch (err) {
+        // Ignore storage write errors
+      }
+    }
+    return normalized;
+  }
+
+  function initThemeSwitcher() {
+    var initialTheme = getSavedThemePreference();
+    applyTheme(initialTheme, false);
+
+    var toggleBtn = document.getElementById('theme-toggle');
+    if (toggleBtn && (!toggleBtn.dataset || toggleBtn.dataset.themeBound !== 'true')) {
+      if (toggleBtn.dataset) toggleBtn.dataset.themeBound = 'true';
+      toggleBtn.addEventListener('click', function () {
+        var nextTheme = state.theme === 'light' ? 'dark' : 'light';
+        applyTheme(nextTheme, true);
+      });
+    }
+  }
+
+  /* ==========================================================================
+     9. PROGRESSIVE DISCLOSURE DETAIL MODAL
+     ========================================================================== */
+  function findAncestor(node, predicate) {
+    var cur = node;
+    while (cur) {
+      if (cur.nodeType === 1 && predicate(cur)) return cur;
+      cur = cur.parentNode || cur.parentElement;
+    }
+    return null;
+  }
+
+  function clearElementChildren(el) {
+    if (!el) return;
+    if (typeof el.innerHTML === 'string' && !el.children.length) {
+      el.innerHTML = '';
+    }
+    while (el.firstChild) {
+      el.removeChild(el.firstChild);
+    }
+  }
+
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function isSafeExternalUrl(url) {
+    return typeof url === 'string' && (url.indexOf('https://') === 0 || url.indexOf('http://') === 0);
+  }
+
+  function initDetailModal() {
+    var dataEl = document.getElementById('portfolio-details');
+    var modal = document.getElementById('detail-modal');
+    if (!dataEl || !modal) return;
+
+    var catalog = {};
+    try {
+      catalog = JSON.parse((dataEl.textContent || '{}').trim());
+    } catch (err) {
+      return;
+    }
+
+    var dialog = document.getElementById('detail-modal-dialog');
+    var closeBtn = document.getElementById('detail-modal-close');
+    var badgeEl = document.getElementById('detail-modal-badge');
+    var contextEl = document.getElementById('detail-modal-context');
+    var titleEl = document.getElementById('detail-modal-title');
+    var subtitleEl = document.getElementById('detail-modal-subtitle');
+    var descEl = document.getElementById('detail-modal-desc');
+    var metricsEl = document.getElementById('detail-modal-metrics');
+    var highlightsEl = document.getElementById('detail-modal-highlights');
+    var tagsEl = document.getElementById('detail-modal-tags');
+    var actionsEl = document.getElementById('detail-modal-actions');
+    var lastOpener = null;
+
+    function openDetailModal(id, openerEl) {
+      var item = catalog[id];
+      if (!item) return false;
+      lastOpener = openerEl || null;
+
+      if (badgeEl) {
+        badgeEl.textContent = item.badge || '';
+        badgeEl.className = (item.badgeClass || 'badge-indigo') + ' inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-medium';
+      }
+      if (contextEl) contextEl.textContent = item.context || '';
+      if (titleEl) titleEl.textContent = item.title || '';
+      if (subtitleEl) subtitleEl.textContent = item.subtitle || '';
+      if (descEl) descEl.textContent = item.description || '';
+
+      var canCreate = typeof document.createElement === 'function';
+
+      if (metricsEl) {
+        clearElementChildren(metricsEl);
+        var metrics = Array.isArray(item.metrics) ? item.metrics : [];
+        if (canCreate) {
+          metrics.forEach(function (metric) {
+            var box = document.createElement('div');
+            box.className = 'detail-metric-box p-3 rounded-xl bg-white/5 border border-white/10 text-center';
+            var val = document.createElement('div');
+            val.className = 'text-sm sm:text-base font-bold text-white';
+            val.textContent = metric.value || '';
+            var lbl = document.createElement('div');
+            lbl.className = 'text-[11px] text-slate-400 mt-0.5';
+            lbl.textContent = metric.label || '';
+            box.appendChild(val);
+            box.appendChild(lbl);
+            metricsEl.appendChild(box);
+          });
+        } else {
+          metricsEl.innerHTML = metrics.map(function (metric) {
+            return '<div class="detail-metric-box p-3 rounded-xl bg-white/5 border border-white/10 text-center"><div class="text-sm sm:text-base font-bold text-white">' +
+              escapeHtml(metric.value) + '</div><div class="text-[11px] text-slate-400 mt-0.5">' +
+              escapeHtml(metric.label) + '</div></div>';
+          }).join('');
+        }
+      }
+
+      if (highlightsEl) {
+        clearElementChildren(highlightsEl);
+        var highlights = Array.isArray(item.highlights) ? item.highlights : [];
+        if (canCreate) {
+          highlights.forEach(function (point) {
+            var li = document.createElement('li');
+            li.className = 'flex items-start gap-2.5';
+            var marker = document.createElement('span');
+            marker.className = 'text-emerald-400 font-bold shrink-0';
+            marker.textContent = '✓';
+            var copy = document.createElement('span');
+            copy.textContent = point;
+            li.appendChild(marker);
+            li.appendChild(copy);
+            highlightsEl.appendChild(li);
+          });
+        } else {
+          highlightsEl.innerHTML = highlights.map(function (point) {
+            return '<li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>' +
+              escapeHtml(point) + '</span></li>';
+          }).join('');
+        }
+      }
+
+      if (tagsEl) {
+        clearElementChildren(tagsEl);
+        var tags = Array.isArray(item.tags) ? item.tags : [];
+        if (canCreate) {
+          tags.forEach(function (tag) {
+            var chip = document.createElement('span');
+            chip.className = 'px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300';
+            chip.textContent = tag;
+            tagsEl.appendChild(chip);
+          });
+        } else {
+          tagsEl.innerHTML = tags.map(function (tag) {
+            return '<span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">' +
+              escapeHtml(tag) + '</span>';
+          }).join('');
+        }
+      }
+
+      if (actionsEl) {
+        clearElementChildren(actionsEl);
+        var hasSafeLink = item.primaryLink && isSafeExternalUrl(item.primaryLink.url);
+        if (canCreate) {
+          if (hasSafeLink) {
+            var link = document.createElement('a');
+            link.href = item.primaryLink.url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.className = 'inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-blue hover:bg-blue-600 text-white text-xs font-mono font-semibold transition-colors shadow-lg shadow-brand-blue/25';
+            link.textContent = (item.primaryLink.label || 'Xem chi tiết') + ' \u2192';
+            actionsEl.appendChild(link);
+          }
+          var footerClose = document.createElement('button');
+          footerClose.type = 'button';
+          footerClose.className = 'detail-footer-close px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-mono font-medium transition-colors';
+          footerClose.textContent = 'Đóng cửa sổ';
+          footerClose.addEventListener('click', closeDetailModal);
+          actionsEl.appendChild(footerClose);
+        } else {
+          var actionHtml = '';
+          if (hasSafeLink) {
+            actionHtml += '<a href="' + escapeHtml(item.primaryLink.url) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-blue hover:bg-blue-600 text-white text-xs font-mono font-semibold transition-colors shadow-lg shadow-brand-blue/25">' +
+              escapeHtml(item.primaryLink.label || 'Xem chi tiết') + ' &rarr;</a>';
+          }
+          actionHtml += '<button type="button" class="detail-footer-close px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white text-xs font-mono font-medium transition-colors">Đóng cửa sổ</button>';
+          actionsEl.innerHTML = actionHtml;
+        }
+      }
+
+      modal.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+      modal.classList.add('flex');
+      modal.setAttribute('aria-hidden', 'false');
+      if (dialog) {
+        dialog.classList.remove('scale-95');
+        dialog.classList.add('scale-100');
+      }
+      state.detailModalOpen = true;
+      if (document.body && document.body.style) {
+        document.body.style.overflow = 'hidden';
+      }
+      if (closeBtn && typeof closeBtn.focus === 'function') {
+        try {
+          closeBtn.focus();
+        } catch (err) {
+          // Ignore focus errors in virtual DOM
+        }
+      }
+      return true;
+    }
+
+    function closeDetailModal() {
+      modal.classList.remove('flex', 'scale-100');
+      modal.classList.add('hidden', 'opacity-0', 'pointer-events-none');
+      modal.setAttribute('aria-hidden', 'true');
+      if (dialog) {
+        dialog.classList.remove('scale-100');
+        dialog.classList.add('scale-95');
+      }
+      state.detailModalOpen = false;
+      if (document.body && document.body.style && !state.lightboxOpen) {
+        document.body.style.overflow = '';
+      }
+      if (lastOpener && typeof lastOpener.focus === 'function') {
+        try {
+          lastOpener.focus();
+        } catch (err) {
+          // Ignore focus errors in virtual DOM
+        }
+      }
+    }
+
+    window.PortfolioDetail = {
+      open: openDetailModal,
+      close: closeDetailModal
+    };
+
+    if (modal.dataset && modal.dataset.detailBound === 'true') return;
+    if (modal.dataset) modal.dataset.detailBound = 'true';
+
+    var detailCards = document.querySelectorAll('[data-detail-id]');
+    detailCards.forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        var anchor = findAncestor(e.target, function (el) {
+          return el.tagName === 'A' && Boolean(el.getAttribute('href'));
+        });
+        if (anchor) return;
+        var detailId = card.getAttribute('data-detail-id');
+        if (detailId) openDetailModal(detailId, card);
+      });
+
+      card.addEventListener('keydown', function (e) {
+        if (e.target !== card) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var detailId = card.getAttribute('data-detail-id');
+          if (detailId) openDetailModal(detailId, card);
+        }
+      });
+    });
+
+    var triggerButtons = document.querySelectorAll('.detail-trigger-btn');
+    triggerButtons.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var targetId = btn.getAttribute('data-detail-target');
+        if (targetId) openDetailModal(targetId, btn);
+      });
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeDetailModal);
+    }
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
+        closeDetailModal();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && state.detailModalOpen) {
+        closeDetailModal();
+      }
+    });
+  }
+
   function init() {
+    initThemeSwitcher();
     initScrollEngine();
     initTypewriter();
     initLightboxModal();
+    initDetailModal();
     initFilterTabs();
     initScrollReveal();
     initMobileMenu();
@@ -623,8 +966,12 @@
 
   // Expose Portfolio API for testing & manual invocation
   window.Portfolio = {
-    version: '2.0.0',
+    version: '2.1.0',
     init: init,
+    setTheme: function (theme) { return applyTheme(theme, true); },
+    getTheme: function () { return state.theme; },
+    openDetail: function (id) { return window.PortfolioDetail ? window.PortfolioDetail.open(id) : false; },
+    closeDetail: function () { if (window.PortfolioDetail) window.PortfolioDetail.close(); },
     openLightbox: window.openLightbox,
     closeLightbox: window.closeLightbox,
     state: state

@@ -217,4 +217,40 @@ describe('Tier 3: Cross-Feature Combinations Suite', () => {
     assert.equal(imageWrap.getAttribute('data-lightbox-src'), 'assets/icpc_contest_2026.png', 'Lightbox source must point to contest arena photo');
   });
 
+  test('3.16: [Theme Switcher]: Clicking #theme-toggle toggles data-theme between dark and light', ({ assert }) => {
+    const { document } = loadDOM(INDEX_HTML);
+    const html = document.querySelector('html');
+    const toggleBtn = document.getElementById('theme-toggle');
+    assert.ok(html && toggleBtn, 'Root <html> and #theme-toggle must exist');
+
+    const initialTheme = html.getAttribute('data-theme') || 'dark';
+    toggleBtn.click();
+    const swappedTheme = html.getAttribute('data-theme');
+    assert.notEqual(swappedTheme, initialTheme, 'Clicking #theme-toggle must toggle data-theme');
+    assert.equal(toggleBtn.getAttribute('aria-pressed'), swappedTheme === 'light' ? 'true' : 'false');
+
+    toggleBtn.click();
+    assert.equal(html.getAttribute('data-theme'), initialTheme, 'Clicking #theme-toggle twice must restore initial theme');
+  });
+
+  test('3.17: [Progressive Disclosure Modal]: Clicking card opens #detail-modal with content and Escape closes it', ({ assert }) => {
+    const { document } = loadDOM(INDEX_HTML);
+    const dueBroCard = document.querySelector('[data-detail-id="project-duebro"]');
+    const modal = document.getElementById('detail-modal');
+    const titleEl = document.getElementById('detail-modal-title');
+    const metricsEl = document.getElementById('detail-modal-metrics');
+    const tagsEl = document.getElementById('detail-modal-tags');
+    assert.ok(dueBroCard && modal && titleEl, 'Summary card and #detail-modal elements must exist');
+
+    dueBroCard.click();
+    assert.ok(!modal.classList.contains('hidden'), '#detail-modal must become visible when card is clicked');
+    assert.equal(modal.getAttribute('aria-hidden'), 'false', '#detail-modal aria-hidden must be false when open');
+    assert.ok(/Due Bro/i.test(titleEl.textContent), '#detail-modal-title must populate selected project title');
+    assert.ok((metricsEl.children.length > 0 || metricsEl.innerHTML.length > 0) && /React Native/i.test(tagsEl.innerHTML), 'Metrics and tags must render on open');
+
+    document.dispatchEvent({ type: 'keydown', key: 'Escape' });
+    assert.ok(modal.classList.contains('hidden'), 'Escape key must close #detail-modal');
+    assert.equal(modal.getAttribute('aria-hidden'), 'true', '#detail-modal aria-hidden must reset to true on close');
+  });
+
 });

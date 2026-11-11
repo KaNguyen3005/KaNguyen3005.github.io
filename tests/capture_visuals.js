@@ -464,6 +464,8 @@ async function runVisualAudit() {
         const results = {
           heroTabSwitchOk: false,
           lightboxOpenCloseOk: false,
+          detailModalOpenCloseOk: false,
+          themeToggleOk: false,
           honorsFilterOk: false,
           zeroLuffyRefs: false,
           heroSplitColumnsOk: false,
@@ -530,12 +532,86 @@ async function runVisualAudit() {
         const rawHtml = document.documentElement.outerHTML;
         results.zeroLuffyRefs = !/luffy|pirate king|vua hải tặc|142709831/i.test(rawHtml);
 
+        // Progressive disclosure detail modal check
+        const detailCard = document.querySelector('[data-detail-id="project-duebro"]');
+        const detailModal = document.getElementById('detail-modal');
+        const detailTitle = document.getElementById('detail-modal-title');
+        const detailClose = document.getElementById('detail-modal-close');
+        if (detailCard && detailModal && detailTitle && detailClose) {
+          detailCard.click();
+          await sleep(160);
+          const detailOpened = !detailModal.classList.contains('hidden') &&
+            detailModal.getAttribute('aria-hidden') === 'false' &&
+            /Due Bro/i.test(detailTitle.textContent);
+          detailClose.click();
+          await sleep(160);
+          const detailClosed = detailModal.classList.contains('hidden') &&
+            detailModal.getAttribute('aria-hidden') === 'true';
+          results.detailModalOpenCloseOk = detailOpened && detailClosed;
+        }
+
+        // Theme switcher roundtrip check (dark -> light -> dark)
+        const themeBtn = document.getElementById('theme-toggle');
+        if (themeBtn) {
+          themeBtn.click();
+          await sleep(120);
+          const isLight = document.documentElement.getAttribute('data-theme') === 'light' &&
+            getComputedStyle(document.body).backgroundColor !== 'rgb(8, 12, 20)';
+          themeBtn.click();
+          await sleep(120);
+          const isDarkRestored = document.documentElement.getAttribute('data-theme') === 'dark';
+          results.themeToggleOk = isLight && isDarkRestored;
+        }
+
         return results;
       })()`,
       awaitPromise: true,
       returnByValue: true
     });
     const desktopInteractions = desktopInteractionsRes.result.value || {};
+
+    // Capture Light Mode Desktop Screenshots
+    await cdp.send('Runtime.evaluate', {
+      expression: `(() => {
+        if (window.Portfolio && window.Portfolio.setTheme) window.Portfolio.setTheme('light');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      })()`
+    });
+    await new Promise((r) => setTimeout(r, 250));
+    await captureTopHero('desktop_hero_light.png', 1280);
+    await captureSection('#honors', 'desktop_honors_light.png');
+    await captureSection('#projects', 'desktop_projects_light.png');
+    await captureSection('#research', 'desktop_research_light.png');
+    await captureSection('#skills', 'desktop_skills_light.png');
+
+    // Capture Detail Modal screenshots (Light Mode & Dark Mode)
+    await cdp.send('Runtime.evaluate', {
+      expression: `(() => {
+        if (window.Portfolio && window.Portfolio.openDetail) window.Portfolio.openDetail('project-duebro');
+      })()`
+    });
+    await new Promise((r) => setTimeout(r, 220));
+    const modalLightShot = await cdp.send('Page.captureScreenshot', { format: 'png' });
+    fs.writeFileSync(path.join(OUTPUT_DIR, 'desktop_detail_modal_light.png'), Buffer.from(modalLightShot.data, 'base64'));
+    console.log(`      ${GREEN}✓${RESET} Saved desktop_detail_modal_light.png`);
+
+    await cdp.send('Runtime.evaluate', {
+      expression: `(() => {
+        if (window.Portfolio && window.Portfolio.setTheme) window.Portfolio.setTheme('dark');
+      })()`
+    });
+    await new Promise((r) => setTimeout(r, 180));
+    const modalDarkShot = await cdp.send('Page.captureScreenshot', { format: 'png' });
+    fs.writeFileSync(path.join(OUTPUT_DIR, 'desktop_detail_modal.png'), Buffer.from(modalDarkShot.data, 'base64'));
+    console.log(`      ${GREEN}✓${RESET} Saved desktop_detail_modal.png`);
+
+    await cdp.send('Runtime.evaluate', {
+      expression: `(() => {
+        if (window.Portfolio && window.Portfolio.closeDetail) window.Portfolio.closeDetail();
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      })()`
+    });
+    await new Promise((r) => setTimeout(r, 150));
 
     // 5. Mobile Audit & Captures (375px)
     console.log(`\n[5/6] Capturing Mobile Viewport (375x812)...`);
@@ -607,6 +683,24 @@ async function runVisualAudit() {
     // Capture mobile sections
     await captureSection('#honors', 'mobile_honors.png');
     await captureSection('#projects', 'mobile_projects.png');
+
+    // Capture Light Mode Mobile Screenshots
+    await cdp.send('Runtime.evaluate', {
+      expression: `(() => {
+        if (window.Portfolio && window.Portfolio.setTheme) window.Portfolio.setTheme('light');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      })()`
+    });
+    await new Promise((r) => setTimeout(r, 200));
+    await captureTopHero('mobile_hero_light.png', 375);
+    await captureSection('#projects', 'mobile_projects_light.png');
+    await cdp.send('Runtime.evaluate', {
+      expression: `(() => {
+        if (window.Portfolio && window.Portfolio.setTheme) window.Portfolio.setTheme('dark');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      })()`
+    });
+    await new Promise((r) => setTimeout(r, 150));
 
     // Interactive Mobile Check (Menu drawer toggle)
     const mobileMenuRes = await cdp.send('Runtime.evaluate', {
