@@ -452,6 +452,40 @@ describe('Tier 2: Boundary & Corner Cases Suite', () => {
         assert.ok(d.textContent.length > 10, 'Project description must be informative');
       }
     });
+
+    test('9.6: Dead link github.com/KaNguyen3005/DueBro does not exist in DOM and unlinked items have no clickable <a> tags', ({ assert }) => {
+      const { document, rawHTML } = loadDOM(INDEX_HTML);
+
+      // 1. Verify complete absence of dead DueBro repo link anywhere in the page
+      assert.ok(!rawHTML.includes('github.com/KaNguyen3005/DueBro"'), 'Must not contain dead link github.com/KaNguyen3005/DueBro"');
+      assert.ok(!rawHTML.includes('github.com/KaNguyen3005/DueBro/'), 'Must not contain dead link github.com/KaNguyen3005/DueBro/');
+      assert.ok(!rawHTML.includes('github.com/KaNguyen3005/DueBro\''), 'Must not contain dead link github.com/KaNguyen3005/DueBro\'');
+
+      // 2. Verify all unlinked project cards contain ZERO clickable <a> tags
+      const unlinkedProjectIds = ['project-lms', 'project-iam', 'project-cp-vault', 'project-katila', 'project-maze-solver'];
+      for (const id of unlinkedProjectIds) {
+        const card = document.querySelector(`[data-detail-id="${id}"]`);
+        assert.ok(card, `Project card ${id} must exist in DOM`);
+        const links = card.querySelectorAll('a');
+        assert.equal(links.length, 0, `Unlinked project card ${id} must contain 0 clickable <a> tags, found ${links.length}`);
+      }
+
+      // 3. Verify unlinked honors cards contain ZERO clickable <a> tags
+      const c4fCard = document.querySelector('[data-detail-id="award-utc-c4f"]');
+      assert.ok(c4fCard, 'Card award-utc-c4f must exist in DOM');
+      assert.equal(c4fCard.querySelectorAll('a').length, 0, 'Unlinked award card award-utc-c4f must contain 0 clickable <a> tags');
+
+      // 4. Verify in-press research card contains ZERO clickable <a> tags
+      const ismacCard = document.querySelector('[data-detail-id="research-ismac"]');
+      assert.ok(ismacCard, 'Card research-ismac must exist in DOM');
+      assert.equal(ismacCard.querySelectorAll('a').length, 0, 'In-press research card research-ismac must contain 0 clickable <a> tags');
+
+      // 5. Verify unlinked skill cards contain ZERO clickable <a> tags
+      const skillCards = document.querySelectorAll('#skills [data-detail-id]');
+      for (const card of skillCards) {
+        assert.equal(card.querySelectorAll('a').length, 0, `Skill card ${card.getAttribute('data-detail-id')} must contain 0 clickable <a> tags`);
+      }
+    });
   });
 
   // =========================================================================

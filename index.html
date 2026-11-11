@@ -136,6 +136,22 @@
       <a href="#research" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5 font-mono text-sm">Nghiên Cứu Khoa Học</a>
       <a href="#skills" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5 font-mono text-sm">Kỹ Năng Kỹ Thuật</a>
       <a href="#contact" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5 font-mono text-sm">Liên Hệ Tuyển Dụng</a>
+      <!-- Mobile Drawer Theme Switcher -->
+      <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+        <span class="text-xs font-mono text-slate-300">Giao diện (Sáng / Tối)</span>
+        <button id="theme-toggle-mobile" type="button" class="theme-toggle-btn p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 transition-colors flex items-center justify-center focus:outline-none" aria-label="Chuyển sang giao diện sáng" aria-pressed="false" title="Chuyển theme Sáng / Tối">
+          <svg class="theme-icon-sun w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2"/><path d="M12 20v2"/>
+            <path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/>
+            <path d="M2 12h2"/><path d="M20 12h2"/>
+            <path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+          <svg class="theme-icon-moon w-4 h-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -204,10 +220,10 @@
               <span class="w-2 h-2 rounded-full bg-amber-400"></span>
               <span>ICPC Global ID</span>
             </a>
-            <a href="https://www.linkedin.com/in/bu-ba-ka-mo-ha-mach-002713309/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300 hover:bg-blue-500/20 transition-colors">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300">
               <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" width="14" height="14"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               <span>LinkedIn</span>
-            </a>
+            </span>
           </div>
         </div>
 
@@ -228,20 +244,20 @@
             </div>
 
             <!-- Master HD Contest Arena Picture Container with Zero CLS -->
-            <div id="hero-image-wrap" class="relative overflow-hidden rounded-xl border border-white/10 aspect-video aspect-[16/9] w-full bg-slate-900/60 cursor-pointer" data-lightbox-src="assets/icpc_contest_2026.png" data-lightbox-title="Chung kết ICPC PTITHCM & Olympic AI 2026" data-lightbox-desc="Khoảnh khắc thi đấu thuật toán trực tiếp tại phòng lab máy tính PTITHCM của Mô Ha Mách Bu Ba Ka cùng đồng đội.">
+            <div id="hero-image-wrap" class="relative overflow-hidden rounded-xl border border-white/10 aspect-video aspect-[16/9] w-full bg-slate-900/60 cursor-pointer" data-lightbox-src="assets/icpc_contest_2026.png" data-lightbox-title="Chung kết ICPC PTITHCM & Olympic AI 2026" data-lightbox-desc="Minh họa anime không khí tập trung cao độ tại đấu trường lập trình ICPC cùng hệ thống màn hình phân tích thuật toán.">
               <!-- Arena View (Default) -->
               <picture id="hero-pic-arena" class="block w-full h-full transition-opacity duration-300">
                 <source srcset="assets/icpc_contest_2026.webp" type="image/webp">
-                <img src="assets/icpc_contest_2026.png" alt="Mô Ha Mách Bu Ba Ka thi đấu tại Chung kết ICPC PTITHCM" width="1024" height="682" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" fetchpriority="high" />
+                <img src="assets/icpc_contest_2026.png" alt="Minh họa anime đấu trường ICPC PTITHCM 2026" width="1376" height="768" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" fetchpriority="high" />
               </picture>
-              <!-- Campus View (Photo 4) -->
+              <!-- Campus View -->
               <picture id="hero-pic-campus" class="hidden w-full h-full transition-opacity duration-300">
                 <source srcset="assets/ptit_campus_life.webp" type="image/webp">
-                <img src="assets/ptit_campus_life.png" alt="Khoảnh khắc hoàng hôn khuôn viên PTITHCM cùng bạn bè" width="469" height="505" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                <img src="assets/ptit_campus_life.png" alt="Minh họa anime đời sống sinh viên tại khuôn viên PTITHCM buổi tối" width="1376" height="768" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               </picture>
               <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-mono text-white">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
-                <span id="hero-zoom-text">Click xem ảnh gốc (1024x682 HD)</span>
+                <span id="hero-zoom-text">Click xem ảnh minh họa (1376x768)</span>
               </div>
             </div>
 
@@ -498,9 +514,9 @@
             <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors whitespace-nowrap" data-detail-target="award-utc-c4f">
               <span>Chi tiết</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
-              <span>GitHub</span> &rarr;
-            </a>
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-300 text-[11px] font-mono whitespace-nowrap shrink-0">
+              <span>Đại học GTVT</span>
+            </span>
           </div>
         </div>
 
@@ -526,7 +542,7 @@
             <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors whitespace-nowrap" data-detail-target="award-kada-korea">
               <span>Chi tiết</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005/DueBro" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
+            <a href="https://github.com/KaNguyen3005/DueBro_Kada_Program" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
               <span>Mã nguồn</span> &rarr;
             </a>
           </div>
@@ -689,7 +705,7 @@
             <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors" data-detail-target="project-duebro">
               <span>Chi tiết &amp; Kiến trúc</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005/DueBro" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
+            <a href="https://github.com/KaNguyen3005/DueBro_Kada_Program" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
               <span>Repository</span> &rarr;
             </a>
           </div>
@@ -720,13 +736,14 @@
               <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-400">+3</span>
             </div>
           </div>
-          <div class="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2 text-xs font-mono">
-            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors" data-detail-target="project-lms">
+          <div class="pt-4 mt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors whitespace-nowrap shrink-0" data-detail-target="project-lms">
               <span>Chi tiết &amp; Kiến trúc</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
-              <span>GitHub</span> &rarr;
-            </a>
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-400 text-[11px] font-mono font-medium whitespace-nowrap shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span>Enterprise Architecture</span>
+            </span>
           </div>
         </div>
 
@@ -755,13 +772,14 @@
               <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-400">+3</span>
             </div>
           </div>
-          <div class="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2 text-xs font-mono">
-            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors" data-detail-target="project-iam">
+          <div class="pt-4 mt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors whitespace-nowrap shrink-0" data-detail-target="project-iam">
               <span>Chi tiết &amp; Kiến trúc</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
-              <span>Repository</span> &rarr;
-            </a>
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-400 text-[11px] font-mono font-medium whitespace-nowrap shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span>Private Microservice</span>
+            </span>
           </div>
         </div>
 
@@ -790,13 +808,14 @@
               <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-400">+2</span>
             </div>
           </div>
-          <div class="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2 text-xs font-mono">
-            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors" data-detail-target="project-cp-vault">
+          <div class="pt-4 mt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors whitespace-nowrap shrink-0" data-detail-target="project-cp-vault">
               <span>Chi tiết &amp; Kiến trúc</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
-              <span>Kho Thuật Toán</span> &rarr;
-            </a>
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-400 text-[11px] font-mono font-medium whitespace-nowrap shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span>ICPC Algorithms</span>
+            </span>
           </div>
         </div>
 
@@ -825,13 +844,14 @@
               <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-400">+2</span>
             </div>
           </div>
-          <div class="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2 text-xs font-mono">
-            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors" data-detail-target="project-katila">
+          <div class="pt-4 mt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors whitespace-nowrap shrink-0" data-detail-target="project-katila">
               <span>Chi tiết &amp; Kiến trúc</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
-              <span>Repository</span> &rarr;
-            </a>
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-400 text-[11px] font-mono font-medium whitespace-nowrap shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span>Clean Architecture</span>
+            </span>
           </div>
         </div>
 
@@ -860,13 +880,14 @@
               <span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-400">+1</span>
             </div>
           </div>
-          <div class="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2 text-xs font-mono">
-            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors" data-detail-target="project-maze-solver">
+          <div class="pt-4 mt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors whitespace-nowrap shrink-0" data-detail-target="project-maze-solver">
               <span>Chi tiết &amp; Kiến trúc</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-rose-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
-              <span>Repository</span> &rarr;
-            </a>
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-400 text-[11px] font-mono font-medium whitespace-nowrap shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span>Heuristic Engine</span>
+            </span>
           </div>
         </div>
 
@@ -886,7 +907,7 @@
           NGHIÊN CỨU KHOA HỌC & ĐÓNG GÓP HỌC THUẬT
         </span>
         <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mt-1">
-          Ấn Phẩm Quốc Tế & Kiến Trúc AI Đột Phá
+          Ấn Phẩm Quốc Tế & Công Bố Khoa Học
         </h2>
         <p class="text-sm text-slate-400 mt-2 max-w-2xl font-light">
           Tác giả: <strong class="text-white font-medium">Mô Ha Mách Bu Ba Ka (KaNguyen3005)</strong> — Nghiên cứu chuyên sâu về mô hình ngôn ngữ lớn, khai phá văn bản và giải quyết bài toán mất cân bằng dữ liệu cực hạn.
@@ -897,7 +918,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
         <!-- Card 1: International Conference Paper (I-SMAC 2026) -->
-        <div class="lg:col-span-7 glass-card p-6 sm:p-7 flex flex-col justify-between gap-5 border-indigo-500/30 cursor-pointer group" data-detail-id="research-ismac" tabindex="0">
+        <div class="lg:col-span-12 glass-card p-6 sm:p-8 flex flex-col justify-between gap-6 border-indigo-500/30 cursor-pointer group" data-detail-id="research-ismac" tabindex="0">
           <div class="space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-3">
               <span class="badge-indigo inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-medium">
@@ -907,7 +928,7 @@
             </div>
 
             <div class="space-y-2">
-              <h3 class="text-xl font-bold text-white group-hover:text-indigo-300 transition-colors leading-snug">
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors leading-snug">
                 Vietnamese Students' Feedback Sentiment Analysis Using PhoBERT Combined with Extreme Class Imbalance Mitigation Strategies
               </h3>
               <p class="text-xs font-mono text-slate-400">
@@ -936,46 +957,10 @@
             <button type="button" class="detail-trigger-btn inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/25 transition-colors" data-detail-target="research-ismac">
               <span>Xem tóm tắt &amp; chi tiết</span> &rarr;
             </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-indigo-300 hover:text-white inline-flex items-center gap-1 transition-colors whitespace-nowrap shrink-0">
-              <span>Research Archive</span> &rarr;
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 2: Autonomous AI Agent Architectures -->
-        <div class="lg:col-span-5 glass-card p-6 sm:p-7 flex flex-col justify-between gap-5 border-cyan-500/30 cursor-pointer group" data-detail-id="research-agents" tabindex="0">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="badge-cyan inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-medium">
-                🤖 Autonomous AI Agents · Systems Research
-              </span>
-            </div>
-            <div>
-              <h3 class="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug">
-                Effective Multi-Agent Design Patterns for Production Workflows
-              </h3>
-              <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                Thiết kế Agentic Workflows với ReAct Loops, Dynamic Planning, Tool-Use &amp; Vector Memory.
-              </p>
-            </div>
-            <div class="grid grid-cols-2 gap-2.5 text-center font-mono">
-              <div class="p-2.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
-                <div class="text-base font-bold text-cyan-300">89.5%</div>
-                <div class="text-[11px] text-slate-400">Task Completion</div>
-              </div>
-              <div class="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-                <div class="text-base font-bold text-emerald-300">Dưới 1.2s</div>
-                <div class="text-[11px] text-slate-400">Streaming Latency</div>
-              </div>
-            </div>
-          </div>
-          <div class="pt-4 border-t border-white/5 flex items-center justify-between gap-3 text-xs font-mono">
-            <button type="button" class="detail-trigger-btn inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors" data-detail-target="research-agents">
-              <span>Xem chi tiết</span> &rarr;
-            </button>
-            <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-white inline-flex items-center gap-1 whitespace-nowrap shrink-0">
-              <span>Tài Liệu Nghiên Cứu</span> &rarr;
-            </a>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-mono font-medium whitespace-nowrap shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+              <span>IEEE Xplore / Scopus (In Press)</span>
+            </span>
           </div>
         </div>
 
@@ -1195,10 +1180,10 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             <span>Gửi Email Trực Tiếp</span>
           </a>
-          <a href="https://www.linkedin.com/in/bu-ba-ka-mo-ha-mach-002713309/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 hover:border-blue-400/40 hover:-translate-y-0.5 transition-all">
+          <span class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 text-slate-300 font-semibold text-sm border border-white/10">
             <svg class="w-4 h-4 fill-current text-blue-400" viewBox="0 0 24 24" width="16" height="16"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            <span>Kết Nối LinkedIn</span>
-          </a>
+            <span>LinkedIn (Mạng Xã Hội)</span>
+          </span>
           <a href="https://github.com/KaNguyen3005" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 hover:border-white/20 hover:-translate-y-0.5 transition-all">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             <span>GitHub Profile</span>
@@ -1307,8 +1292,7 @@
         { "label": "Đối tác", "value": "UTC & FPT Software" },
         { "label": "Năm", "value": "2024" }
       ],
-      "tags": ["Algorithms", "Software Engineering", "UTC Code4Future", "FPT Software"],
-      "primaryLink": { "label": "Xem GitHub Portfolio", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["Algorithms", "Software Engineering", "UTC Code4Future", "FPT Software"]
     },
     "award-kada-korea": {
       "badge": "🥉 KADA Korea",
@@ -1327,7 +1311,7 @@
         { "label": "Quốc tế", "value": "Hàn Quốc" }
       ],
       "tags": ["KADA Korea", "Due Bro", "Gemini AI", "Product Engineering"],
-      "primaryLink": { "label": "Xem Mã nguồn Due Bro", "url": "https://github.com/KaNguyen3005/DueBro" }
+      "primaryLink": { "label": "Xem Mã nguồn Due Bro", "url": "https://github.com/KaNguyen3005/DueBro_Kada_Program" }
     },
     "award-icpc-national": {
       "badge": "🇻🇳 National Finalist",
@@ -1404,7 +1388,7 @@
         { "label": "AI Core", "value": "Gemini API" }
       ],
       "tags": ["React Native", "Expo", "Supabase", "Gemini AI", "TypeScript", "Docker"],
-      "primaryLink": { "label": "Xem Repository trên GitHub", "url": "https://github.com/KaNguyen3005/DueBro" }
+      "primaryLink": { "label": "Xem Repository trên GitHub", "url": "https://github.com/KaNguyen3005/DueBro_Kada_Program" }
     },
     "project-lms": {
       "badge": "⚓ Distributed Architecture",
@@ -1423,8 +1407,7 @@
         { "label": "Event Bus", "value": "Apache Kafka" },
         { "label": "Kiến trúc", "value": "Microservices" }
       ],
-      "tags": ["Spring Boot 3", "Kafka", "Redis", "PostgreSQL", "Docker", "Microservices"],
-      "primaryLink": { "label": "Xem Kiến trúc trên GitHub", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["Spring Boot 3", "Kafka", "Redis", "PostgreSQL", "Docker", "Microservices"]
     },
     "project-iam": {
       "badge": "🔐 Auth & Security Gateway",
@@ -1443,8 +1426,7 @@
         { "label": "Session Store", "value": "Redis" },
         { "label": "Bảo mật", "value": "Token Rotation" }
       ],
-      "tags": ["Java", "Spring Security", "JWT", "Redis", "MySQL", "Docker"],
-      "primaryLink": { "label": "Xem Repository trên GitHub", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["Java", "Spring Security", "JWT", "Redis", "MySQL", "Docker"]
     },
     "project-cp-vault": {
       "badge": "📐 ICPC & CP Vault",
@@ -1463,8 +1445,7 @@
         { "label": "Kiểm thử", "value": "100% Verified" },
         { "label": "Mục tiêu", "value": "ICPC Finals" }
       ],
-      "tags": ["C++20", "Segment Tree", "Graph Theory", "Fast I/O", "ICPC"],
-      "primaryLink": { "label": "Xem Kho Thuật Toán", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["C++20", "Segment Tree", "Graph Theory", "Fast I/O", "ICPC"]
     },
     "project-katila": {
       "badge": "📚 Full-Stack Web",
@@ -1483,8 +1464,7 @@
         { "label": "Backend", "value": "Spring Boot" },
         { "label": "Database", "value": "MySQL" }
       ],
-      "tags": ["Java", "Spring Boot", "MySQL", "Thymeleaf", "Docker"],
-      "primaryLink": { "label": "Xem Repository trên GitHub", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["Java", "Spring Boot", "MySQL", "Thymeleaf", "Docker"]
     },
     "project-maze-solver": {
       "badge": "🧠 Heuristics & Search",
@@ -1503,8 +1483,7 @@
         { "label": "Stack", "value": "Python / PyTorch" },
         { "label": "Chế độ", "value": "Multi-Agent" }
       ],
-      "tags": ["Python", "PyTorch", "A* Search", "Genetic Algorithm"],
-      "primaryLink": { "label": "Xem Repository trên GitHub", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["Python", "PyTorch", "A* Search", "Genetic Algorithm"]
     },
     "research-ismac": {
       "badge": "📄 International Conference · I-SMAC 2026",
@@ -1523,28 +1502,7 @@
         { "label": "MRR@10", "value": "0.912" },
         { "label": "Inference Latency", "value": "24ms" }
       ],
-      "tags": ["PhoBERT", "Extreme Class Imbalance", "NLP", "Sentiment Analysis", "I-SMAC 2026", "PyTorch"],
-      "primaryLink": { "label": "Xem Chi Tiết Bài Báo (Research Archive)", "url": "https://github.com/KaNguyen3005" }
-    },
-    "research-agents": {
-      "badge": "🤖 Autonomous AI Agents",
-      "badgeClass": "badge-cyan",
-      "context": "Systems Research · Multi-Agent Engineering",
-      "title": "Effective Multi-Agent Design Patterns for Production Workflows",
-      "subtitle": "Kiến trúc điều phối tác tử AI tự trị ổn định trong môi trường thực tế",
-      "description": "Nghiên cứu và chuẩn hóa các mẫu thiết kế tác tử AI tự trị (Agentic Design Patterns) phục vụ quy trình nghiệp vụ production: ReAct Loops, Dynamic Planning, Function/Tool-Use có kiểm soát và Long-term Vector Memory.",
-      "highlights": [
-        "Ứng dụng trực tiếp vào AI Copilot / Assistant trong nền tảng Due Bro giúp tự động hóa tác vụ người dùng.",
-        "Tối ưu hóa độ trễ phản hồi tác tử dưới 1.2s nhờ kiến trúc streaming inference và cache ngữ cảnh.",
-        "Đạt tỷ lệ hoàn thành tác vụ tự trị chính xác 89.5% qua bộ kiểm thử đánh giá đa bước."
-      ],
-      "metrics": [
-        { "label": "Task Completion", "value": "89.5%" },
-        { "label": "Latency", "value": "Dưới 1.2s" },
-        { "label": "Ứng dụng", "value": "Due Bro AI" }
-      ],
-      "tags": ["ReAct Loops", "Tool-Use", "Vector Memory", "Streaming Inference", "AI Agents"],
-      "primaryLink": { "label": "Xem Tài Liệu Nghiên Cứu", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["PhoBERT", "Extreme Class Imbalance", "NLP", "Sentiment Analysis", "I-SMAC 2026", "PyTorch"]
     },
     "skill-languages": {
       "badge": "💻 Core Languages",
@@ -1563,8 +1521,7 @@
         { "label": "Enterprise", "value": "Java" },
         { "label": "AI & Data", "value": "Python / SQL" }
       ],
-      "tags": ["C++", "Java", "Python", "TypeScript", "JavaScript", "SQL"],
-      "primaryLink": { "label": "Xem dự án trên GitHub", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["C++", "Java", "Python", "TypeScript", "JavaScript", "SQL"]
     },
     "skill-backend": {
       "badge": "⚙️ Backend & Architecture",
@@ -1583,8 +1540,7 @@
         { "label": "Messaging", "value": "Apache Kafka" },
         { "label": "Security", "value": "OAuth2 / JWT" }
       ],
-      "tags": ["Spring Boot", "Microservices", "Spring Security", "Kafka", "Redis", "Hibernate/JPA", "RESTful APIs", "Node.js"],
-      "primaryLink": { "label": "Xem hệ thống Backend", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["Spring Boot", "Microservices", "Spring Security", "Kafka", "Redis", "Hibernate/JPA", "RESTful APIs", "Node.js"]
     },
     "skill-frontend": {
       "badge": "📱 Client Applications",
@@ -1603,8 +1559,7 @@
         { "label": "Web SSR", "value": "Next.js / React" },
         { "label": "UI Polish", "value": "HTML5 / CSS3" }
       ],
-      "tags": ["React Native", "Expo", "React.js", "Next.js", "Tailwind CSS", "Redux Toolkit", "HTML5 / CSS3"],
-      "primaryLink": { "label": "Xem Due Bro App", "url": "https://github.com/KaNguyen3005/DueBro" }
+      "tags": ["React Native", "Expo", "React.js", "Next.js", "Tailwind CSS", "Redux Toolkit", "HTML5 / CSS3"]
     },
     "skill-database": {
       "badge": "🗄️ Data & Persistence",
@@ -1623,8 +1578,7 @@
         { "label": "In-Memory", "value": "Redis Cache" },
         { "label": "BaaS / Edge", "value": "Supabase / CF" }
       ],
-      "tags": ["PostgreSQL", "Supabase", "MySQL", "Redis Cache", "Cloudflare"],
-      "primaryLink": { "label": "Xem GitHub Projects", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["PostgreSQL", "Supabase", "MySQL", "Redis Cache", "Cloudflare"]
     },
     "skill-devops": {
       "badge": "🚀 DevOps & Cloud",
@@ -1643,8 +1597,7 @@
         { "label": "OS / Proxy", "value": "Linux / Nginx" },
         { "label": "Automation", "value": "Git / CI/CD" }
       ],
-      "tags": ["Docker", "Linux", "Git", "GitHub Actions", "CI/CD", "Nginx"],
-      "primaryLink": { "label": "Xem Repositories", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["Docker", "Linux", "Git", "GitHub Actions", "CI/CD", "Nginx"]
     },
     "skill-ai": {
       "badge": "🧠 AI, NLP & Algorithms",
@@ -1663,8 +1616,7 @@
         { "label": "Agents", "value": "Gemini / ReAct" },
         { "label": "Algorithms", "value": "Graph & DP" }
       ],
-      "tags": ["PyTorch", "Transformers", "NLP", "PhoBERT", "AI Agents", "Google Gemini API", "Graph Theory", "Dynamic Programming"],
-      "primaryLink": { "label": "Xem Nghiên Cứu & AI Projects", "url": "https://github.com/KaNguyen3005" }
+      "tags": ["PyTorch", "Transformers", "NLP", "PhoBERT", "AI Agents", "Google Gemini API", "Graph Theory", "Dynamic Programming"]
     }
   }
   </script>

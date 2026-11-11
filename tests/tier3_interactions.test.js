@@ -253,4 +253,75 @@ describe('Tier 3: Cross-Feature Combinations Suite', () => {
     assert.equal(modal.getAttribute('aria-hidden'), 'true', '#detail-modal aria-hidden must reset to true on close');
   });
 
+  test('3.18: [Mobile Theme Switcher]: Clicking #theme-toggle-mobile toggles theme on mobile and syncs state', ({ assert }) => {
+    const { document, window } = loadDOM(INDEX_HTML);
+    window.innerWidth = 375;
+    window.innerHeight = 812;
+    const html = document.querySelector('html');
+    const mobileToggle = document.getElementById('theme-toggle-mobile');
+    const desktopToggle = document.getElementById('theme-toggle');
+    assert.ok(html && mobileToggle, 'Root <html> and #theme-toggle-mobile must exist');
+
+    const initialTheme = html.getAttribute('data-theme') || 'dark';
+    mobileToggle.click();
+    const switchedTheme = html.getAttribute('data-theme');
+    assert.notEqual(switchedTheme, initialTheme, 'Clicking #theme-toggle-mobile must toggle data-theme');
+    assert.equal(mobileToggle.getAttribute('aria-pressed'), switchedTheme === 'light' ? 'true' : 'false', 'Mobile toggle aria-pressed must update');
+    if (desktopToggle) {
+      assert.equal(desktopToggle.getAttribute('aria-pressed'), switchedTheme === 'light' ? 'true' : 'false', 'Desktop toggle aria-pressed must sync');
+    }
+
+    // Toggle again to restore
+    mobileToggle.click();
+    assert.equal(html.getAttribute('data-theme'), initialTheme, 'Clicking #theme-toggle-mobile twice must restore initial theme');
+  });
+
+  test('3.19: [Card Detail Modal Multi-Category Interaction]: Clicking honors, projects, research, and skills cards populates correct content and handles close triggers', ({ assert }) => {
+    const { document } = loadDOM(INDEX_HTML);
+    const modal = document.getElementById('detail-modal');
+    const titleEl = document.getElementById('detail-modal-title');
+    const descEl = document.getElementById('detail-modal-desc');
+    const closeBtn = document.getElementById('detail-modal-close');
+    assert.ok(modal && titleEl && descEl && closeBtn, '#detail-modal and core elements must exist');
+
+    // Test representative cards from Honors, Projects, Research, and Skills
+    const testCardIds = [
+      { id: 'award-icpc-2024', category: 'honors', titlePattern: /ICPC|Quán Quân/i },
+      { id: 'project-lms', category: 'projects', titlePattern: /LMS|Microservices/i },
+      { id: 'research-ismac', category: 'research', titlePattern: /I-SMAC|PhoBERT/i },
+      { id: 'skill-languages', category: 'skills', titlePattern: /Ngôn Ngữ|Languages/i }
+    ];
+
+    for (const testCase of testCardIds) {
+      const card = document.querySelector(`[data-detail-id="${testCase.id}"]`);
+      assert.ok(card, `Card with data-detail-id="${testCase.id}" (${testCase.category}) must exist in DOM`);
+
+      // Trigger card click
+      card.click();
+      assert.ok(!modal.classList.contains('hidden'), `Modal must open when clicking ${testCase.id}`);
+      assert.equal(modal.getAttribute('aria-hidden'), 'false', `Modal aria-hidden must be false for ${testCase.id}`);
+      assert.ok(testCase.titlePattern.test(titleEl.textContent), `Modal title for ${testCase.id} must match expected content`);
+      assert.ok((descEl.textContent || '').trim().length > 10, `Modal description for ${testCase.id} must not be empty`);
+
+      // Close using close button
+      closeBtn.click();
+      assert.ok(modal.classList.contains('hidden'), `Modal must close when clicking close button after ${testCase.id}`);
+      assert.equal(modal.getAttribute('aria-hidden'), 'true', `Modal aria-hidden must reset to true after ${testCase.id}`);
+    }
+  });
+
+  test('3.20: [Card Detail Modal Trigger Button & Backdrop Interaction]: .detail-trigger-btn opens modal and backdrop click closes it', ({ assert }) => {
+    const { document } = loadDOM(INDEX_HTML);
+    const modal = document.getElementById('detail-modal');
+    const triggerBtn = document.querySelector('.detail-trigger-btn');
+    if (triggerBtn) {
+      triggerBtn.click();
+      assert.ok(!modal.classList.contains('hidden'), 'Modal must open via .detail-trigger-btn');
+
+      // Backdrop click closes modal
+      modal.click();
+      assert.ok(modal.classList.contains('hidden'), 'Clicking modal backdrop must close #detail-modal');
+    }
+  });
+
 });

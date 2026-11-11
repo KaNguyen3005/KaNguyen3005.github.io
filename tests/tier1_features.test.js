@@ -455,6 +455,18 @@ describe('Tier 1: Feature Coverage Suite', () => {
       const { rawHTML } = loadDOM(INDEX_HTML);
       assert.ok(/researchgate|arxiv|doi|github\.com\/KaNguyen3005|paper/i.test(rawHTML), 'Research paper link must be provided');
     });
+
+    test('10.6: Complete absence of "Effective Multi-Agent Design" and research-agents in DOM and JSON catalog', ({ assert }) => {
+      const { document, rawHTML } = loadDOM(INDEX_HTML);
+      assert.ok(!/research-agents/i.test(rawHTML), 'Must not contain research-agents anywhere in HTML');
+      assert.ok(!/Effective Multi-Agent Design/i.test(rawHTML), 'Must not contain "Effective Multi-Agent Design" in text');
+      assert.equal(document.querySelector('[data-detail-id="research-agents"]'), null, 'DOM must not contain card with data-detail-id="research-agents"');
+      const scriptEl = document.getElementById('portfolio-details');
+      if (scriptEl) {
+        const catalog = JSON.parse(scriptEl.textContent);
+        assert.equal(catalog['research-agents'], undefined, 'Catalog must not contain research-agents entry');
+      }
+    });
   });
 
   // =========================================================================
@@ -573,12 +585,23 @@ describe('Tier 1: Feature Coverage Suite', () => {
       assert.ok(scriptEl, '#portfolio-details JSON catalog must exist');
       const catalog = JSON.parse(scriptEl.textContent);
       const triggerCards = document.querySelectorAll('[data-detail-id]');
-      assert.equal(triggerCards.length, 22, 'Expected 22 summary cards (8 honors + 6 projects + 2 research + 6 skills)');
+      assert.equal(triggerCards.length, 21, 'Expected 21 summary cards (8 honors + 6 projects + 1 research + 6 skills)');
       for (const card of triggerCards) {
         const id = card.getAttribute('data-detail-id');
         assert.ok(catalog[id], `Catalog must contain structured detail entry for "${id}"`);
         assert.ok(catalog[id].title && catalog[id].description, `Catalog entry "${id}" must define title and description`);
       }
+    });
+
+    test('13.4: Mobile theme toggle #theme-toggle-mobile exists inside #mobile-menu with class theme-toggle-btn', ({ assert }) => {
+      const { document } = loadDOM(INDEX_HTML);
+      const mobileMenu = document.getElementById('mobile-menu');
+      assert.ok(mobileMenu, '#mobile-menu must exist in DOM');
+      const mobileToggle = document.getElementById('theme-toggle-mobile');
+      assert.ok(mobileToggle, '#theme-toggle-mobile button must exist');
+      assert.ok(mobileMenu.contains(mobileToggle), '#theme-toggle-mobile must reside inside #mobile-menu');
+      assert.ok(mobileToggle.classList.contains('theme-toggle-btn'), '#theme-toggle-mobile must have class theme-toggle-btn');
+      assert.ok(mobileToggle.getAttribute('aria-label'), '#theme-toggle-mobile must have aria-label');
     });
   });
 

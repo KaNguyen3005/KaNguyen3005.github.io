@@ -249,7 +249,10 @@ button {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-subtle);
-  contain: paint;
+}
+
+#navbar {
+  contain: none;
 }
 
 #navbar.scrolled,
@@ -1019,6 +1022,7 @@ textarea:focus-visible,
 
 .bg-blue-500\/10 { background-color: rgba(59, 130, 246, 0.1); }
 .bg-blue-500\/15 { background-color: rgba(59, 130, 246, 0.15); }
+.bg-indigo-400 { background-color: #818CF8; }
 .bg-indigo-500\/10 { background-color: rgba(99, 102, 241, 0.1); }
 .bg-cyan-500\/10 { background-color: rgba(6, 182, 212, 0.1); }
 .bg-emerald-500\/10 { background-color: rgba(16, 185, 129, 0.1); }
@@ -1036,6 +1040,7 @@ textarea:focus-visible,
 .bg-yellow-500\/10 { background-color: rgba(234, 179, 8, 0.1); }
 .bg-red-500\/10 { background-color: rgba(239, 68, 68, 0.1); }
 .bg-slate-400\/10 { background-color: rgba(148, 163, 184, 0.1); }
+.bg-slate-500 { background-color: #64748B; }
 
 /* Gradients */
 .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops, transparent, transparent)); }
@@ -1786,6 +1791,7 @@ html[data-theme="light"] .award-card > div:last-child {
   .lg\:col-span-3 { grid-column: span 3 / span 3; }
   .lg\:col-span-5 { grid-column: span 5 / span 5; }
   .lg\:col-span-7 { grid-column: span 7 / span 7; }
+  .lg\:col-span-12 { grid-column: span 12 / span 12; }
   .lg\:w-5\/12 { width: 41.666667%; }
   .lg\:w-7\/12 { width: 58.333333%; }
   .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }

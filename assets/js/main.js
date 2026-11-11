@@ -564,13 +564,13 @@
 
         imageWrap.setAttribute('data-lightbox-src', 'assets/icpc_contest_2026.png');
         imageWrap.setAttribute('data-lightbox-title', 'Chung kết ICPC PTITHCM & Olympic AI 2026');
-        imageWrap.setAttribute('data-lightbox-desc', 'Khoảnh khắc thi đấu thuật toán trực tiếp tại phòng lab máy tính PTITHCM của Mô Ha Mách Bu Ba Ka cùng đồng đội.');
+        imageWrap.setAttribute('data-lightbox-desc', 'Minh họa anime không khí tập trung cao độ tại đấu trường lập trình ICPC cùng hệ thống màn hình phân tích thuật toán.');
 
         if (statusPill) {
           statusPill.textContent = 'Live Arena';
           statusPill.className = 'text-[11px] text-rose-400 font-mono';
         }
-        if (zoomText) zoomText.textContent = 'Click xem ảnh gốc (1024x682 HD)';
+        if (zoomText) zoomText.textContent = 'Click xem ảnh minh họa (1376x768)';
         if (ethosQuote) ethosQuote.textContent = 'Kỷ luật thuật toán & Tư duy hệ thống ⚡';
         if (ethosTag) ethosTag.textContent = '@morex3';
       } else {
@@ -585,14 +585,14 @@
         picArena.classList.remove('block');
 
         imageWrap.setAttribute('data-lightbox-src', 'assets/ptit_campus_life.png');
-        imageWrap.setAttribute('data-lightbox-title', 'Khuôn Viên PTITHCM & Tình Bạn Học Đường');
-        imageWrap.setAttribute('data-lightbox-desc', 'Khoảnh khắc thư giãn dưới hoàng hôn rực rỡ tại khuôn viên PTITHCM cùng bạn bè — nơi nuôi dưỡng đam mê kỹ thuật và khát vọng kiến tạo công nghệ.');
+        imageWrap.setAttribute('data-lightbox-title', 'Khuôn Viên PTITHCM & Đời Sống Sinh Viên');
+        imageWrap.setAttribute('data-lightbox-desc', 'Minh họa anime không gian thư giãn bình yên buổi tối tại khuôn viên PTITHCM — nơi nuôi dưỡng đam mê kỹ thuật và nghiên cứu AI.');
 
         if (statusPill) {
           statusPill.textContent = 'Campus Life';
           statusPill.className = 'text-[11px] text-amber-400 font-mono';
         }
-        if (zoomText) zoomText.textContent = 'Click xem ảnh hoàng hôn PTIT';
+        if (zoomText) zoomText.textContent = 'Click xem ảnh PTIT Campus (1376x768)';
         if (ethosQuote) ethosQuote.textContent = 'PTIT Campus Life & Collaborative Engineering 🎓';
         if (ethosTag) ethosTag.textContent = 'PTIT Campus';
       }
@@ -644,15 +644,16 @@
     }
     state.theme = normalized;
 
-    var toggleBtn = document.getElementById('theme-toggle');
-    if (toggleBtn) {
-      var label = normalized === 'light'
-        ? 'Chuyển sang giao diện tối'
-        : 'Chuyển sang giao diện sáng';
-      toggleBtn.setAttribute('aria-pressed', normalized === 'light' ? 'true' : 'false');
-      toggleBtn.setAttribute('aria-label', label);
-      toggleBtn.setAttribute('title', label);
-    }
+    var toggleBtns = document.querySelectorAll('.theme-toggle-btn, #theme-toggle, #theme-toggle-mobile');
+    var label = normalized === 'light'
+      ? 'Chuyển sang giao diện tối'
+      : 'Chuyển sang giao diện sáng';
+
+    toggleBtns.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', normalized === 'light' ? 'true' : 'false');
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    });
 
     if (persist) {
       try {
@@ -670,14 +671,16 @@
     var initialTheme = getSavedThemePreference();
     applyTheme(initialTheme, false);
 
-    var toggleBtn = document.getElementById('theme-toggle');
-    if (toggleBtn && (!toggleBtn.dataset || toggleBtn.dataset.themeBound !== 'true')) {
-      if (toggleBtn.dataset) toggleBtn.dataset.themeBound = 'true';
-      toggleBtn.addEventListener('click', function () {
-        var nextTheme = state.theme === 'light' ? 'dark' : 'light';
-        applyTheme(nextTheme, true);
-      });
-    }
+    var toggleBtns = document.querySelectorAll('.theme-toggle-btn, #theme-toggle, #theme-toggle-mobile');
+    toggleBtns.forEach(function (btn) {
+      if (!btn.dataset || btn.dataset.themeBound !== 'true') {
+        if (btn.dataset) btn.dataset.themeBound = 'true';
+        btn.addEventListener('click', function () {
+          var nextTheme = state.theme === 'light' ? 'dark' : 'light';
+          applyTheme(nextTheme, true);
+        });
+      }
+    });
   }
 
   /* ==========================================================================
@@ -686,7 +689,7 @@
   function findAncestor(node, predicate) {
     var cur = node;
     while (cur) {
-      if (cur.nodeType === 1 && predicate(cur)) return cur;
+      if ((cur.nodeType === 1 || cur.tagName) && predicate(cur)) return cur;
       cur = cur.parentNode || cur.parentElement;
     }
     return null;
@@ -759,68 +762,85 @@
       if (metricsEl) {
         clearElementChildren(metricsEl);
         var metrics = Array.isArray(item.metrics) ? item.metrics : [];
-        if (canCreate) {
-          metrics.forEach(function (metric) {
-            var box = document.createElement('div');
-            box.className = 'detail-metric-box p-3 rounded-xl bg-white/5 border border-white/10 text-center';
-            var val = document.createElement('div');
-            val.className = 'text-sm sm:text-base font-bold text-white';
-            val.textContent = metric.value || '';
-            var lbl = document.createElement('div');
-            lbl.className = 'text-[11px] text-slate-400 mt-0.5';
-            lbl.textContent = metric.label || '';
-            box.appendChild(val);
-            box.appendChild(lbl);
-            metricsEl.appendChild(box);
-          });
+        if (metrics.length > 0) {
+          metricsEl.style.display = '';
+          if (canCreate) {
+            metrics.forEach(function (metric) {
+              var box = document.createElement('div');
+              box.className = 'detail-metric-box p-3 rounded-xl bg-white/5 border border-white/10 text-center';
+              var val = document.createElement('div');
+              val.className = 'text-sm sm:text-base font-bold text-white';
+              val.textContent = metric.value || '';
+              var lbl = document.createElement('div');
+              lbl.className = 'text-[11px] text-slate-400 mt-0.5';
+              lbl.textContent = metric.label || '';
+              box.appendChild(val);
+              box.appendChild(lbl);
+              metricsEl.appendChild(box);
+            });
+          } else {
+            metricsEl.innerHTML = metrics.map(function (metric) {
+              return '<div class="detail-metric-box p-3 rounded-xl bg-white/5 border border-white/10 text-center"><div class="text-sm sm:text-base font-bold text-white">' +
+                escapeHtml(metric.value) + '</div><div class="text-[11px] text-slate-400 mt-0.5">' +
+                escapeHtml(metric.label) + '</div></div>';
+            }).join('');
+          }
         } else {
-          metricsEl.innerHTML = metrics.map(function (metric) {
-            return '<div class="detail-metric-box p-3 rounded-xl bg-white/5 border border-white/10 text-center"><div class="text-sm sm:text-base font-bold text-white">' +
-              escapeHtml(metric.value) + '</div><div class="text-[11px] text-slate-400 mt-0.5">' +
-              escapeHtml(metric.label) + '</div></div>';
-          }).join('');
+          metricsEl.style.display = 'none';
         }
       }
 
       if (highlightsEl) {
         clearElementChildren(highlightsEl);
         var highlights = Array.isArray(item.highlights) ? item.highlights : [];
-        if (canCreate) {
-          highlights.forEach(function (point) {
-            var li = document.createElement('li');
-            li.className = 'flex items-start gap-2.5';
-            var marker = document.createElement('span');
-            marker.className = 'text-emerald-400 font-bold shrink-0';
-            marker.textContent = '✓';
-            var copy = document.createElement('span');
-            copy.textContent = point;
-            li.appendChild(marker);
-            li.appendChild(copy);
-            highlightsEl.appendChild(li);
-          });
+        var highlightsSection = highlightsEl.parentElement;
+        if (highlights.length > 0) {
+          if (highlightsSection) highlightsSection.style.display = '';
+          if (canCreate) {
+            highlights.forEach(function (point) {
+              var li = document.createElement('li');
+              li.className = 'flex items-start gap-2.5';
+              var marker = document.createElement('span');
+              marker.className = 'text-emerald-400 font-bold shrink-0';
+              marker.textContent = '✓';
+              var copy = document.createElement('span');
+              copy.textContent = point;
+              li.appendChild(marker);
+              li.appendChild(copy);
+              highlightsEl.appendChild(li);
+            });
+          } else {
+            highlightsEl.innerHTML = highlights.map(function (point) {
+              return '<li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>' +
+                escapeHtml(point) + '</span></li>';
+            }).join('');
+          }
         } else {
-          highlightsEl.innerHTML = highlights.map(function (point) {
-            return '<li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>' +
-              escapeHtml(point) + '</span></li>';
-          }).join('');
+          if (highlightsSection) highlightsSection.style.display = 'none';
         }
       }
 
       if (tagsEl) {
         clearElementChildren(tagsEl);
         var tags = Array.isArray(item.tags) ? item.tags : [];
-        if (canCreate) {
-          tags.forEach(function (tag) {
-            var chip = document.createElement('span');
-            chip.className = 'px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300';
-            chip.textContent = tag;
-            tagsEl.appendChild(chip);
-          });
+        var tagsSection = tagsEl.parentElement;
+        if (tags.length > 0) {
+          if (tagsSection) tagsSection.style.display = '';
+          if (canCreate) {
+            tags.forEach(function (tag) {
+              var chip = document.createElement('span');
+              chip.className = 'px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300';
+              chip.textContent = tag;
+              tagsEl.appendChild(chip);
+            });
+          } else {
+            tagsEl.innerHTML = tags.map(function (tag) {
+              return '<span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">' +
+                escapeHtml(tag) + '</span>';
+            }).join('');
+          }
         } else {
-          tagsEl.innerHTML = tags.map(function (tag) {
-            return '<span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">' +
-              escapeHtml(tag) + '</span>';
-          }).join('');
+          if (tagsSection) tagsSection.style.display = 'none';
         }
       }
 
@@ -904,13 +924,61 @@
     if (modal.dataset && modal.dataset.detailBound === 'true') return;
     if (modal.dataset) modal.dataset.detailBound = 'true';
 
+    // Robust Document-Level Card & Trigger Event Delegation
+    document.addEventListener('click', function (e) {
+      if (!e || !e.target || e._detailHandled) return;
+
+      // 1. If clicking an anchor tag with an href attribute, allow standard navigation (do not open modal)
+      var anchor = findAncestor(e.target, function (el) {
+        return el.tagName === 'A' && Boolean(el.getAttribute('href'));
+      });
+      if (anchor) return;
+
+      // 2. If clicking a dedicated detail trigger button (or element with data-detail-target)
+      var triggerBtn = findAncestor(e.target, function (el) {
+        return (el.classList && el.classList.contains('detail-trigger-btn')) || el.hasAttribute('data-detail-target');
+      });
+      if (triggerBtn) {
+        e.preventDefault();
+        e._detailHandled = true;
+        var targetId = triggerBtn.getAttribute('data-detail-target') || triggerBtn.getAttribute('data-detail-id');
+        if (targetId) {
+          openDetailModal(targetId, triggerBtn);
+          return;
+        }
+      }
+
+      // 3. If clicking anywhere on a card with data-detail-id
+      var card = findAncestor(e.target, function (el) {
+        return el.hasAttribute && el.hasAttribute('data-detail-id');
+      });
+      if (card) {
+        // If clicking on an interactive element other than a detail trigger, do not open modal
+        var otherInteractive = findAncestor(e.target, function (el) {
+          return el !== card && (el.tagName === 'BUTTON' || el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT');
+        });
+        if (otherInteractive && !otherInteractive.classList.contains('detail-trigger-btn') && !otherInteractive.hasAttribute('data-detail-target')) {
+          return;
+        }
+
+        e._detailHandled = true;
+        var detailId = card.getAttribute('data-detail-id');
+        if (detailId) {
+          openDetailModal(detailId, card);
+        }
+      }
+    });
+
+    // Direct card event bindings for full environment compatibility
     var detailCards = document.querySelectorAll('[data-detail-id]');
     detailCards.forEach(function (card) {
       card.addEventListener('click', function (e) {
+        if (e._detailHandled) return;
         var anchor = findAncestor(e.target, function (el) {
           return el.tagName === 'A' && Boolean(el.getAttribute('href'));
         });
         if (anchor) return;
+        e._detailHandled = true;
         var detailId = card.getAttribute('data-detail-id');
         if (detailId) openDetailModal(detailId, card);
       });
@@ -928,10 +996,23 @@
     var triggerButtons = document.querySelectorAll('.detail-trigger-btn');
     triggerButtons.forEach(function (btn) {
       btn.addEventListener('click', function (e) {
+        if (e._detailHandled) return;
         e.stopPropagation();
+        e._detailHandled = true;
         var targetId = btn.getAttribute('data-detail-target');
         if (targetId) openDetailModal(targetId, btn);
       });
+    });
+
+    // Keyboard accessibility (Enter / Space) for focused cards
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var activeEl = document.activeElement;
+      if (!activeEl || !activeEl.hasAttribute || !activeEl.hasAttribute('data-detail-id')) return;
+      if (activeEl.tagName === 'A' || activeEl.tagName === 'BUTTON') return;
+      e.preventDefault();
+      var detailId = activeEl.getAttribute('data-detail-id');
+      if (detailId) openDetailModal(detailId, activeEl);
     });
 
     if (closeBtn) {

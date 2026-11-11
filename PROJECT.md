@@ -1,64 +1,56 @@
-# Project: KaNguyen3005.github.io Modern Professional UI/UX Overhaul
+# Project: KaNguyen3005.github.io Portfolio Refinement & Verification
 
 ## Architecture
 - **Client Frontend**: Zero-dependency static architecture (`index.html`, `assets/css/portfolio.css`, `assets/js/main.js`).
-- **Hero Showcase**: Dual-tab bento switcher (ICPC live arena and PTIT campus life) with high-res photos and Lightbox zoom modal.
-- **Achievements Section (`#honors`)**: Zero-image typographic grid with semantic category badges, issuing dates, and external verification links.
-- **Testing Track**: Zero-dependency automated test runner in `tests/runner.js` (Tiers 1-4) + Chrome CDP automated visual screenshot capture (`tests/capture_visuals.js`).
+- **Hero Showcase**: Dual-tab bento switcher (ICPC live arena and PTIT campus life) featuring 16:9 chilling anime illustrations and Lightbox zoom modal.
+- **Theme Engine**: Unified CSS custom properties (`--bg-canvas`, `--bg-surface`, `--text-primary`, etc.) toggled via `html[data-theme="light"]` and `html[data-theme="dark"]`, controlled across desktop and mobile viewports with localStorage persistence.
+- **Progressive Disclosure Modal**: Document-level event delegation opening `#detail-modal` for 21 summary cards (8 honors, 6 projects, 1 research, 6 skills) reading from `<script type="application/json" id="portfolio-details">`.
+- **Typographic Grid (`#honors`)**: Zero-image typographic grid with semantic category badges, issuing dates, and authentic verification links.
+- **Testing & Visual Audit**: Zero-dependency Node.js test runner in `tests/runner.js` (Tiers 1-4) and automated Chrome CDP visual screenshot auditor in `tests/capture_visuals.js`.
 
 ## Feature Inventory
 | # | Feature | Description | Milestone | Source |
 |---|---------|-------------|-----------|--------|
-| 1 | Eradicate Luffy mascot SVG from Hero | Replace `assets/luffy-mascot.svg` in Hero chrome with technical terminal/code SVG icon | M1 | ORIGINAL_REQUEST §R1 |
-| 2 | Replace Hero Luffy ethos quote | Replace "Tinh thần Luffy: Vươn ra biển lớn 🏴‍☠️" with "Kỷ luật thuật toán & Tư duy hệ thống ⚡" in HTML & JS | M1 | ORIGINAL_REQUEST §R1 |
-| 3 | Eradicate Footer Luffy quote and mascot | Remove straw hat mascot and One Piece quote in footer, replace with professional engineering motto | M1 | ORIGINAL_REQUEST §R1 |
-| 4 | Clean Project & Research text | Replace "Mascot Bro" in Due Bro and AI research cards with "AI Copilot / Assistant" | M1 | ORIGINAL_REQUEST §R1 |
-| 5 | Clean JS tab switcher strings | Replace Luffy references in `assets/js/main.js` `setView('arena')` and `setView('campus')` | M1 | ORIGINAL_REQUEST §R1 |
-| 6 | Remove images from 8 Achievement Cards | Completely remove `<picture>`, `<source>`, `<img>` and aspect wrappers from all 8 cards in `#honors` | M1 | ORIGINAL_REQUEST §R2 |
-| 7 | Typographic Achievement Cards Design | Rebuild `#honors` cards with category badges, issue dates, bold titles, context, and verification links | M1 | ORIGINAL_REQUEST §R2 |
-| 8 | Preserve Hero Dual-Tab Showcase | Retain `#hero-tab-arena`, `#hero-tab-campus`, photos, and lightbox zoom for arena and campus views | M1 | ORIGINAL_REQUEST §R2 |
-| 9 | Preserve Bilingual Technical Branding | Retain Vietnamese narrative and English technical branding without regression | M1 | ORIGINAL_REQUEST §R2 |
-| 10 | Executive Typography & Hierarchy | Refine heading scales, sans-serif nav links, authoritative eyebrow tags (`Plus Jakarta Sans` & `JetBrains Mono`) | M2 | ORIGINAL_REQUEST §R1 |
-| 11 | Color Hierarchy & Semantic Glow | Enhance glassmorphic card borders, category-specific hover glows (gold, cyan, emerald, indigo) | M2 | ORIGINAL_REQUEST §R1 |
-| 12 | Spacing & Grid Standardization | Standardize container padding, card alignment, and gutters across all sections | M2 | ORIGINAL_REQUEST §R1 |
-| 13 | Responsive Mobile Hygiene (375px–414px) | Flex-wrapping for pills/badges, responsive padding, zero horizontal scrollbar | M2 | ORIGINAL_REQUEST §R1 |
-| 14 | Smooth Micro-Interactions | Tactile `active:scale-[0.98]` button states, accessible focus indicators, smooth transitions | M2 | ORIGINAL_REQUEST §R1 |
-| 15 | Test Suite Alignment | Update 16 assertions in `tests/tier1_features.test.js`, `tier2_boundaries.test.js`, `tier3_interactions.test.js`, `tier4_workloads.test.js` | M-TEST | ORIGINAL_REQUEST §R3 |
-| 16 | Zero Test Failures Verification | Verify `node tests/runner.js` passes 150/150 tests with 0 failures | M-FINAL | ORIGINAL_REQUEST §R3 |
-| 17 | Automated Visual Browser Verification Script | Zero-dependency Node.js + Chrome CDP script (`tests/capture_visuals.js`) to capture full-page & section screenshots | M-TEST | ORIGINAL_REQUEST §R4 |
-| 18 | Multi-Viewport Screenshot Audit | Capture and audit desktop (1280px+) and mobile (375px) screenshots for overlap, clipping, or breakage | M-FINAL | ORIGINAL_REQUEST §R4 |
+| 1 | Remove Multi-Agent Section | Remove "Effective Multi-Agent Design" card (`research-agents`) and JSON catalog entry; expand Card 1 to `lg:col-span-12` | M1 | ORIGINAL_REQUEST §R3 |
+| 2 | Link Verification & Anti-Fabrication | Update verified live links (`DueBro_Kada_Program`), convert unverified links (LMS, IAM, CP-Vault, KaTiLa, Maze Solver, ISMAC, UTC C4F, LinkedIn) to plain text / badges without clickable `<a>` tags | M1 | ORIGINAL_REQUEST §R4 |
+| 3 | Desktop & Mobile Theme Switcher | Restore functional light/dark theme switcher across desktop navbar and mobile drawer `#mobile-menu` with localStorage persistence | M1 | ORIGINAL_REQUEST §R1 |
+| 4 | Navbar Mobile Menu Clipping Fix | Remove `contain: paint` and adjust navbar overflow so mobile drawer `#mobile-menu` renders cleanly | M1 | ORIGINAL_REQUEST §R1 |
+| 5 | Card Detail Modal Delegation | Implement robust document-level event delegation opening `#detail-modal` for all 21 cards (honors, projects, research, skills) | M1 | ORIGINAL_REQUEST §R1 |
+| 6 | Modal Content Robustness | Cleanly handle empty metrics, highlights, and tags without rendering empty orphaned sections in `#detail-modal` | M1 | ORIGINAL_REQUEST §R1 |
+| 7 | Chilling Anime ICPC Arena Asset | Generate 16:9 atmospheric, chilling anime illustration for ICPC contest arena, replacing existing 3:2 photo | M2 | ORIGINAL_REQUEST §R2 |
+| 8 | Chilling Anime PTIT Campus Life Asset | Generate 16:9 atmospheric, chilling anime illustration for PTIT student life, replacing existing 1:1 photo | M2 | ORIGINAL_REQUEST §R2 |
+| 9 | Maintain Image-Free Honors Section | Guarantee zero `<img>` or `<picture>` elements in `#honors` section cards | M2 | ORIGINAL_REQUEST §R2 |
+| 10 | Test Suite Alignment (Tiers 1-4) | Update test assertions in `tests/tier1_features.test.js`, `tier2_boundaries.test.js`, `tier3_interactions.test.js`, `tier4_workloads.test.js` to match 21 cards, mobile theme toggle, and verified links | M3 | ORIGINAL_REQUEST §R5 |
+| 11 | Visual Capture Audit Alignment | Update `tests/capture_visuals.js` to verify mobile theme toggle, 21 cards, zero overflow, and visual layout stability | M3 | ORIGINAL_REQUEST §R5 |
+| 12 | Zero Test Failures Verification | Verify `node tests/runner.js` passes 100% of tests with 0 failures (161/161 passed) | M3 | ORIGINAL_REQUEST §R5 |
+| 13 | Layout & Visual Screenshot Audit | Execute `node tests/capture_visuals.js`, inspect desktop & mobile screenshots, verify zero visual clipping, overlap, or broken layouts | M3 | ORIGINAL_REQUEST §R5 |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| M-TEST | E2E Testing & Verification Track | Update test assertions in `tests/` to match de-Luffy & image-free specs, implement `tests/capture_visuals.js`, and publish `TEST_READY.md` | Survey complete | DONE |
-| M1 | Content & Theme De-Luffy & Achievement Typographic Overhaul | Update `index.html` and `assets/js/main.js` to eradicate all Luffy elements, remove achievement images, rebuild typographic cards, preserve hero tabs | Survey complete | DONE |
-| M2 | UI/UX Modernization & Responsive Styling Polish | Modernize `assets/css/portfolio.css`, refine typography hierarchy, add semantic card hover glows, ensure mobile responsiveness | M1 | DONE |
-| M-FINAL | Final Verification, E2E Pass & Visual Audit | Run `node tests/runner.js` (100% pass), execute `tests/capture_visuals.js`, inspect desktop & mobile screenshots, verify zero layout regressions | M-TEST, M1, M2 | DONE |
+| M1 | Frontend Core Overhaul: Theme, Modals, Multi-Agent & Links | Remove Multi-Agent section, expand Card 1 to 12 cols, audit links to real-only / plain text, restore dual desktop/mobile theme toggle with persistence, fix navbar containment, and implement card detail modal event delegation across all 21 cards | Survey complete | DONE |
+| M2 | Visual Assets: 16:9 Chilling Anime Illustrations | Generate 16:9 chilling anime illustrations for ICPC arena and PTIT student life, integrate into Hero dual-tab showcase, preserve image-free honors cards | Survey complete | DONE |
+| M3 | Test Suite Alignment, Final E2E Pass & Visual Audit | Update test assertions across Tiers 1-4 and visual capture runner; pass 100% automated tests (161/161); verify CDP screenshots (12/12 checks, 0 overflow); Challenger & Forensic Audit review | M1, M2 | DONE |
 
 ## Interface Contracts
 ### HTML (`index.html`) ↔ Test Harness (`tests/*`)
-- Hero quote element ID: `#hero-ethos-quote` containing professional engineering ethos.
-- Vector badges check: `#skills` or `#hero` references `assets/badges/codeforces.svg` or `assets/badges/icpc_global.svg`.
-- Award cards in `#honors`: Contain `.award-card.glass-card`, attributes `data-category` and `data-award-id`, zero `<img>` tags inside `#honors`.
-- Hero showcase: Retains `#hero-tab-arena`, `#hero-tab-campus`, `#hero-pic-arena`, `#hero-pic-campus`, `#hero-image-wrap[data-lightbox-src]`.
-- Lightbox modal: `#lightbox-modal` retained for hero showcase.
+- Desktop theme toggle ID: `#theme-toggle` (class `theme-toggle-btn`)
+- Mobile theme toggle ID: `#theme-toggle-mobile` (class `theme-toggle-btn`) inside `#mobile-menu`
+- Total cards with `data-detail-id`: Exactly 21 cards (8 honors + 6 projects + 1 research + 6 skills)
+- Multi-Agent absence: Zero occurrences of `"research-agents"` in DOM and catalog
+- Dead link absence: Zero occurrences of `https://github.com/KaNguyen3005/DueBro` (replaces with `DueBro_Kada_Program` or plain badge)
+- Hero showcase assets: `assets/icpc_contest_2026.png` and `assets/ptit_campus_life.png` with 16:9 aspect ratio
+- Honors cards: Zero `<img>` or `<picture>` elements inside `#honors`
+- Detail modal: `#detail-modal` with `.close-detail-modal` trigger
 
 ### HTML (`index.html`) ↔ Stylesheet (`assets/css/portfolio.css`)
-- Glass cards: `.glass-card` with refined top border highlight and semantic category hover shadows.
-- Typographic award cards: `.award-card` with clean padding, typography hierarchy, and badge styles.
-- Navigation links: `font-sans` with smooth hover states.
-
-### Visual Capture Runner (`tests/capture_visuals.js`)
-- Output directory: `.agents/teamwork/visual_audit/`
-- Captured viewports:
-  - Desktop: 1280x800 (`desktop_full.png`, `desktop_hero.png`, `desktop_honors.png`, `desktop_projects.png`, `desktop_skills.png`, `desktop_contact.png`)
-  - Mobile: 375x812 (`mobile_full.png`, `mobile_hero.png`, `mobile_honors.png`, `mobile_projects.png`, `mobile_skills.png`, `mobile_contact.png`)
+- Theme tokens: `html[data-theme="light"]` and `html[data-theme="dark"]` define all surface and text variables
+- Navbar glass: `.glass` on `#navbar` must not clip mobile drawer `#mobile-menu`
 
 ## Code Layout
-- `index.html`: Main portfolio structure, semantic HTML markup. Owned by Worker M1.
-- `assets/js/main.js`: Client runtime, hero switcher, typewriter, filter logic. Owned by Worker M1.
-- `assets/css/portfolio.css`: Design tokens, typography, glassmorphism, responsive utilities. Owned by Worker M2.
-- `tests/*.test.js`: Automated test suites. Owned by Worker M-TEST.
-- `tests/capture_visuals.js`: Automated browser screenshot capture runner. Owned by Worker M-TEST.
-- `.agents/teamwork/visual_audit/*.png`: Visual audit artifacts. Produced by M-TEST / M-FINAL.
+- `index.html`: Main portfolio structure, semantic HTML markup, `#portfolio-details` JSON catalog. Owned by Worker M1.
+- `assets/js/main.js`: Client runtime, theme switcher, modal delegation, hero tab switcher. Owned by Worker M1.
+- `assets/css/portfolio.css`: Design tokens, theme styling, navbar styles. Owned by Worker M1.
+- `assets/icpc_contest_2026.*`, `assets/ptit_campus_life.*`: Visual assets in Hero showcase. Owned by Worker M2.
+- `tests/*.test.js`: Automated test suites (Tiers 1-4). Owned by Worker M3.
+- `tests/capture_visuals.js`: Automated browser screenshot capture runner. Owned by Worker M3.

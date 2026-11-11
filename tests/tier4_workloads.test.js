@@ -82,25 +82,43 @@ describe('Tier 4: Real-World Recruiter & Reviewer Journeys', () => {
   });
 
   // =========================================================================
+  // =========================================================================
   // Scenario 3: Fast Mobile User Browsing & Filter Switching Journey
   // =========================================================================
   test('Scenario 3: Fast Mobile User Browsing & Filter Switching Journey', ({ assert }) => {
     const { document, window } = loadDOM(INDEX_HTML);
 
-    // Step 1: Mobile viewport setup (375x667)
+    // Step 1: Mobile viewport setup (375x812)
     window.innerWidth = 375;
-    window.innerHeight = 667;
+    window.innerHeight = 812;
 
     // Step 2: Navbar is streamlined
     const navbar = document.querySelector('#navbar');
     assert.ok(navbar, 'Navbar must exist in mobile view');
 
-    // Step 3: Mobile hamburger menu toggle
+    // Step 3: Mobile hamburger menu toggle & mobile drawer
     const menuBtn = document.querySelector('#menu-btn') || document.querySelector('#navbar button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    assert.ok(mobileMenu, '#mobile-menu must exist in DOM');
     if (menuBtn) {
       menuBtn.click();
       assert.ok(menuBtn, 'Menu toggle must handle tap event');
     }
+
+    // Step 3b: Mobile theme toggle in drawer
+    const mobileToggle = document.getElementById('theme-toggle-mobile');
+    assert.ok(mobileToggle, '#theme-toggle-mobile must exist inside mobile drawer');
+    assert.ok(mobileToggle.classList.contains('theme-toggle-btn'), '#theme-toggle-mobile must have class theme-toggle-btn');
+    const html = document.querySelector('html');
+    const initialTheme = html.getAttribute('data-theme') || 'dark';
+
+    mobileToggle.click();
+    const toggledTheme = html.getAttribute('data-theme');
+    assert.notEqual(toggledTheme, initialTheme, 'Mobile theme toggle must switch data-theme');
+    assert.equal(mobileToggle.getAttribute('aria-pressed'), toggledTheme === 'light' ? 'true' : 'false');
+
+    mobileToggle.click();
+    assert.equal(html.getAttribute('data-theme'), initialTheme, 'Clicking mobile theme toggle again must restore initial theme');
 
     // Step 4: Filter tab cycling
     const filterTabs = ['all', 'icpc', 'tech', 'scholarship'];
@@ -112,7 +130,17 @@ describe('Tier 4: Real-World Recruiter & Reviewer Journeys', () => {
       }
     }
 
-    // Step 5: Modal open & close on mobile
+    // Step 5: Modal open & close on mobile (both detail modal and lightbox)
+    const detailCard = document.querySelector('[data-detail-id="project-duebro"]');
+    const detailModal = document.getElementById('detail-modal');
+    const detailClose = document.getElementById('detail-modal-close');
+    if (detailCard && detailModal && detailClose) {
+      detailCard.click();
+      assert.ok(!detailModal.classList.contains('hidden'), '#detail-modal must open on mobile card tap');
+      detailClose.click();
+      assert.ok(detailModal.classList.contains('hidden'), '#detail-modal must close on mobile close tap');
+    }
+
     const modal = document.querySelector('#lightbox-modal');
     if (modal) {
       modal.classList.remove('hidden');
@@ -154,7 +182,7 @@ describe('Tier 4: Real-World Recruiter & Reviewer Journeys', () => {
   // Scenario 5: Full Portfolio Asset & Link Audit Journey
   // =========================================================================
   test('Scenario 5: Full Portfolio Asset & Link Audit Journey', async ({ assert, fetch }) => {
-    const { document } = loadDOM(INDEX_HTML);
+    const { document, rawHTML } = loadDOM(INDEX_HTML);
 
     // Step 1: Audit all internal anchor fragments
     const anchors = document.querySelectorAll('a[href^="#"]');
@@ -166,14 +194,74 @@ describe('Tier 4: Real-World Recruiter & Reviewer Journeys', () => {
       assert.ok(target, `Anchor ${href} must have corresponding target element in DOM`);
     }
 
-    // Step 2: Audit all external URLs
+    // Step 2: Audit all external URLs: authentic, secure HTTPS, and zero dead links
     const extLinks = document.querySelectorAll('a[href^="http"]');
+    assert.ok(extLinks.length >= 5, 'Must have verified external links present');
+
+    const allowedDomains = [
+      'github.com',
+      'codeforces.com',
+      'icpc.global',
+      'ptithcm.edu.vn',
+      'fonts.googleapis.com',
+      'fonts.gstatic.com'
+    ];
+
     for (const a of extLinks) {
       const url = a.getAttribute('href');
       assert.ok(/^https:\/\//i.test(url), `External link ${url} must use secure HTTPS`);
+
+      // Confirm dead link does not exist
+      assert.ok(!url.includes('github.com/KaNguyen3005/DueBro"'), `Link must not be dead DueBro link: ${url}`);
+      assert.ok(url !== 'https://github.com/KaNguyen3005/DueBro', `Link must not be dead DueBro URL: ${url}`);
+      assert.ok(url !== 'https://github.com/KaNguyen3005/DueBro/', `Link must not be dead DueBro URL/: ${url}`);
+
+      // Verify domain is in allowed authentic whitelist
+      const parsed = new URL(url);
+      const isAllowed = allowedDomains.some((d) => parsed.hostname === d || parsed.hostname.endsWith('.' + d));
+      assert.ok(isAllowed, `External link domain ${parsed.hostname} must be in authentic verified whitelist: ${url}`);
     }
 
-    // Step 3: Audit core images via HTTP server (zero 404s)
+    // Step 3: Verify verified DueBro repository link exists
+    assert.ok(
+      rawHTML.includes('https://github.com/KaNguyen3005/DueBro_Kada_Program'),
+      'Must contain verified live DueBro link (https://github.com/KaNguyen3005/DueBro_Kada_Program)'
+    );
+
+    // Step 4: Verify unlinked items render as plain text or badges without clickable <a>
+    const unlinkedItems = [
+      'award-utc-c4f',
+      'project-lms',
+      'project-iam',
+      'project-cp-vault',
+      'project-katila',
+      'project-maze-solver',
+      'research-ismac'
+    ];
+    for (const id of unlinkedItems) {
+      const card = document.querySelector(`[data-detail-id="${id}"]`);
+      if (card) {
+        assert.equal(card.querySelectorAll('a').length, 0, `Unlinked card ${id} must contain 0 clickable <a> tags`);
+      }
+    }
+
+    // Step 5: Audit #portfolio-details catalog links for authenticity
+    const scriptEl = document.getElementById('portfolio-details');
+    if (scriptEl) {
+      const catalog = JSON.parse(scriptEl.textContent);
+      for (const [key, item] of Object.entries(catalog)) {
+        if (item.primaryLink && item.primaryLink.url) {
+          const linkUrl = item.primaryLink.url;
+          assert.ok(/^https:\/\//i.test(linkUrl), `Catalog link for ${key} must use HTTPS`);
+          assert.ok(!linkUrl.includes('DueBro"') && linkUrl !== 'https://github.com/KaNguyen3005/DueBro', `Catalog link for ${key} must not be dead link`);
+          const parsed = new URL(linkUrl);
+          const isAllowed = allowedDomains.some((d) => parsed.hostname === d || parsed.hostname.endsWith('.' + d));
+          assert.ok(isAllowed, `Catalog link domain ${parsed.hostname} for ${key} must be in authentic whitelist`);
+        }
+      }
+    }
+
+    // Step 6: Audit core images via HTTP server (zero 404s)
     const criticalAssets = [
       '/index.html',
       '/assets/icpc_contest_2026.png',

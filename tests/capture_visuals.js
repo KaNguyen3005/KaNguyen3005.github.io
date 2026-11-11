@@ -349,6 +349,7 @@ async function runVisualAudit() {
 
         const honorsImgs = Array.from(document.querySelectorAll('#honors img')).length;
         const honorsPictures = Array.from(document.querySelectorAll('#honors picture')).length;
+        const totalCards = Array.from(document.querySelectorAll('[data-detail-id]')).length;
 
         return {
           viewport: { width: docWidth, scrollWidth, height: window.innerHeight },
@@ -358,7 +359,8 @@ async function runVisualAudit() {
           totalImages: imgs.length,
           brokenImagesCount: imgs.filter(i => i.broken).length,
           honorsImagesCount: honorsImgs,
-          honorsPicturesCount: honorsPictures
+          honorsPicturesCount: honorsPictures,
+          totalCards
         };
       })()`,
       returnByValue: true
@@ -369,6 +371,7 @@ async function runVisualAudit() {
     console.log(`      Horizontal overflow: ${desktopAudit.result.value.hasHorizontalOverflow ? RED + 'DETECTED' : GREEN + 'NONE'}${RESET}`);
     console.log(`      Total images rendered: ${desktopAudit.result.value.totalImages} (Broken: ${desktopAudit.result.value.brokenImagesCount})`);
     console.log(`      Honors section images: ${desktopAudit.result.value.honorsImagesCount} (Pictures: ${desktopAudit.result.value.honorsPicturesCount})`);
+    console.log(`      Total progressive cards: ${desktopAudit.result.value.totalCards} (Expected: 21)`);
 
     // Desktop Full-page screenshot
     const desktopFullShot = await cdp.send('Page.captureScreenshot', {
@@ -469,7 +472,9 @@ async function runVisualAudit() {
           honorsFilterOk: false,
           zeroLuffyRefs: false,
           heroSplitColumnsOk: false,
-          honorsFourColOk: false
+          honorsFourColOk: false,
+          totalCards21Ok: false,
+          zeroMultiAgentOk: false
         };
 
         const heroGrid = document.querySelector('#about .grid');
@@ -531,6 +536,11 @@ async function runVisualAudit() {
 
         const rawHtml = document.documentElement.outerHTML;
         results.zeroLuffyRefs = !/luffy|pirate king|vua hải tặc|142709831/i.test(rawHtml);
+
+        const triggerCards = Array.from(document.querySelectorAll('[data-detail-id]'));
+        results.totalCards21Ok = triggerCards.length === 21;
+        results.zeroMultiAgentOk = !document.querySelector('[data-detail-id="research-agents"]') &&
+          !/Effective Multi-Agent Design/i.test(rawHtml);
 
         // Progressive disclosure detail modal check
         const detailCard = document.querySelector('[data-detail-id="project-duebro"]');
@@ -702,20 +712,42 @@ async function runVisualAudit() {
     });
     await new Promise((r) => setTimeout(r, 150));
 
-    // Interactive Mobile Check (Menu drawer toggle)
+    // Interactive Mobile Check (Menu drawer toggle & mobile theme toggle)
     const mobileMenuRes = await cdp.send('Runtime.evaluate', {
       expression: `(async () => {
         const sleep = (ms) => new Promise(r => setTimeout(r, ms));
         const btn = document.getElementById('menu-btn');
         const menu = document.getElementById('mobile-menu');
-        if (!btn || !menu) return { mobileMenuToggleOk: false };
+        const mobileToggle = document.getElementById('theme-toggle-mobile');
+
+        if (!btn || !menu) return { mobileMenuToggleOk: false, mobileThemeToggleOk: false };
+        if (!mobileToggle || !mobileToggle.classList.contains('theme-toggle-btn')) {
+          return { mobileMenuToggleOk: false, mobileThemeToggleOk: false };
+        }
+
         btn.click();
-        await sleep(120);
+        await sleep(150);
         const opened = !menu.classList.contains('hidden') && menu.getBoundingClientRect().height > 20;
-        btn.click();
+
+        // Mobile theme toggle verification
+        const initialTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        mobileToggle.click();
         await sleep(120);
+        const switchedTheme = document.documentElement.getAttribute('data-theme');
+        const themeSwitched = switchedTheme !== initialTheme;
+        mobileToggle.click();
+        await sleep(120);
+        const restoredTheme = document.documentElement.getAttribute('data-theme');
+        const themeRestored = restoredTheme === initialTheme;
+        const mobileThemeToggleOk = themeSwitched && themeRestored;
+
+        btn.click();
+        await sleep(150);
         const closed = menu.classList.contains('hidden');
-        return { mobileMenuToggleOk: opened && closed };
+        return {
+          mobileMenuToggleOk: opened && closed,
+          mobileThemeToggleOk
+        };
       })()`,
       awaitPromise: true,
       returnByValue: true
@@ -729,6 +761,10 @@ async function runVisualAudit() {
 
     // 6. Synthesize Audit Report
     console.log(`\n[6/6] Generating Audit Report & Summary...`);
+    if (desktopAudit.result.value.totalCards !== 21) {
+      auditReport.summary.passed = false;
+      auditReport.summary.issues.push(`Found ${desktopAudit.result.value.totalCards} progressive cards (expected exactly 21)`);
+    }
     if (desktopAudit.result.value.hasHorizontalOverflow) {
       auditReport.summary.passed = false;
       auditReport.summary.issues.push(`Desktop viewport exhibits horizontal overflow (${desktopAudit.result.value.viewport.scrollWidth}px > ${desktopAudit.result.value.viewport.width}px)`);
